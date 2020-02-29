@@ -1,0 +1,3 @@
+#!/bin/bash
+
+echo "drop database if exists rocketdb; create database rocketdb collate 'utf8_unicode_ci'; grant all on rocketdb.* to 'developer'@'localhost' identified by 'developpass';" | sudo mysql -p -uroot;

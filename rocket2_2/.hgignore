@@ -1,0 +1,45 @@
+syntax: glob
+**.swp
+**.log
+**.log.*
+**.pdf
+**.pyc
+**.vim
+**.json
+**.txt
+**.png
+**.jpg
+**.jpeg
+**.un
+**.pkl
+**.**~
+**.**.swo
+**.**.swp
+**.sql
+**.pkl
+**.xlsx
+**.csv
+**.pid
+**.orig
+**.bk
+**.md
+**.db
+**SOURCES.txt**
+tags
+
+bin
+build
+local
+dist
+share
+include
+logs
+tests
+dms
+.idea
+
+syntax: regexp
+?\.pyc
+?\.vim
+# Default ignored files
+rocket/.idea/workspace.xml
