@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #invoicing_tabs  {min-height: 600px;}
+    #cont_budgets_seperated { width: 45%;  margin: 0px; float: right; }
+    #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+    #feedback { font-size: 1.4em; }
+    #cont_main_budget .ui-selecting { background: #FECA40; }
+    #cont_main_budget .ui-selected { background: #F39814; color: white; }
+    #cont_main_budget { list-style-type: none; margin: 0; padding: 0; width: 50%; float: left; }
+    #cont_main_budget li { margin: 3px; padding: 0.4em; font-size: 0.9em; height: 12px; }
+    #invbutton_reset {
+    float: right;
+    margin-right: 0px;
+    margin-top: 0px;
+    }
+    #ivn_qty {text-align:right;}
+    #ivn_price {text-align:right;}
+    #ivn_total {text-align:right;}
+    #ivn_unit {text-align:right;}
+    #invs_totalexcl {text-align:right;}
+    #invs_totalvat {text-align:right;}
+    #invs_totalincl {text-align:right;}
+    #point_gallery { float: left; width: 100%; min-height: 8em; background-color: #eee; } * html #gallery { height: 12em; } /* IE6 */
+    .gallery.custom-state-active { background: #eee; }
+    .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+    .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+    .gallery li a { float: left; }
+    .gallery li a.ui-icon-zoomin { float: left; }
+    .gallery li img { width: 100%; align:left; cursor: move; }
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebudgetitemid">Active Budget Item ID</label>
+    <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activescopeid">Active Scope Item ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+        <div id="warningdiv" style="display: none"></div>
+<div id="invoicing_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Invoicing-Index"><span></span>Invoicing Index</a></li>
+        <li><a href="#ui-tabs-Invoicing-ClientList"><span></span>Client List</a></li>
+        <li><a href="#ui-tabs-Invoicing-ContractItems"><span></span>Invoicing Contract Items</a></li>
+        <li><a href="#ui-tabs-Invoicing-NewInv"><span></span>New Invoice</a></li>
+        <li><a href="#ui-tabs-InvByContract"><span></span>Invoices By Contract</a></li>
+        <li><a href="#ui-tabs-InvSingleView"><span></span>Single Invoice</a></li>
+        <li><a href="#ui-tabs-InvByDate"><span></span>Invoices By Date</a></li>
+        <li><a href="#ui-tabs-InvByDateClient"><span></span>Invoices By Client/Date</a></li>
+        <li><a
+            href="#ui-tabs-WIPPoint"><span></span>WIP Per Point</a></li>
+        <!--li><a href="/invoicingcont/ajax_get_payments_paid"><span></span>Payments Received</a></li-->
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-Invoicing-Index"></div>
+    <div id="ui-tabs-Invoicing-ClientList">
+      <fieldset>
+      <button class="ui-state-default ui-corner-all" id="invbutton_reset">Reset</button>
+       <label for="combobox_contractswip">Choose a Contract To Invoice</label>
+           <br/>
+        <select id="combobox_contractswip" style="display: block">
+        <option value="">Select one...</option>
+          <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+              <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+          </div>
+        </select>
+              <button class="ui-state-default ui-corner-all"
+                  id="invbutton_get_contract_items">Get Contracts Items To Invoice</button>
+                <p/>
+              <button class="ui-state-default ui-corner-all" style="float:left"
+                  id="button_create_new_invclient">Create New Client To Invoice</button>
+              <div id="existing_client_data" style="float:left">
+                   <label for="combobox_clients">Choose an Existing Client</label>
+                        <br/>
+                        <select id="combobox_clients">
+                        <option value="">Select one...</option>
+                          <div py:for="i,x in enumerate(clientlist)">
+                              <option value="${x}">${x}</option>
+                          </div>
+                        </select>
+                        <br/>
+                      <button class="ui-state-default ui-corner-all"
+                          id="clientbutton_get_invoices_all">Get Last 20 Invoices To Client</button>
+                        <p/>
+                    <div id="clientoutput_invoice_all_only"> </div>
+                        <p/>
+            </div>
+            <div id="output_invoice_clients_form"> </div>
+      </fieldset>
+                <p/>
+                <div id="inv_client_details_new" style="display: none">
+                    <form id = "inv_client_details_form_new">
+                 <fieldset>
+                <label for="">Invoice Date</label>
+                <input type="text" name="inv_date_new" id="inv_date_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Client Name</label>
+                <input type="text" name="inv_client_name_new" id="inv_client_name_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Order Number: </label>
+                <input type="text" name="order_number_new" id="order_number_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Our JCNo: </label>
+                <input type="text" name="jcno_new" id="jcno_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Address Line1</label>
+                <input type="text" name="address_line1_new" id="address_line1_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Address Line2</label>
+                <input type="text" name="address_line2_new" id="address_line2_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Address Line3</label>
+                <input type="text" name="address_line3_new" id="address_line3_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">VAT Number: </label>
+                <input type="text" name="vat_number_new" id="vat_number_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Del To: Name</label>
+                <input type="text" name="delvToname_new" id="delvToname_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Del To: Address Line 1</label>
+                <input type="text" name="delvToadd1_new" id="delvToadd1_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Del To: Address Line 2</label>
+                <input type="text" name="delvToadd2_new" id="delvToadd2_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Del To: Contact Person</label>
+                <input type="text" name="delvTocontperson_new"
+                id="delvTocontperson_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Del To: Contact Tel</label>
+                <input type="text" name="delvToconttel_new"
+                id="delvToconttel_new" class="text ui-widget-content ui-corner-all"/><br/>
+                <button id="button_new_invoice_new_info" >Use This Info To Create A New Invoice</button>
+                </fieldset>
+                </form>
+            </div>
+    </div>
+    <div id="ui-tabs-Invoicing-ContractItems">
+    </div>
+    <div id="ui-tabs-Invoicing-NewInv">
+        <form id="tblinv_new_client_form">
+        <fieldset>
+            <table id="tblinv_new_client_info"> 
+                <tr>
+                    <td>
+              <label for="ivn_active_invoice">Active Invoice ID:</label>
+                    </td>
+                    <td>
+              <input type="text" name="ivn_active_invoice" id="ivn_active_invoice" style="display: block"  disabled="true" />
+                    </td>
+                </tr>
+            </table> 
+        </fieldset>
+        </form>
+        <p/>
+        <div id="dialog_invoice_item" >
+            <p class="validateScopeTips">All form fields are required.</p>
+            <form>
+            <fieldset>
+                <table>
+                    <tr>
+              <td>
+              <label for="ivn_item">Item</label>
+              </td><td>
+              <label for="ivn_description">Description</label>
+              </td><td>
+              <label for="ivn_unit">Unit</label>
+              </td><td>
+              <label for="ivn_qty">Qty</label>
+              </td><td>
+              <label for="ivn_price">Price</label>
+              </td><td>
+              <label for="ivn_total">Total</label>
+              </td>
+                    </tr>
+                    <tr>
+                    <td>
+              <input type="text" name="ivn_orderitemid"
+              id="ivn_orderitemid" style="display: none" />
+              <input type="text" name="ivn_item" id="ivn_item" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_description" id="ivn_description" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_unit" id="ivn_unit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_qty" id="ivn_qty" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_price" id="ivn_price" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_total" id="ivn_total" class="text ui-widget-content ui-corner-all" />
+              </td>
+                    </tr>
+                </table>
+                <br/>
+              <button class="ui-state-default ui-corner-all"
+                  id="button_add_to_invoice_items">Add To Invoice Items</button>
+            </fieldset>
+            </form>
+        </div>
+        <p/>
+        <form id="tblinv_new_items_form">
+        <fieldset>
+            <table id="tblinv_new_items_info" class="tableinvoicesitems"> 
+                <th>OrderItem ID</th>
+                <th>Item</th>
+                <th>Description</th>
+                <th>Unit</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Total</th>
+            </table> 
+        </fieldset>
+        </form>
+              <p/>
+        <form id="inv_new_totals">
+        <fieldset>
+                <table class="tableinvoicesitems">
+                    <tr>
+                      <td>
+                            <label for="invs_totalexcl">Total Excl</label>
+                      </td><td>
+                            <input type="text" name="invs_totalexcl" id="invs_totalexcl" class="text ui-widget-content ui-corner-all" />
+                      </td><td>
+                            <label for="invs_totalvat">Total VAT</label>
+                      </td><td>
+                            <input type="text" name="invs_totalvat" id="invs_totalvat" class="text ui-widget-content ui-corner-all" />
+                      </td><td>
+                            <label for="invs_totalincl">Total Incl</label>
+                      </td><td>
+                            <input type="text" name="invs_totalincl" id="invs_totalincl" class="text ui-widget-content ui-corner-all" />
+                      </td>
+                    </tr>
+                </table>
+        </fieldset>
+        </form>
+            <p/>
+              <button class="ui-state-default ui-corner-all"
+                  style="display:none"
+                  id="button_close_new_invoice">Close New Invoice
+              </button>
+              <a><img id="print_new_invoice" src="/images/pdficon.jpg"></img></a>
+            
+    </div>
+    <div id="ui-tabs-InvByContract">
+    </div>
+    <div id="ui-tabs-InvSingleView">
+        <div>
+            <table id="buttons_inv_edit_group" class="tableinvoicesitems">
+                <tr>
+                    <td>
+                      <button class="ui-state-default ui-corner-all"
+                          id="button_edit_client_data">Edit Invoice Client Data
+                      </button>
+                      </td>
+                </tr>
+            </table>
+        </div>
+        <div id="inv_client_details_edit"></div>
+        <p/>
+        <div id="dialog_invoice_item_edit" style="display: none" >
+            <form id="form_invoice_item_edit">
+            <fieldset>
+                <table>
+                    <tr>
+              <td>
+              <label for="ivn_id_edit">ID</label>
+              </td><td>
+              <label for="ivn_item_edit">Item</label>
+              </td><td>
+              <label for="ivn_description_edit">Description</label>
+              </td><td>
+              <label for="ivn_unit_edit">Unit</label>
+              </td><td>
+              <label for="ivn_qty_edit">Qty</label>
+              </td><td>
+              <label for="ivn_price_edit">Price</label>
+              </td><td>
+              <label for="ivn_total_edit">Total</label>
+              </td>
+                    </tr>
+                    <tr>
+                    <td>
+              <input type="text" name="ivn_id_edit" id="ivn_id_edit"
+              class="text ui-widget-content ui-corner-all" width="20px" />
+              </td><td>
+              <input type="text" name="ivn_invid_edit"
+              id="ivn_invid_edit" style="display: none" />
+              <input type="text" name="ivn_orderitemid_edit"
+              id="ivn_orderitemid_edit" style="display: none" />
+              <input type="text" name="ivn_item_edit" id="ivn_item_edit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_description_edit"
+              id="ivn_description_edit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_unit_edit" id="ivn_unit_edit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_qty_edit" id="ivn_qty_edit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_price_edit" id="ivn_price_edit" class="text ui-widget-content ui-corner-all" />
+              </td><td>
+              <input type="text" name="ivn_total_edit" id="ivn_total_edit" class="text ui-widget-content ui-corner-all" />
+              </td>
+                    </tr>
+                </table>
+                <br/>
+              <button class="ui-state-default ui-corner-all"
+                  id="button_add_to_invoice_items_edit">Save Edited Invoice Item</button>
+              <button class="ui-state-default ui-corner-all"
+                  id="button_add_new_to_invoice_items_edit">Add New Invoice Item</button>
+              <button class="ui-state-default ui-corner-all"
+                  id="button_delete_item_data">Delete Selected Line
+              </button>
+
+            </fieldset>
+            </form>
+        </div>
+
+        <div id="inv_single_item_table"></div>
+
+    </div>
+    <div id="ui-tabs-InvByDate">
+            View Invoices Between Dates!!! 
+          <p/>
+          <form id="startend_form"><fieldset>
+              <label for="startdate">From Date</label>
+              <input type="text" name="startdate" id="startdate" class="text ui-widget-content ui-corner-all" />
+              <label for="enddate">To Date</label>
+              <input type="text" name="enddate" id="enddate" class="text ui-widget-content ui-corner-all" />
+              <button class="ui-state-default ui-corner-all" id="button_get_invoices_dates">Get Invoices Between Dates</button>
+           </fieldset>
+           </form>
+           <p/>
+          <div style="height:20px;"> &nbsp; </div>
+          <div id="output_invoice_dates"> </div>
+    </div>
+    <div id="ui-tabs-InvByDateClient">
+            View Invoices By Client Between Dates!!! 
+          <p/>
+          <form id="clientstartend_form"><fieldset>
+              <label for="clientstartdate">From Date</label>
+              <input type="text" name="clientstartdate" id="clientstartdate" class="text ui-widget-content ui-corner-all" />
+              <label for="clientenddate">To Date</label>
+              <input type="text" name="clientenddate" id="clientenddate" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="clientlist">Client</label>
+                <select id="clientlist"  class="text ui-widget-content ui-corner-all">
+                <option id="client_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(clientlist)">
+                      <option value="${x}">${x}</option>
+                  </div>
+                </select>
+              <br/>
+              <button class="ui-state-default ui-corner-all" id="clientbutton_get_invoices_dates">Get Invoices By Client Between Dates</button>
+           </fieldset>
+           </form>
+           <p/>
+          <div style="height:20px;"> &nbsp; </div>
+          <div id="clientoutput_invoice_dates"> </div>
+    </div>
+    <div id="ui-tabs-WIPPoint">
+            <div class="ui-widget ui-helper-clearfix">
+                <ul id="point_gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+                     <div py:for="i,x in enumerate(points)">
+                        <li class="ui-widget-content ui-corner-tr">
+                        <h5 class="ui-widget-header">${x.display_name}</h5>
+                        <img value="${x.user_id}" src="/images/staffpics/${x.user_id}.png" alt="${x.user_name}" width="80px" height="80px" />
+                          <div class="idnos" style="display:none">${x.user_id}</div>
+                        </li>
+
+                    </div>
+                </ul>
+            </div>
+
+            <div id="financial_wip_per_point"></div>
+    </div>
+     <div id="ui-tabs-WIP">
+     </div>
+ 
+ 
+  </div>
+  <div class="clearingdiv" />
+</body>
+</html>
+
+
+
+
+

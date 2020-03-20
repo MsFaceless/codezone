@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+        <title>${page}</title>
+        <script type="text/javascript" src="${tg.url(['/javascript/contractsmaps.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_contractsmaps.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/markerclusterer.js'])}"></script>
+        <style>
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="map_search">
+        </div>
+        <div id="map_contract_search_div">
+        </div>
+        <div id='map_contract_header'></div>
+        <div id="map_contract_canvas"></div>
+        <div id="map_contract_contractlist_canvas"></div>
+        <div id="map_contract_directions_canvas"></div>
+        <div class="clearingdiv" />
+        <div id="map_contract_streetview_canvas"></div>
+        <div id="map_contract_maps_canvas"></div>
+        <div id="warnings_panel"></div>
+        <div id="dialog_choose_locations_div"></div>
+
+        <div id="dialog_location_div" title="Save Description to Coordinates">
+            <form id="dialog_location_frm">
+                <fieldset>
+                    <label for="">Latitude :</label>
+                    <input type="text" name="dialog_lat" id="dialog_lat" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="">Longitude :</label>
+                    <input type="text" name="dialog_lng" id="dialog_lng" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="">Description Of Location</label>
+                    <input id="description_location" name="description_location" class="text ui-widget-content ui-corner-all" /><br/>
+                </fieldset>
+            </form>
+        </div>
+
+
+        <div class="clearingdiv" />
+        </body>
+    </html>
+
+
+
+

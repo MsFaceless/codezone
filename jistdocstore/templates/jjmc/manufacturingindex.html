@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul py:if="tg.identity" class="nav nav-pills">
+            <li py:if="request.identity" class="active"><a href="${tg.url('/manufacturecont/orders_console')}">Order Book</a> </li>
+            <li py:if="request.identity" class="active"><a href="${tg.url('/manufacturecont/raw_material_console')}">Raw Material</a> </li>
+            <li py:if="request.identity" class="active"><a href="${tg.url('/manufacturecont/manufacture_process_console')}">Process Control</a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+  <div class="clearingdiv" />
+</body>
+</html>
+
+
+
+
+

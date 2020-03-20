@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+<style>
+    #gallery { float: left; width: 100%; min-height: 6em; background-color: #eee; } * html #gallery { height: 8em; } /* IE6 */
+    .gallery.custom-state-active { background: #eee; }
+    .gallery li { float: left; width: 86px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+    .gallery li h6 { margin: 0 0 0.4em; cursor: move; }
+    .gallery li a { float: left; }
+    .gallery li a.ui-icon-zoomin { float: left; }
+    .gallery li img {  align:left; cursor: move; }
+    #outputcalendar {margin: 0 0 0; }
+    #outputcalendar h4 {margin: 0 0 0em; min-height: 3em;  background-color: #cce;}
+    #outputcalendar h4 img {float: right; margin-top:-12px;}
+ 
+    #trash { float: right; width: 32%; min-height: 18em; padding: 1%;} * html #trash { height: 18em; } /* IE6 */
+    #trash h4 { line-height: 14px; margin: 0 0 0.4em; }
+    #trash h4 .ui-icon { float: left; }
+    #trash .gallery h5 { display: block; }
+    #draggable { width: 12%; min-height: 18em; padding: 0.5em; float: right; margin: 10px 10px 10px 0; }
+    #droppable { width: 32%; min-height: 18em; padding: 0.5em; float: right; margin: 10px; }
+    .newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.6em; }
+    </style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div class="ui-widget ui-helper-clearfix">
+    <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+         <div py:for="i,x in enumerate(points)">
+            <li class="ui-widget-content ui-corner-tr">
+            <h6 class="ui-widget-header">${x.display_name}</h6>
+            <img class='thispoint' value="${x.user_id}" src="/images/staffpics/${x.user_id}.png" alt="${x.user_name}" width="80px" height="80px" />
+              <div class="idnos" style="display:none">${x.user_id}</div>
+            </li>
+
+        </div>
+    </ul>
+</div>
+<div id="outputpoints" class="ui-widget-content">
+</div>
+ 
+  <div class="clearingdiv" />
+</body>
+</html>
+

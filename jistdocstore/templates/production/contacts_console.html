@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #fileupload_tabs  {min-height: 600px;}
+            .ui-tabs-panel {width: 98%; float:left;}
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activemysiteid" class="" style="margin-left: 50px">Active Site ID</label>
+            <input type="text" name="activemysiteid" id="activemysiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+        </div>
+        <div id="contact_employees_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>Contact Index</a></li>
+                <li><a href="#ui-tabs-ContactDetails"><span></span>Contact Details</a></li>
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="tabs-1">
+                
+            </div>
+            <div id="ui-tabs-ContactDetails">
+                <!--fieldset>
+                <label for="">Search Employee Name</label>
+                <input type="text" name="search_emp_name" id="search_emp_name" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_name_staff">Search Staff</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_name_labour">Search Labour</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_name_subcon">Search Subcons</button>
+                </fieldset-->
+                <div id='div_contact_details' class='div_contact_details'> </div> 
+                <div id='div_contact_data' class='div_contact_data'> </div> 
+            </div> 
+            <div id="ui-tabs-MyWIP"> </div>
+        </div>
+                <div class="clearingdiv" />
+                </body>
+            </html>
+
+
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id='jist_pic_viewer'>
+                    <div id ="staff_faces_available_div_shared" class = "staff_photo_carousel responsive">
+                    <h3 class="ui-widget-header">Actions</h3>
+                    <button id="btn_unshare_from_pic">Unshare</button>
+                    </div>
+                    <div id='pic_data_div'>
+                        <table id='table_pic_data' class='tablepicdata'>
+                            <th> Subject</th>
+                            <th> JCNo</th>
+                            <th> Description</th>
+                            <th> Owner</th>
+                            <th> Date Taken</th>
+                            <tr>
+                                <td>
+                                ${thisupload.filesubject}
+                                </td><td>
+                                ${thisupload.jcno} 
+                                </td><td>
+                                ${thisupload.description}
+                                </td><td>
+                                ${owner}
+                                </td><td>
+                                ${thisupload.datetaken}
+                                </td><td width='100px'>
+                                <button id="triggerClose" style="display: block" class="ui-state-default ui-corner-all">
+                                    Close Window 
+                                </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='6'>
+                                    <img id="jist_viewer_current_pic_shared" value="${srcid}" src="${srcpic}"></img>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="staff_faces_shared_div" class = "staff_photo_carousel responsive">
+                    <h3  class="ui-widget-header">Shared Users</h3>
+                            <ul id="staff_faces_shared_carousel_sharing">
+                             <div  py:for="i,x in enumerate(sharedusers)">
+                                <img  value="${x.user_id}"
+                                src="/images/staffpics/${x.user_id}.png" width="80px" height="80px" />
+                                <br/>
+                            </div>
+                            </ul>
+                    </div>
+        </div>
+
+        <div style="height:20px;"> &nbsp; </div>
+        <div class="clearingdiv" />
+            <div class="notice"> The JIST Way.
+            </div>
+        </body>
+    </html>
+
+
+

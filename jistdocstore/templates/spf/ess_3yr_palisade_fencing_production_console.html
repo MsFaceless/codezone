@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            .ui-tabs-panel {width: 98%; float:left;}
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+            #
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="screensize_radio">
+            <input type="radio" id="screen1" value="1250" checked="checked" />
+            <label for="screen1">1250</label>
+            <input type="radio" id="screen2" value="1900" />
+            <label for="screen2">1900</label>
+        </div>
+
+        <div id="warningdiv" style="display:none"></div>
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activesiteidindex">Active Site ID Index</label>
+            <input type="text" name="activesiteidindex" id="activesiteidindex" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebqitemid">Active BQ Item ID</label>
+            <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activemyuser">Active User</label>
+            <input type="text" name="activemyuser" id="activemyuser" value="${myjistid}" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activereqitemid">Active Req Item ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <input type="text" name="activequoteidindex" id="activequoteidindex" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+        </div>
+        <div id="ess_3yr_palisade_fencing_production_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>SPF Index</a></li>
+                <li><a href="#ui-tabs-Sites"><span></span>SPF Contracts</a></li>
+                <li><a href="#ui-tabs-Scope"><span></span>SPF Scopes</a></li>
+                <li><a href="#ui-tabs-SiteRequire"><span></span>Site Requirements</a></li>
+                <li><a href="#ui-tabs-PicsPalisade"><span></span>Pics</a></li>
+                <li><a href="#ui-tabs-StandardList"><span></span>Standard Material List</a></li>
+                <li><a href="#ui-tabs-SPFStores"><span></span>SPF Stores</a></li>
+                <li><a href="#ui-tabs-SPFNonStandardMat"><span></span>SPF Non Standard Material</a></li>
+            </ul>
+            <div id="tabs-1"> </div>
+            <div id="ui-tabs-Sites">
+                <fieldset>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_view_all_contracts_palisade">View All Contracts</button>
+                <label for="search_contractname">Search Contract Name</label>
+                <input type="text" name="search_contractname_palisade" id="search_contractname_palisade" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_name_palisade">Search Contract Name</button>
+                <label for="search_contract_area_palisade">Search Contract Area</label>
+                <input type="text" name="search_contract_area_palisade" id="search_contract_area_palisade" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_area_palisade">Search Contract Area</button>
+                <button  py:if="'estimates_manager' in tg.identity.groups" class="ui-widget ui-widget-content ui-state-default" id="button_add_new_est_contract_palisade">Add New Palisade Contract To Console</button>
+                </fieldset>
+                <div id="estimate_editcontract" title="Edit contract" style="display:none"> </div>
+                <div id="div_est_contracts"> </div>
+                <!--div id="div_contract_data"> </div>
+                <div id="div_quote_data"> </div>
+                <div id="div_contract_scope_data"> </div-->
+            </div>
+            <div id="ui-tabs-Scope">
+                <div id="dialog_newsitescope" title="New Site Scope">
+                    <form id="new_sites_scope_form">
+                    <fieldset>
+                        <label for="newscopeid">ID</label><br/>
+                        <input type="text" name="newscopeid" id="newscopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+                        <label for="newscopedescription">Description</label><br/>
+                        <input type="text" name="newscopedescription" id="newscopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newscopeunit">Unit</label><br/>
+                        <input type="text" name="newscopeunit" id="newscopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newscopeqty">Qty</label><br/>
+                        <input type="text" name="newscopeqty" id="newscopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+                <div id="dialog_editsitescope" title="Edit Site Scope">
+                    <form id="edit_sites_scope_form">
+                    <fieldset>
+                        <label for="editsitescopeid">ID</label><br/>
+                        <input type="text" name="editsitescopeid" id="editsitescopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+                        <label for="editsitescopedescription">Description</label><br/>
+                        <input type="text" name="editsitescopedescription" id="editsitescopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editsitescopeunit">Unit</label><br/>
+                        <input type="text" name="editsitescopeunit" id="editsitescopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editsitescopeqty">Qty</label><br/>
+                        <input type="text" name="editsitescopeqty" id="editsitescopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+                    <div id='div_site_scope'></div>
+                    <div id='div_jcno_scope'></div>
+                    <div id='div_jcno_despatch'></div>
+                    <div id='div_space'> 
+                <div id='div_site_picture'></div>
+                </div>
+            </div>
+            <div id="ui-tabs-SiteRequire">
+                <fieldset>
+                <label for="activesiteid" class="" style="margin-left: 0px">Active Site ID</label>
+                <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <label for="activejcno" class="" style="margin-left: 0px">Active JCNo</label>
+                <input type="text" name="activejcno" id="activejcno" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <label for="activelinkid" class="" style="margin-left: 0px">Active Linked ID</label>
+                <input type="text" name="activelinkid" id="activelinkid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <br/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_do_add_new_item_palisade">Add New Material Item To Site</button>
+                </fieldset>
+
+                <div id="dialog_new_site_requirements" title="New Item To Site">
+                    <form id="new_site_requirements_form">
+                    <fieldset>
+                        <!--label for="newlistid">ID</label><br/>
+                        <input type="text" name="newlistid" id="newlistid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/-->
+                        <label for="newlistdescription">Description</label><br/>
+                        <select id="newlistdescription" name="newlistdescription">
+                           <div py:for="i,x in enumerate(boq)" class="${i%2 and 'even' or 'odd'}">
+                               <option py:if="x.id" value="${x.id}" >${x.description}</option>
+                            </div>
+                        </select><br/>
+                        <!--label for="newlistunit">Unit</label><br/>
+                        <input type="text" name="newlistunit" id="newlistunit" class="text ui-widget-content ui-corner-all" /><br/-->
+                        <label for="newlistqty">Qty</label><br/>
+                        <input type="text" name="newlistqty" id="newlistqty" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newlist_instruction">Instruction</label><br/>
+                        <input type="text" name="newlist_instruction" id="newlist_instruction" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newlist_date_req">Date Required</label><br/>
+                        <input type="text" name="newlist_date_req" id="newlist_date_req" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+                <div id = "estimate_item_items_edit"></div>
+                <div id="div_selected_item" title="" style="display:block"> </div>
+                <div id = "estimate_item_list"></div>
+                <div id = "estimate_item_items"></div>
+            </div> 
+
+            <div id="ui-tabs-PicsPalisade">
+                <div id="div_upload_pic">
+                    <div class ='default_pic' id='palisade_pics_default'></div>
+                </div>
+                <div id='palisade_pics'></div>
+                <div id='palisade_pics_jcno'></div>
+            </div> 
+
+            <div id="ui-tabs-StandardList">
+               <h3 class="ui-widget-shadow">Standard Material List: 
+               <span style="float:right"></span>
+               </h3>
+                <button id="button_new_standarditem" style="display: block" class="ui-state-default ui-corner-all">Add New Standard Item</button>
+                <div id = "estimate_boq_prices">
+                            <table id='standardlist_palisade' class='table_estdata'>
+                            <th>ID</th>
+                            <th>Description</th>
+                            <th>Size</th>
+                            <th>Length</th>
+                            <th>Height</th>
+                            <th>Weight</th>
+                            <th>Edit</th>
+                  <div py:for="i,x in enumerate(boq)">
+                        <tr>
+                        <td >
+                           ${x.id} 
+                        </td>
+                        <td >
+                           ${x.description} 
+                        </td>
+                        <td align='right' >
+                           ${x.size} 
+                        </td>
+                        <td align='right' >
+                           ${x.length} 
+                        </td>
+                        <td align='right' >
+                           ${x.height} 
+                        </td>
+                        <td align='right' >
+                           ${x.weight} 
+                        </td>
+                        <td width='25px'>
+                            <img src="/images/Edit-16.png">
+                            </img>
+                        </td>
+                        </tr>
+                  </div>
+                    </table>
+
+                </div>
+
+                <div id="dialog_newstandarditems" title="New Standard Item">
+                    <form id="new_standard_list_form">
+                    <fieldset>
+                        <label for="newlistid">ID</label><br/>
+                        <input type="text" name="newlistid" id="newlistid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+                        <label for="newlistdescription">Description</label><br/>
+                        <input type="text" name="newlistdescription" id="newlistdescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <!--label for="newlistunit">Unit</label><br/>
+                        <input type="text" name="newlistunit" id="newlistunit" class="text ui-widget-content ui-corner-all" /><br/-->
+                        <label for="newlistsize">Size</label><br/>
+                        <input type="text" name="newlistsize" id="newlistsize" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newlistlength">Length</label><br/>
+                        <input type="text" name="newlistlength" id="newlistlength" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newlistheight">Height</label><br/>
+                        <input type="text" name="newlistheight" id="newlistheight" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newlistweight">Weight</label><br/>
+                        <input type="text" name="newlistweight" id="newlistweight" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+
+                <div id="dialog_editstandarditems" title="Edit Standard Item">
+                    <form id="edit_standard_list_form">
+                    <fieldset>
+                        <label for="editlistid">ID</label><br/>
+                        <input type="text" name="editlistid" id="editlistid" class="text ui-widget-content ui-corner-all"/><br/>
+                        <label for="editlistdescription">Description</label><br/>
+                        <input type="text" name="editlistdescription" id="editlistdescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <!--label for="editlistunit">Unit</label><br/>
+                        <input type="text" name="editlistunit" id="editlistunit" class="text ui-widget-content ui-corner-all" /><br/-->
+                        <label for="editlistsize">Size</label><br/>
+                        <input type="text" name="editlistsize" id="editlistsize" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editlistlength">Length</label><br/>
+                        <input type="text" name="editlistlength" id="editlistlength" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editlistheight">Height</label><br/>
+                        <input type="text" name="editlistheight" id="editlistheight" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editlistweight">Weight</label><br/>
+                        <input type="text" name="editlistweight" id="editlistweight" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div id="ui-tabs-SPFStores">
+                <div id='div_stores_stock'> </div>
+                <div id='div_stores_stock_level'> </div>
+                <div class='stores_view' id='div_stores_stock_data'> </div>
+                <div id='div_stores_receive'></div>
+                <div id='div_stores_receive_dropbox'></div>
+                <div class='stores_view' id='div_stores_receive_data'></div>
+                <div id='div_stores_despatch'></div>
+                <div id='div_stores_despatch_dropbox'></div>
+                <div class='stores_view' id='div_stores_despatch_data'></div>
+                <div id='div_stores_return'></div>
+                <div id='div_stores_return_dropbox'></div>
+                <div class='stores_view' id='div_stores_return_data'></div>
+
+            </div> 
+            <div id="ui-tabs-SPFNonStandardMat">
+                <div class='stores_view' id='div_nonstandard_list'></div>
+            </div> 
+          </div>
+                <div class="clearingdiv" />
+                </body>
+    </html>
+
+
+
+
+

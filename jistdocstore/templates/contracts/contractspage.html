@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #feedback { font-size: 1.4em; }
+    #selectableli .ui-selecting { background: #FECA40; }
+    #selectableli .ui-selected { background: #F39814; color: white; }
+    #selectableli { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+    #selectableli li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 10px; }
+    .toggler { width: 500px; height: 200px; position: relative; }
+    #effectbutton { padding: .5em 1em; text-decoration: none; }
+    #effect { width: 240px;  padding: 1em;  font-size: 1.2em; border: 1px solid #000; background: #eee; color: #333; }
+    .newClass { text-indent: 40px; letter-spacing: .4em; width: 410px; height: 100px; padding: 30px; margin: 10px; font-size: 1.6em; }
+    input, label { line-height: 1.5em; }
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <input type="radio" value="0" name="radio2" id="siteswip" onclick="javascript:toggle_sites_wip();">Toggle WIP</input>
+    <!--input type="radio" value="0" name="radio1" id="sitescompleted" onclick="javascript:toggle_sites_completed();">Toggle Completed</input>
+    <input type="radio" value="0" name="radio3" id="sitesall" onclick="javascript:toggle_newquote_box();">Toggle All</input-->
+
+<div id="acitve_radio_buttons" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebqitemid">Active BQ Item ID</label>
+    <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+</div>
+<div id="sites_main_window" style="display: none">
+    <p id="feedback">
+    </p>
+    <div id="searchwidget" class="ui-widget">
+        <select id="combobox" style="display: none">
+        <option value="">Select one...</option>
+          <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+              <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+          </div>
+        </select>
+    </div>
+    <p/>
+        <div id="newcontractbutton" class="sidebar_est_scope_buttons" >
+            <button id="create-newcontract">Create New Contract</button>
+        </div>
+        <div id="outputsites" class="sidebar_est_site_sow" style="display: none"></div>
+        <div id="outputcontractdata" class="sidebar_est_site_sow">
+        </div>
+        <div id="outputcontractorderitems" class="sidebar_est_site_sow"></div>
+        <div id="outputcontractscopeofwork" class="sidebar_est_site_sow"></div>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+
+</div>
+<div id="dialog-newcontract" title="Add New Contract">
+    <p class="validateScopeTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+          <div py:for="i,x in enumerate(newcontractfields[:6])" class="${i%2 and 'even' or 'odd'}">
+              <label for="${x}">${x}</label>
+              <input type="text" name="${x}" id="${x}" class="text ui-widget-content ui-corner-all" />
+              <br/>
+        </div>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-editcontract" title="Edit Contract">
+    <p class="validateScopeTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+          <div py:for="i,x in enumerate(editcontractfields[:15])" class="${i%2 and 'even' or 'odd'}">
+              <label for="${x}">${x}</label><br/>
+              <select py:if="x == 'editsitecompleted'" id="combotruefalse">
+                <option value="False">False</option>
+                <option value="True">True</option>
+              </select>
+              <select py:if="x == 'editsitecidbrating'" id="combocidbrating">
+              <div py:for="i,x in enumerate(cidbratings)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x}">${x}</option>
+              </div>
+              </select>
+              <select py:if="x == 'editsitecidbcategory'" id="combocidbcategory">
+              <div py:for="i,x in enumerate(cidbcategories)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x}">${x}</option>
+              </div>
+              </select>
+              <select py:if="x == 'editsiteworkcategory'" id="combositeworkcategory">
+              <div py:for="i,x in enumerate(workcategories)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x}">${x}</option>
+              </div>
+              </select>
+              <input type="text" name="${x}" id="${x}" class="text ui-widget-content ui-corner-all" />
+              <br/>
+        </div>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-addorderitem" title="Add Order Item">
+    <p class="validateScopeTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+          <div py:for="i,x in enumerate(addorderitem)" class="${i%2 and 'even' or 'odd'}">
+              <label for="${x}">${x}</label>
+              <input type="text" name="${x}" id="${x}" class="text ui-widget-content ui-corner-all" />
+              <br/>
+        </div>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-editorderitem" title="Edit Order Item">
+    <p class="validateScopeTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+          <div py:for="i,x in enumerate(editorderitem)" class="${i%2 and 'even' or 'odd'}">
+              <label for="${x}">${x}</label>
+              <input type="text" name="${x}" id="${x}" class="text ui-widget-content ui-corner-all" /><br/>
+              <br/>
+        </div>
+    </fieldset>
+    </form>
+</div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+<!--div class="toggler">
+    <div id="effect" class="ui-corner-all">
+            Etiam libero neque, luctus a, eleifend nec, semper at, lorem. Sed pede.
+    </div>
+</div>
+ 
+<a href="#" id="effectbutton" class="ui-state-default ui-corner-all">Run
+    Effect</a-->
+ 
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>
+

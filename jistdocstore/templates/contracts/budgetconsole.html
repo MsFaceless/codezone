@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #budget-console-tabs  {min-height: 600px; overflow:auto}
+    #budget-console-tabs ul  {width: 1200px;}
+    #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+    #grv_back_button { padding: .5em 1em; float: right; }
+    #active_shopping_trolley {width: 49%; padding 1em 1em float:left; }
+    #active_shopping_req_prices_list {width: 49%; float:left; }
+    #active_shopping_trolley_approval {width: 49%;  float:left; }
+    #active_shopping_req_prices_list_approval {width: 49% float:right}
+    #active_shopping_req_prices_budget {width: 49%; float:right; }
+    #purchase_approve_panel {width: 49%; float:right; }
+</style>
+</head>
+<body>
+    <h1>${page}</h1>
+
+<div id="budget_console_tabs">
+    <ul>
+        <li><a href="#tabs-1"><span></span>Budgets Start</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>All Active Contracts</a></li>
+        <li><a
+            href="/logisticscont/purchase_reqs_items_all_active"><span></span>All Active Purchase Reqs</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="tabs-1">
+
+    </div>
+</div>
+
+
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>
+
+
+

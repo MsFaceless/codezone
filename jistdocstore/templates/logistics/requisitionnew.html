@@ -1,0 +1,185 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+
+    <style>
+        .ui-combobox_suppliers {
+            position: relative;
+            display: inline-block;
+        }
+        .ui-combobox_suppliers-toggle {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+            /* adjust styles for IE 6/7 */
+            *height: 1.7em;
+            *top: 0.1em;
+        }
+        .ui-combobox-input {
+            margin: 0;
+            padding: 0.3em;
+            width: 400px;
+        }
+        .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+        .contract_req_budget {width: 200px;}
+        #prefered_supplier {width: 400px;}
+        #req_item {width: 120px;}
+        #req_description {width: 400px;}
+        #req_unit {width: 80px;}
+        #req_qty {width: 90px;}
+        #purchase_req_new_tabs  {min-height: 600px;}
+        #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+        #log { text-indent: 40px; overflow-x: hidden; overflow-y: auto; letter-spacing: .4em; width: 810px; background: black; color:white; height: 200px; padding: 30px; margin: 10px; }
+        #add-req-to-list { padding: .5em 1em; text-decoration: none; float:right }
+        #add-req-to-list-cancel { padding: .5em 1em; text-decoration: none; float:right}
+        #add-req-done { padding: .5em 1em; text-decoration: none; float:right }
+        #add-req-done-cancel { padding: .5em 1em; text-decoration: none; float:right}
+        #add-new-req { padding: .5em 1em; text-decoration: none; float:left}
+        #selectableli .ui-selecting { background: #FECA40; }
+        #selectableli .ui-selected { background: #F39814; color: white; }
+        #selectableli { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+        #selectableli li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 10px; }
+        .row-highlight { background-color: #FECA40; height: 30px; }
+        #warningdiv { background-color: #FECA40; height: 30px; font-size: 1.4em; }
+    </style>
+  <script>
+  </script>
+  <title>New Purchase Requisition</title>
+</head>
+
+<body>
+
+    <h2 class='effect6'>${page}</h2>
+    <div id="active_disable_inputs" style="display: none">
+        <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+        <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+        <label for="activesupplierid">Active Supplier ID</label>
+        <input type="text" name="activesupplierid" id="activesupplierid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+        <label for="activebqitemid">Active BQ Item ID</label>
+        <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+        <label for="activenewreqid">Active New Req ID</label>
+        <input type="text" name="activenewreqid" id="activenewreqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+        <br/>
+            <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+    </div>
+    <div class="sidebar_purchase_req_new">
+
+        <!--div id="dialog-newpurchasereqitem">
+            <form>
+                <fieldset>
+                      <div py:for="i,x in enumerate(newreqitemfields)" class="${i%2 and 'even' or 'odd'}">
+                          <label for="${x}">${x}</label>
+                          <input type="text" name="${x}" id="${x}" class="text ui-widget-content ui-corner-all" />
+                    </div>
+                </fieldset>
+            </form>
+        </div-->
+    <div id="warningdiv" style="display: none"></div>
+    <div id="purchase_req_new_tabs">
+        <ul>
+            <li><a href="#tabs-newreq">New Purchase Req</a></li>
+            <li><a href="#ui-tabs-PurchaseReqsAddItem">Add Items</a></li>
+            <li><a href="#ui-tabs-PurchaseReqsBudgets">Contract Budgets</a></li>
+            <li><a href="#ui-tabs-PurchaseReqsContract">All Reqs for Contract</a></li>
+            <!--li><a href="/logisticscont/getPurchase_orders_for_jcno/1801">Buying Records</a></li>
+            <li><a href="/contractscont/ajaxsiteswip/">WIP</a></li-->
+        </ul>
+        <div id="tabs-newreq">
+            <label for="req_musthavedate">Must Have Date</label>
+            <br/>
+            <input type="text" name="req_musthavedate" id="req_musthavedate" class="text ui-widget-content ui-corner-all"  enabled="true"/>
+            <p/>
+            <label for="prefered_suppliers">Preferred Supplier</label>
+            <br/>
+            <input type="text" name="prefered_supplier" id="prefered_supplier" class="text ui-widget-content ui-corner-all"  enabled="true"/>
+            <p/>
+            <label for="combobox_suppliers">Or Choose an Existing Supplier</label>
+                <br/>
+                <select id="combobox_suppliers" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(suppliers)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.id}">${x.id}-${x.suppliername}-${x.city}-${x.address}</option>
+                  </div>
+                </select>
+
+            <p/>
+            Choose a Contract in Progress!!! 
+            <div id="searchwidget_contract_overview" class="ui-widget">
+                <select id="combobox_contracts_req" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+                  </div>
+                </select>
+            </div>
+            <p/>
+            <button class="ui-state-default ui-corner-all" id="add-new-req">Add New Requisition</button>
+
+        </div>
+        <div id="ui-tabs-PurchaseReqsAddItem">
+            <div id="req-new-form" class="ui-widget"> 
+
+            </div>
+            <div id="req-new-form-buttons"> 
+                <button class="ui-state-default ui-corner-all" id="add-req-to-list">Add To List</button>
+            </div>
+            <div id="req-holding-items-form" class="ui-widget"> 
+                <table id="req-holding-table" class="tablesinglepoint">
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <colgroup></colgroup>
+                    <th>JCNo </th>
+                    <th>Budget ID </th>
+                    <th>Budget Description </th>
+                    <th>Item </th>
+                    <th>Description </th>
+                    <th>Unit </th>
+                    <th>Qty </th>
+                    <th>Delete </th>
+                </table>
+            </div>
+              <div class="clearingdiv" />
+            <div id="req-new-form-buttons-completed"> 
+                <button class="ui-state-default ui-corner-all" id="add-req-done">Add Requisition [Done]</button>
+                <button class="ui-state-default ui-corner-all" id="add-req-done-cancel">Cancel</button>
+            </div>
+        </div>
+
+        <div id="ui-tabs-PurchaseReqsContract"></div>
+        <div id="ui-tabs-SOW"></div>
+        <div id="ui-tabs-PurchaseReqsBudgets"></div>
+        <div id="ui-tabs-Labour"></div>
+        <div id="ui-tabs-Buying"></div>
+        <div id="ui-tabs-Invoices"></div>
+    </div>
+ <!--div id="log" class="ui-widget">
+ </div-->
+</div>
+    <script>
+
+    </script>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>

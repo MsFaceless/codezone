@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>Supplier Edit</title>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <div id="output"></div>
+          <form id="supplier_edit_form"><fieldset>
+              <label for="supplierid_edit">ID Number</label>
+              <input  value='${supplier.id}' type="text" name="supplierid_edit" id="supplierid_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="suppliername_edit">Supplier Name</label>
+              <input value='${supplier.suppliername}' type="text" name="suppliername_edit" id="suppliername_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="supplieraccno_edit">Acc Number</label>
+              <input  value='${supplier.accnumber}' type="text" name="supplieraccno_edit" id="supplieraccno_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="supplieraddress_edit">Address</label>
+              <input  value='${supplier.address}' type="text" name="supplieraddress_edit" id="supplieraddress_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="suppliercity_edit">City</label>
+              <input  value='${supplier.city}' type="text" name="suppliercity_edit" id="suppliercity_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="supplierfax_edit">Fax</label>
+              <input value='${supplier.fax}' type="text" name="supplierfax_edit" id="supplierfax_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="supplierphone_edit">Phone</label>
+              <input  value='${supplier.phone}' type="text" name="supplierphone_edit" id="supplierphone_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="suppliercontact_edit">Contact</label>
+              <input  value='${supplier.contact}' type="text" name="suppliercontact_edit" id="suppliercontact_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="supplieractive_edit">Active</label>
+              <select py:if="supplier" id="supplieractive_edit" name="supplieractive_edit" >
+                <option value="0">False</option>
+                <option value="1">True</option>
+              </select>
+              <br/>
+              <button   class="ui-state-default ui-corner-all"
+                  id="btn_supplier_edit">Save Supplier Details</button>
+              <br/>
+           </fieldset>
+          </form>
+   <div style="height:20px;"> &nbsp; </div>
+    <!--${tmpl_context.widget()}
+    ${tmpl_context.flot(data=data)}-->
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <div py:if="'production' in tg.identity.groups">
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul py:if="tg.identity" class="nav nav-pills">
+                <li py:if="'labour_payment' in tg.identity.groups" class="active" > <a href="${tg.url('/labourcont/labour_employees_console')}">Labour Employees Console</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" class="active" > <a href="${tg.url('/labourcont/labour_teams_console')}">Labour Teams Console</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" class="active" > <a href="${tg.url('/labourcont/labour_teams_schedule_console')}">Labour Teams Schedule Console</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div py:if="'managers' in tg.identity.groups">
+    <h2 class='effect6'>Management Menu</h2>
+        <div class="navbar">
+          <div class="navbar-inner">
+            <div class="container">
+              <ul py:if="tg.identity" class="nav nav-pills">
+                <li py:if="'managers' in tg.identity.groups" class="active" > <a href="${tg.url('/contractscont/logopage')}">About Our Logo</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>
+

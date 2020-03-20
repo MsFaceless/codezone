@@ -1,0 +1,603 @@
+/* Sidebar */
+.flogojist {
+	float:right;
+	margin-bottom:0px;
+	padding-left:20px;
+	padding-right:20px;
+	margin-top:-75px;
+}
+.cctvsidebar {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 1em;
+  float: left;
+  font-size: 100%;
+  margin-top: 0.5em
+}
+
+.cctvsidebar h2 {
+  margin-top: 0;
+  color: black;
+}
+
+.cctvsidebar ul {
+  margin-left: 1.5em;
+  padding-left: 0;
+  font-size: 120%;
+}
+
+.cctv_menu_sidebar {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 1em;
+  float: left;
+  font-size: 100%;
+  margin-top: 0px
+  clear:both
+}
+.cctv_menu_sidebar_tvc {
+  border: 1px solid #cce;
+  background-color: #cce;
+  margin: 0.5em;
+  padding: 1em;
+  float: center;
+  font-size: 150%;
+  margin-top: 1px
+  clear:both
+}
+.cctv_smallcams_sidebar {
+  border: 1px solid #cce;
+  background-color: #eee;
+  padding: 0.1em;
+}
+.cctv_smallcams_sidebar_main_window {
+  width:1420px;
+  border: 1px solid #acacfd; 
+  background-color: #eee;
+  float: left;
+  font-size: 100%;
+  margin-top: 0px
+}
+.cctv_smallcams_sidebar_side {
+/* light purple  #cce*/
+/* dark purple  #acacfd*/
+  width:100%;
+  border: 1px solid #acacfd; 
+  background-color: #eee;
+  float: left;
+  font-size: 100%;
+  margin-top: 0px
+}
+.cctv_smallcams_sidebar_left {
+/* light purple  #cce*/
+/* dark purple  #acacfd*/
+  width:300px;
+  border: 1px solid #acacfd; 
+  background-color: #eee;
+  float: left;
+  font-size: 110%;
+  margin-top: 0px
+}
+
+.cctv_output_faces {
+  float: left;
+  font-size: 100%;
+  margin-top: 0px
+}
+.cctv_smallcams_sidebar_all {
+  border: 1px solid #cce;
+  background-color: #eee;
+  padding: 1em;
+  margin: 0.5em;
+  width: 150px;
+  float: left;
+}
+.sidebar_events_all {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 1720px;
+  margin-top: 0px
+}
+.sidebar_events_dates {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 1720px;
+  margin-top: 0px
+}
+
+.cctv_smallcams_sidebar_top {
+  border: 1px solid #cce;
+  background-color: #eee;
+  padding: 10em;
+}
+
+.cctv_io_table {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 1em;
+  float: left;
+  font-size: 400%;
+  margin-top: 0px
+}
+
+table.tablelabourdata {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tablelabourdata  {
+    border: 1px solid #eee;
+}
+td.tablelabourdata  {
+    border: 1px solid #eee;
+}
+
+.sidebar_backbutton {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.1em;
+  float: right;
+  width: 64px;
+  margin-top: -90px
+}
+
+div.backbuttonclass {
+    float: right;
+    margin-top:50px;
+	padding: 0px;
+	color:#888888;
+	font-size: 190%;
+	width: 180px;
+	height: 200px;
+}
+div.datagridclass {
+    float: right;
+	color:#888888;
+}
+#backbuttontop {
+    float:right;
+    margin-top:0px;
+	padding: 0px;
+	padding-right: 30px;
+	color:#888888;
+	font-size:190%;
+	width:180px;
+}
+#indexdiv {
+    float:center;
+    margin-top:0px;
+	padding: 0px;
+	padding-right: 30px;
+	padding-left: 230px;
+	color:#888888;
+	font-size:290%;
+	width:680px;
+}
+#indexdivsmall {
+    float:center;
+    margin-top:0px;
+	padding: 0px;
+	padding-right: 30px;
+	padding-left: 280px;
+	color:#888888;
+	font-size:190%;
+	width:680px;
+}
+#pagename {
+    float:center;
+    margin-top:20px;
+	background: #000;
+	padding: 0px;
+	padding-left: 40px;
+	color:#888888;
+	font-size:290%;
+}
+
+.sidebar_camadmin {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 1720px;
+  margin-top: 0px
+}
+.sidebar_planadmin {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 1720px;
+  margin-top: 0px
+}
+.sidebar_camusage {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 500px;
+  margin-top: 0px
+}
+
+.sidebar_facesall {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 200px;
+  margin-top: 0px
+}
+.sidebar_faceschoose {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 1720px;
+  margin-top: 0px
+}
+.sidebar_userusage {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 500px;
+  margin-top: 0px
+}
+.sidebar_facial_admin {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 120px;
+  margin-top: 0px
+}
+.dummydatechoser {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  float: left;
+  width: 300px;
+  margin-top: 0px
+}
+.addcam {
+  border: 1px solid #cce;
+  background-color: #eee;
+  margin: 0.5em;
+  padding: 0.5em;
+  padding-left: 5em;
+  float: right;
+  width: 500px;
+  margin-top: 0px
+}
+
+table.tablesinglepoint {
+    width: 100%;
+    background-color: #eef;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	vertical-align: middle;
+}
+tr.tablesinglepoint  {
+    background-color: lightgray;
+}
+td.tablesinglepoint  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size: 100%;
+}
+table.tableallcamslive {
+    width: 100%;
+    background-color: #eef;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	vertical-align: middle;
+	font-size: 130%;
+}
+tr.tableallcamslive  {
+    background-color: lightgray;
+}
+td.tableallcamslive  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size: 100%;
+
+}
+table.tableplancams {
+    width: 50%;
+    background-color: #eef;
+    border: 1px solid #eee;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+	font-size: 50%;
+}
+tr.tableplancams  {
+    background-color: lightgray;
+}
+td.tableplancams  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size: 50%;
+
+}
+table.tablecamusage {
+    width: 70%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tablecamusage  {
+    background-color: lightgray;
+}
+td.tablecamusage  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+
+}
+table.tableuserusage {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tableuserusage  {
+    background-color: lightgray;
+}
+td.tableuserusage  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+
+}
+table.tablefacesall {
+    width: 50%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tablefacesall  {
+    background-color: lightgray;
+}
+td.tablefacesall  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+}
+
+table.tableeventsall {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+
+table.tableeventsdate {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tableeventsdate  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+    width: 100%;
+}
+td.tableeventsdate  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:100%;
+
+}
+table.tableplansindex {
+    width: 100%;
+    background-color: #eef;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	padding-top: 0px;
+}
+tr.tableplansindex  {
+    background-color: lightgray;
+}
+td.tableplansindex  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size: 100%;
+}
+table.tablefaceschoose {
+    width: 100%;
+    border: 1px solid #acacfd; 
+    background-color: #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+td.tablefaceschoose  {
+    border: 2px solid #acacfd; 
+    background-color: lightgray;
+	font-size: 100%;
+}
+table.tablefacialadmin {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tablefacialadmin  {
+    background-color: lightgray;
+}
+td.tablefacialadmin  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+}
+table.tableplanadmin {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tableplanadmin  {
+    background-color: lightgray;
+}
+td.tableplanadmin  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+
+}
+table.tableplanview {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	float:left;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+	font-size:150%;
+}
+tr.tableplanview  {
+    background-color: lightgray;
+}
+td.tableplanview  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:90%;
+
+}
+table.tableplanscreens {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+	margin-bottom:0px;
+    margin-left: 0px;
+	padding-left:0px;
+	padding-right:0px;
+	padding-top:0px;
+}
+tr.tableplanscreens  {
+    background-color: lightgray;
+    width: 100%;
+}
+td.tableplanscreens  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+	font-size:100%;
+
+}
+#div_cctv_left_smallpics {
+    float: left;
+    margin: 10px;
+    padding: 0;
+    height: 480px;
+    width: 15%;
+    overflow-y: scroll;
+}
+.cctv_img_small {
+    cursor: pointer;
+    
+}
+
+#div_cctv_main_image {
+    border: 1px solid #ccc;
+    width: 640px;
+    height: 480px;
+    overflow: hidden;
+}
+.loading {
+    background: url(../images/spinner.gif) no-repeat center center;
+}
+.notloading {
+    width: 640px;
+    height: 480px;
+}
+#transport_reqs_active {
+    height: 700px;
+    overflow-y: scroll;
+}
+#transport_scheduled_trips {
+    height: 650px;
+    overflow-y: scroll;
+}
+#contracts_wip_div {
+    height: 650px;
+    width: 100%;
+    overflow-y: scroll;
+}

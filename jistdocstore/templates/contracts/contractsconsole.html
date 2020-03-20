@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+        </style>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #contracts_tabs  {min-height: 600px;}
+        </style>
+    </head>
+
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="active_disable_inputs" style="display: none">
+            <label for="activescopeid">Active Scope ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebudgetitemid">Active Budget Item ID</label>
+            <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activescopeid">Active Scope Item ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <br/>
+            <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+        </div>
+        <div id="contracts_tabs">
+            <ul>
+                <li><a href="#ui-tabs-Contracts-Index"><span></span>Contracts Index</a></li>
+                <li><a href="#ui_main_contract_tab"><span></span>Main Contract Tab</a></li>
+                <li><a href="#ui-tabs-Contract-OrderItems"><span></span>Contract Order Items</a></li>
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="ui-tabs-Contracts-Index"></div>
+            <div id="ui_main_contract_tab">
+                <fieldset>
+                <label for="">Search JCNo</label>
+                <input type="text" name="search_contract_jcno" id="search_contract_jcno" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_jcno">Search JCNo</button>
+                <label for="">Search orderno</label>
+                <input type="text" name="search_contract_orderno" id="search_contract_orderno" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_orderno">Search Order No</button>
+                <label for="">Search Client</label>
+                <input type="text" name="search_contract_client" id="search_contract_client" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_client">Search Client</button>
+                <label for="">Search Site Name</label>
+                <input type="text" name="search_contract_sitename" id="search_contract_sitename" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_sitename">Search Site Name</button>
+                <label for="search_site_description">Search Site Description</label>
+                <input type="text" name="search_contract_description" id="search_contract_description" class=""/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_contract_description">Search Site Description</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_add_new_contract">Add New Contract</button>
+                </fieldset>
+
+                <div id="dialog_contract_new" title="Add New Contract">
+                    <form id="dialog_contract_new_frm">
+                    <fieldset>
+                              <label for=''>Client Name</label>
+                              <input type="text" name="contract_clientname" id="contract_clientname" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                              <label for=''>Site Name</label>
+                              <input type="text" name="contract_sitename" id="contract_sitename" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                              <label for=''>Order Number</label>
+                              <input type="text" name="contract_orderno" id="contract_orderno" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                              <label for=''>Order Date</label>
+                              <input type="text" name="contract_orderdate" id="contract_orderdate" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                              <label for=''>Contract Description</label>
+                              <input type="text" name="contract_description" id="contract_description" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                              <label for=''>Contact</label>
+                              <input type="text" name="contract_contact" id="contract_contact" class="text ui-widget-content ui-corner-all" />
+                              <br/>
+                    </fieldset>
+                    </form>
+                </div>
+                <div id="contract_new_site" title="" style="display:none"> </div>
+                <div id="dialog_contract_edit" title="Edit Contract" style="display:none"> </div>
+                <div id="div_contracts_site"> </div>
+            </div>
+            <div id="ui-tabs-Contract-OrderItems">
+
+                        <div id="dialog_orderitems_edit" title="Edit Order Item" style="display:none"> </div>
+                        <div id="outputcontractdata"> </div>
+                        <div id="outputtempsitestorage" style="display: none"></div>
+                        <div id="dialog_orderitems_new" title="Add New Order Item">
+                            <form id="dialog_orderitems_new_frm">
+                            <fieldset>
+                                      <label for=''>JCNo</label>
+                                      <input type="text" name="orderitem_new_jcno" id="orderitem_new_jcno" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Item</label>
+                                      <input type="text" name="orderitem_new_item" id="orderitem_new_item" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Description</label>
+                                      <input type="text" name="orderitem_new_description" id="orderitem_new_" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Unit</label>
+                                      <input type="text" name="orderitem_new_unit" id="orderitem_new_unit" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Qty</label>
+                                      <input type="text" name="orderitem_new_qty" id="orderitem_new_qty" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Price</label>
+                                      <input type="text" name="orderitem_new_price" id="orderitem_new_price" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+                                      <label for=''>Total</label>
+                                      <input type="text" name="orderitem_new_total" id="orderitem_new_total" class="text ui-widget-content ui-corner-all" />
+                                      <br/>
+
+                            </fieldset>
+                            </form>
+                        </div>
+                    
+            </div>
+        </div>
+        <div class="clearingdiv" />
+        </body>
+    </html>
+
+
+
+
+

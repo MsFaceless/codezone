@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #fleet_tabs  {min-height: 600px; overflow:auto}
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="fleet_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Fleet"><span></span>Fleet</a></li>
+        <li><a href="/transportcont/do_search_fleet_all"><span></span>All Fleet</a></li>
+        <li><a href="/transportcont/do_search_fleet_active"><span></span>Active Fleet</a></li>
+        <li><a href="#ui-tabs-EditFleet"><span></span>Edit Fleet Info</a></li>
+        <li><a href="/transportcont/do_search_drivers_all"><span></span>Fleet Drivers</a></li>
+        <li><a href="#ui-tabs-FleetDriversInfo"><span></span>Fleet Drivers - Info</a></li>
+        <li><a href="#ui-tabs-FleetTransportLink"><span></span>Fleet - Transport - Link</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-Fleet"></div>
+    <div id="ui-tabs-AllFleet"></div>
+    <div id="ui-tabs-ActiveFleet"></div>
+    <div id="ui-tabs-EditFleet">
+        <div id="div_editfleet"></div>
+         
+        <form id="new_fleet_form" style="display:none">
+            <fieldset>
+        <H3> Add New Fleet </H3>
+                <label for="">Vehicle Description</label>
+            <input type="text" name="vehicle_description" id="vehicle_description" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Registration Number</label>
+            <input type="text" name="registration_number" id="registration_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Year Model</label>
+            <input type="text" name="year_model" id="year_model" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Date Acquired</label>
+            <input type="text" name="date_acquired" id="date_acquired" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Vin Number</label>
+            <input type="text" name="vin_number" id="vin_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Engine Number</label>
+            <input type="text" name="engine_number" id="engine_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">NR Number</label>
+            <input type="text" name="n_r_number" id="n_r_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Tare</label>
+            <input type="text" name="tare" id="tare" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Fuel Type</label>
+            <input type="text" name="fuel_type" id="fuel_type" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Tank Capacity</label>
+            <input type="text" name="tank_capacity" id="tank_capacity" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Fuel Card Number</label>
+            <input type="text" name="fuel_card_number" id="fuel_card_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Fuel Card Expiry Date</label>
+            <input type="text" name="fuel_card_expiry_date" id="fuel_card_expiry_date" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Exterior Colour</label>
+            <input type="text" name="ext_colour" id="ext_colour" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Service Center</label>
+            <input type="text" name="service_center" id="service_center" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Service Center Number</label>
+            <input type="text" name="service_center_tel_no" id="service_center_tel_no" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Driver</label>
+                <select id="driver_name"  class="text ui-widget-content ui-corner-all">
+                <option id="driver_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(activedrivers)">
+                      <option value="${x.id}">${x.driver_name}</option>
+                  </div>
+                </select><br/>
+                <label for="">Active</label>
+                <select id="fleet_active"  class="text ui-widget-content ui-corner-all">
+                    <option id="fleet_active" value="1" selected="selected">True</option>
+                    <option id="fleet_active" value="0">False</option>
+                </select>
+            <button class="ui-state-default ui-corner-all"  id="btn_fleet_new" style="display:block">Add New Fleet</button>
+            </fieldset>
+        </form>
+    </div>
+    <div id="ui-tabs-FleetDrivers"></div>
+    <div id="ui-tabs-FleetDriversInfo">
+        <div id="div_editdriver"></div>
+        <form id="new_driver_form" style="display:none">
+            <fieldset>
+        <H3> Add New Driver </H3>
+            <label for="">Driver Name</label>
+            <input type="text" name="driver_name_id" id="driver_name_id" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">ID Number</label>
+            <input type="text" name="id_number" id="id_number" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Licence Code</label>
+            <input type="text" name="licence_code" id="licence_code" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Licence Expiry Date</label>
+            <input type="text" name="licence_exp_date" id="licence_exp_date" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">PDP Code</label>
+            <input type="text" name="pdp_code" id="pdp_code" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">PDP Expiry Date</label>
+            <input type="text" name="pdp_exp_date" id="pdp_exp_date" class="text ui-widget-content ui-corner-all"/><br/>
+                <label for="">Active</label>
+                <select id="driver_active"  class="text ui-widget-content ui-corner-all">
+                    <option id="driver_active" value="1" selected="selected">True</option>
+                    <option id="driver_active" value="0">False</option>
+                </select>
+            <button class="ui-state-default ui-corner-all" id="btn_driver_new" style="display:block">Add New Driver</button>
+            </fieldset>
+        </form>
+    
+    </div>
+    <div id="ui-tabs-FleetTransportLink">
+        <div id="link_all_fleet_div"> </div> 
+        <div id="link_all_transport_div"> </div> 
+    </div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.</div>
+</body>
+</html>
+
+

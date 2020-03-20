@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #invoicing_tabs  {min-height: 600px;}
+    #cont_budgets_seperated { width: 45%;  margin: 0px; float: right; }
+    #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+    #feedback { font-size: 1.4em; }
+    #cont_main_budget .ui-selecting { background: #FECA40; }
+    #cont_main_budget .ui-selected { background: #F39814; color: white; }
+    #cont_main_budget { list-style-type: none; margin: 0; padding: 0; width: 50%; float: left; }
+    #cont_main_budget li { margin: 3px; padding: 0.4em; font-size: 0.9em; height: 12px; }
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebudgetitemid">Active Budget Item ID</label>
+    <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activescopeid">Active Scope Item ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="invoicing_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Invoicing-Index"><span></span>Invoicing Index</a></li>
+        <li><a href="/invoicingcont/do_search_invoices_unpaid"><span></span>Invoices Outstanding</a></li>
+        <li><a href="/invoicingcont/do_search_invoices_balances"><span></span>Invoices Balances</a></li>
+        <li><a href="#ui-tabs-InvByDate"><span></span>Invoices By Date</a></li>
+        <li><a href="#ui-tabs-InvByDateClient"><span></span>Invoices By Client/Date</a></li>
+        <li><a href="#ui-tabs-InvoicePayments"><span></span>Invoice Payments</a></li>
+        <!--li><a href="/invoicingcont/ajax_get_payments_paid"><span></span>Payments Received</a></li-->
+        <li><a href="#ui-tabs-InvoicePaymentsDone"><span></span>Payments Received</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-Invoicing-Index"></div>
+    <div id="ui-tabs-Outstanding"></div>
+    <div id="uiyy-tabs-Balances"></div>
+    <div id="ui-tabs-InvByDate">
+            View Invoices Between Dates!!! 
+          <p/>
+          <form id="startend_form"><fieldset>
+              <label for="startdate">From Date</label>
+              <input type="text" name="startdate" id="startdate" class="text ui-widget-content ui-corner-all" />
+              <label for="enddate">To Date</label>
+              <input type="text" name="enddate" id="enddate" class="text ui-widget-content ui-corner-all" />
+              <button class="ui-state-default ui-corner-all" id="button_get_invoices_dates">Get Invoices Between Dates</button>
+           </fieldset>
+           </form>
+           <p/>
+          <div style="height:20px;"> &nbsp; </div>
+          <div id="output_invoice_dates"> </div>
+    </div>
+    <div id="ui-tabs-InvByDateClient">
+            View Invoices By Client Between Dates!!! 
+          <p/>
+          <form id="clientstartend_form"><fieldset>
+              <label for="clientstartdate">From Date</label>
+              <input type="text" name="clientstartdate" id="clientstartdate" class="text ui-widget-content ui-corner-all" />
+              <label for="clientenddate">To Date</label>
+              <input type="text" name="clientenddate" id="clientenddate" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="clientlist">Client</label>
+                <select id="clientlist"  class="text ui-widget-content ui-corner-all">
+                <option id="client_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(clientlist)">
+                      <option value="${x}">${x}</option>
+                  </div>
+                </select>
+              <br/>
+              <button class="ui-state-default ui-corner-all" id="clientbutton_get_invoices_dates">Get Invoices By Client Between Dates</button>
+           </fieldset>
+           </form>
+           <p/>
+          <div style="height:20px;"> &nbsp; </div>
+          <div id="clientoutput_invoice_dates"> </div>
+    </div>
+    <div id="ui-tabs-InvoicePayments">
+        <form id="invoice_payment_form">
+            <fieldset>
+                <select id="combo_invoicelist" style="display: block">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(invoices)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.id}">${x.id} ${x.client} ${x.value_incl} Incl</option>
+                  </div>
+                </select>
+              <!--label for="invoiceid">Invoice No</label-->
+                <select id="invoiceid" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(invoices)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.id}">${x.id}</option>
+                  </div>
+                </select>
+              <label for="paymentdate">Payment Date</label>
+              <input type="text" name="paymentdate" id="paymentdate" class="text ui-widget-content ui-corner-all" />
+              <label for="">Payment Amount</label>
+              <input type="text" name="paymentamount" id="paymentamount" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <button class="ui-state-default ui-corner-all"
+                  id="button_add_new_payment">Add New Payment</button>
+           </fieldset>
+       </form>
+           <form id="edit_invoice_payment_form" style="display: none">
+            <fieldset>
+              <!--label for="invoiceid">Invoice No</label-->
+                <select id="edit_invoiceid" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(invoices)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.id}">${x.id}</option>
+                  </div>
+                </select>
+                <label for="edit_activepaymentid" class="" style="margin-left: 50px">Active Payment ID</label>
+              <input type="text" name="edit_activepaymentid" id="edit_activepaymentid" class="text ui-widget-content ui-corner-all"/>
+              <label for="edit_paymentdate">Payment Date</label>
+              <input type="text" name="edit_paymentdate" id="edit_paymentdate" class="text ui-widget-content ui-corner-all" />
+              <label for="">Payment Amount</label>
+              <input type="text" name="edit_paymentamount" id="edit_paymentamount" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <button class="ui-state-default ui-corner-all"
+                  id="edit_button_add_new_payment">Edit Saved Payment</button>
+              <button class="ui-state-default ui-corner-all"
+                  id="edit_button_cancel_payment">Cancel</button>
+           </fieldset>
+       </form>
+       <p/>
+       <div style="height:20px;"> &nbsp; </div>
+       <div style="height:20px;"> &nbsp; </div>
+       <div id="output_invoice_payment_form"> </div>
+     </div>
+     <div id="ui-tabs-InvoicePaymentsDone"> 
+              <form id="clientstartend_paymentform"><fieldset>
+                  <label for="clientstartdatepayment">From Date</label>
+                  <input type="text" name="clientstartdatepayment"
+                  id="clientstartdatepayment" class="text ui-widget-content ui-corner-all" />
+                  <label for="clientenddatepayment">To Date</label>
+                  <input type="text" name="clientenddatepayment"
+                  id="clientenddatepayment" class="text ui-widget-content ui-corner-all" />
+                  <br/>
+                  <label for="clientlistpayment">Client</label>
+                    <select id="clientlistpayment"  class="text ui-widget-content ui-corner-all">
+                    <option id="client_namepayment" value="">Select one...</option>
+                      <div py:for="i,x in enumerate(clientlist)">
+                          <option value="${x}">${x}</option>
+                      </div>
+                    </select>
+                  <br/>
+                  <button class="ui-state-default ui-corner-all"
+                      id="clientbutton_get_payment_dates">Get Payments By Client Between Dates</button>
+               </fieldset>
+              </form>
+       <p/>
+       <div style="height:20px;"> &nbsp; </div>
+       <div style="height:20px;"> &nbsp; </div>
+       <div id="output_invoice_payments_made"> </div>
+     </div>
+     <div id="ui-tabs-WIP">
+  
+      </div>
+ 
+ 
+  </div>
+  <div class="clearingdiv" />
+</body>
+</html>
+
+
+
+

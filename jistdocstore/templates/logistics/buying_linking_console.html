@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #buying_linking_tabs  {height: 600px; overflow:auto}
+            #buying_linking_tabs ul  {width: 98%;}
+            #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+            #grv_back_button { padding: .5em 1em; float: right; }
+            #add-new-porder { padding: 1.5em 1em; text-decoration: none; float:left; }
+            #view-old-porder { padding: 1.5em 1em; text-decoration: none; float:left; }
+            #reset-porder { padding: 1.5em 1em; text-decoration: none; float:left; }
+            #active_shopping_trolley {width: 49%; padding 1em 1em float:left; }
+            #active_shopping_req_prices_list {width: 49%; float:left; }
+            #active_shopping_trolley_approval {width: 49%;  float:left; }
+            #active_shopping_req_prices_list_approval {width: 49% float:right}
+            #active_shopping_req_prices_budget {width: 49%; float:right; }
+            #purchase_approve_panel {width: 49%; float:right; }
+            #activepodisplay {background-color: #0F0; text-align:center; margin-right: 140px; width: 10%; height: 30px;  float:right; font-size: 1.4em; } 
+            .span.ui-icon { float:right;}
+            .ui-tabs-panel {width: 98%; float:left;}
+            #buying_gallery { float: left; width: 100%; min-height: 8em; background-color: #eee; } * html #gallery { height: 12em; } /* IE6 */
+            .gallery.custom-state-active { background: #eee; }
+            .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+            .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+            .gallery li a { float: left; }
+            .gallery li a.ui-icon-zoomin { float: left; }
+            .gallery li img { width: 100%; align:left; cursor: move; }
+        </style>
+    </head>
+    <body>
+        <div id="activepodisplay"></div>
+        <h2 class='effect6'>${page}</h2>
+        <div id="warningdiv" style="display:none"></div>
+        <div id="active_disable_inputs_buying" style="display: none">
+            <label for="activepoid_buying" class="" style="margin-left:50px">Active PO ID</label>
+            <input type="text" name="activepoid_buying" id="activepoid_buying" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activesupplierid_buying">Active Supplier ID</label>
+            <input type="text" name="activesupplierid_buying" id="activesupplierid_buying" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activepoitemid_buying">Active PO Item ID Buying</label>
+            <input type="text" name="activepoitemid_buying" id="activepoitemid_buying" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activereqitemid_buying">Active Req Item ID</label>
+            <input type="text" name="activereqitemid_buying" id="activereqitemid_buying" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <input type="text" name="activeshoppinglist_buyingid" id="activeshoppinglist_buyingid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+            <div id="outputtempsitestorage_grv" class="sidebar_est_site_sow" style="display: none"></div>
+        </div>
+        <div id="buying_linking_tabs">
+            <ul>
+                <li py:if="'logistics_manager' in tg.identity.groups"><a href="#tabs-1"><span></span>Link Index</a></li>
+                <li py:if="'logistics_manager' in tg.identity.groups"><a href="#ui_tabs_Rentals"><span></span>Hire - Rentals</a></li>
+                <li py:if="'logistics_manager' in tg.identity.groups"><a href="#ui_tabs_Maintenance"><span></span>Vehicle Maintenance</a></li>
+                <li py:if="'logistics_manager' in tg.identity.groups"><a href="#ui_tabs_Plant"><span></span>Plant</a></li>
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="tabs-1"> </div>
+            <div id="ui_tabs_Rentals">
+                <div id="link_all_suppliers_rentals_div"> </div> 
+                <div id="link_all_rentals_div"> </div> 
+            </div>
+            <div id="ui_tabs_Maintenance">
+                <div id="link_all_suppliers_maintenance_div"> </div> 
+                <div id="link_all_maintenance_div"> </div> 
+            </div>
+            <div id="ui_tabs_Plant">
+                <div id="link_all_suppliers_plant_div"> </div> 
+                <div id="link_all_plant_div"> </div> 
+            </div>
+            <div id="tabs-WIP"> </div>
+        </div>
+
+
+        <div style="height:20px;"> &nbsp; </div>
+        <div class="clearingdiv" />
+            <div class="notice"> The JIST Way.
+            </div>
+        </body>
+    </html>
+
+
+

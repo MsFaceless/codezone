@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+    #feedback { font-size: 1.4em; }
+    #mainlinks .ui-selecting { background: #FECA40; }
+    #mainlinks .ui-selected { background: #F39814; color: white; }
+    #mainlinks { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+    #mainlinks li { margin: 3px; background: #FECA40; padding: 0.4em;}
+    </style>
+</head>
+
+<body>
+    <h1>${page}</h1>
+    ${sidebar_menu_logistics_purchasing()}
+    ${sidebar_menu_logistics_grv()}
+    <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>

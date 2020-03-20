@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+      <!--AIzaSyAq-Ji88xFVYLxTGIPfKnTV_P8VKdjpo2I-->
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+  <!--script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq-Ji88xFVYLxTGIPfKnTV_P8VKdjpo2I&amp;sensor=true"> </script-->
+<style>
+    #gallery_allfleet {float:left; width:800px;};
+    #activefleet {float:right; width:800px; min-height:300px};
+    #transport_tabs  {min-height: 600px; width=100%; overflow:auto};
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="transport_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Transport"><span></span>Transport</a></li>
+        <li><a href="#ui-tabs-ActiveTransportRequests"><span></span>All Active Transport Requests</a></li>
+        <li><a href="#ui-tabs-WayBills"><span></span>Loading Waybills</a></li>
+        <li><a href="#ui-tabs-ScheduledTrips"><span></span>Scheduled Requisitions</a></li>
+        <li><a href="#ui-tabs-DriverSchedules"><span></span>Driver Schedules</a></li>
+        <li><a href="#ui-tabs-DailyTripSheets"><span></span>Driver Daily Trip Sheets</a></li>
+        <li><a href="#ui-tabs-Directions"><span></span>Routes - Maps - Directions</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-Transport">
+
+        <div id="dialog_schedule_transport" title="Schedule Transport Trip">
+            <form id="dialog_transport_schedule_frm">
+                <fieldset>
+                    <label for="">Requisition Item</label>
+                    <input id="req_id" name="req_id" class="text ui-widget-content ui-corner-all" /><br/>
+                    <label for="">Transport Resource</label><br/>
+                  <select id='schedule_fleet_id' name='schedule_fleet_id' class="text ui-widget-content ui-corner-all" >
+                  <div py:for="i,x in enumerate(transport_resources_list)">
+                      <option value="${x.fleet_id}">${x.driver} - ${x.vehicle_description} - ${x.registration_number}</option>
+                  </div>
+                  </select>
+                  <br/>
+                    <label for="">Date To Schedule</label>
+                    <input id="schedule_date_this" name="schedule_date_this" class="text ui-widget-content ui-corner-all" /><br/>
+
+                  <br/>
+                    <label for="schedule_est_hours_there">Anticipated Duration (Hrs)</label>
+                        <select id="schedule_duration" name="schedule_duration"  class="text ui-widget-content ui-corner-all">
+                        <option id="schedule_duration" value="">Select one...</option>
+                          <div py:for="i,x in enumerate(timeperiod)">
+                              <option value="${x}">${x}</option>
+                          </div>
+                        </select>
+                    <br/>
+                    <label for="schedule_trips">Anticipated Trips</label>
+                        <select id="schedule_trips" name="schedule_trips" class="text ui-widget-content ui-corner-all">
+                        <option id="schedule_trips" value="">Select one...</option>
+                          <div py:for="i,x in enumerate(tripsno)">
+                              <option value="${x}">${x}</option>
+                          </div>
+                        </select>
+                    <br/>
+                    <label for="schedule_kms">Anticipated KM's</label>
+                        <select id="schedule_kms" name="schedule_kms" class="text ui-widget-content ui-corner-all">
+                        <option id="schedule_kms" value="">Select one...</option>
+                          <div py:for="i,x in enumerate(kmsno)">
+                              <option value="${x}">${x}</option>
+                          </div>
+                        </select>
+                    <br/>
+                    <label for="schedule_timestart">Time To Start</label>
+                    <input type="text" name="schedule_timestart" id="schedule_timestart" class="ui-widget-content ui-corner-all"/><br/>
+                  <br/>
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+    <div id="ui-tabs-ActiveTransportRequests">
+        <div id="transport_reqs_active"></div>
+    </div>
+    <div id="ui-tabs-WayBills"></div>
+    <div id="ui-tabs-ScheduledTrips">
+        <div id="transport_schedule_search">
+                <form id="search_schedule_frm"><fieldset>
+                        <label for="">Choose Date :</label>
+                        <input type="text" name="schedule_date" id="schedule_date" class="text ui-widget-content ui-corner-all" />
+                        <button class="ui-state-default ui-corner-all" id="btn_search_schedule">Get Schedule</button>                
+                    </fieldset>
+                </form>
+        </div>
+        <div id="transport_scheduled_trips"></div>
+        <div id="transport_dialog_schedule_div"></div>
+    </div>
+    <div id="ui-tabs-DriverSchedules">
+        <div id="transport_driver_schedule_search">
+                <form id="search_driver_schedule_frm"><fieldset>
+                        <label for="">Choose Date :</label>
+                        <input type="text" name="schedule_driver_date" id="schedule_driver_date" class="text ui-widget-content ui-corner-all" />
+                        <label for="">Search Driver / Transport Resource :</label>
+                              <select id='schedule_driver_name' name='schedule_driver_name' class="text ui-widget-content ui-corner-all" >
+                              <div py:for="i,x in enumerate(transport_resources_list)">
+                                  <option value="${x.fleet_id}">${x.driver} - ${x.vehicle_description} - ${x.registration_number}</option>
+                              </div>
+                              </select>
+                        <button class="ui-state-default ui-corner-all" id="btn_search_driver_schedule">Get Driver Schedule</button>                
+                    </fieldset>
+                </form>
+        </div>
+        <div id="transport_driver_schedules"></div>
+    </div>
+    <div id="ui-tabs-DailyTripSheets">
+    
+        <div id="transport_dailytrip_sheet_search">
+                <form id="search_dailytrip_sheet_frm"><fieldset>
+                        <label for="">Choose Date :</label>
+                        <input type="text" name="trip_sheet_date" id="trip_sheet_date" class="text ui-widget-content ui-corner-all" />
+                        <label for="">Search Driver / Transport Resource :</label>
+                              <select id='trip_sheet_fleet_id' name='trip_sheet_fleet_id' class="text ui-widget-content ui-corner-all" >
+                              <div py:for="i,x in enumerate(transport_resources_list)">
+                                  <option value="${x.fleet_id}">${x.driver} - ${x.vehicle_description} - ${x.registration_number}</option>
+                              </div>
+                              </select>
+                        <button class="ui-state-default ui-corner-all" id="btn_search_dailytrip_sheet">Get Driver Daily Trip Sheet</button>                
+                        <button class="ui-state-default ui-corner-all" id="btn_add_dailytrip_sheet">Add Driver Daily Trip Sheet</button>                
+                    </fieldset>
+                </form>
+        </div>
+        <div id="transport_driver_tripsheets"></div>
+    
+    </div>
+    <div id="ui-tabs-Directions">
+        <div id="map_canvas">
+        </div>
+    </div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+  <div class="clearingdiv" />
+</body>
+</html>
+

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+
+    <div class="">
+
+                    <form id="edit_store_form">
+                    <fieldset>
+                        <label for="">Store ID</label><br/>
+                        <input type="text" value="${storelocation.id}" name="store_id_edit" id="store_id_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Name</label><br/>
+                        <input type="text" value="${storelocation.store_name}" name="store_name_edit" id="store_name_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Location</label><br/>
+                        <input type="text" value="${storelocation.store_location}" name="store_location_edit" id="store_location_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Address 1</label><br/>
+                        <input type="text" value="${storelocation.store_address_1}" name="store_address_1_edit" id="store_address_1_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Address 2</label><br/>
+                        <input type="text" value="${storelocation.store_address_2}" name="store_address_2_edit" id="store_address_2_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Address 3</label><br/>
+                        <input type="text" value="${storelocation.store_address_3}" name="store_address_3_edit" id="store_address_3_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="">Store Person Name</label><br/>
+                        <input type="text" value="${storelocation.store_person_name}" name="store_person_name_edit" id="store_person_name_edit" class="text ui-widget-content ui-corner-all" /><br/>
+                          <label for="storeactive_edit">Active</label><br/>
+                          <select py:if="storelocation.active==0" id="storeactive" name="storeactive" >
+                            <option value="0" selected="selected">False</option>
+                            <option value="1">True</option>
+                          </select>
+                          <select py:if="storelocation.active==1" id="storeactive" name="storeactive" >
+                            <option value="0">False</option>
+                            <option value="1" selected="selected">True</option>
+                          </select><br/>
+                        <button class="ui-widget ui-widget-content ui-state-default" id="button_store_edit">Save Store</button>
+                    </fieldset>
+                    </form>
+</div>
+
+
+  <div class="clearingdiv" />
+</body>
+</html>
+

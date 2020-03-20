@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    #labour_employees_tabs  {min-height: 800px; overflow:auto}
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activereqid">Active Req ID</label>
+    <input type="text" name="activereqid" id="activereqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activepayeeid">Active Payee ID</label>
+    <input type="text" name="activepayeeid" id="activepayeeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activesplitreqid">Active Split Req ID</label>
+    <input type="text" name="activesplitreqid" id="activesplitreqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="labour_employees_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Labour_Index"><span></span>Labour Index</a></li>
+        <li><a href="#ui-tabs-Labour_Employees"><span></span>Employees</a></li>
+        <li><a href="#ui-tabs-Labour_Info"><span></span>Employee Info</a></li>
+        <li><a href="#ui-tabs-Labour_Divisions"><span></span>Labour Divisions</a></li>
+        <li><a href="#ui-tabs-Labour_History"><span></span>Employee - Payment History</a></li>
+        <li><a href="#ui-tabs-Labour_Payment"><span></span>Labour Payment</a></li>
+    </ul>
+    <div id="ui-tabs-Labour_Index"></div>
+    <div id="ui-tabs-Labour_Employees">
+                <fieldset>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_view_active_labour">View Active Employees</button>
+                <label for="search_employee_id">Search Employee By ID</label>
+                <input type="text" name="search_employee_id" id="search_employee_id" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_labour_idno">Search Employee By ID</button>
+                <label for="search_employee_">Search Employee First Name</label>
+                <input type="text" name="search_employee_first_name" id="search_employee_first_name" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_employee_first_name">Search Employee First Name</button>
+                <label for="search_employee_last_name">Search Employee Last Name</label>
+                <input type="text" name="search_employee_last_name" id="search_employee_last_name" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_employee_last_name">Search Employee Last Name</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_employee_new">Add New Employee</button>
+                </fieldset>
+                <div id="employee_edit" title="Edit Employee Info" style="display:none"> </div>
+                <div id="div_employee_list"> </div>
+                <div id="div_dialog_pic_place" > </div>
+    </div>
+    <div id="ui-tabs-Labour_Info">
+        <div id="edit_employee_div"> </div>
+        <div id="new_employee_div"> </div>
+    </div>
+    <div id="ui-tabs-Labour_Divisions">
+        <div id="_divisions"></div>
+    </div>
+    <div id="ui-tabs-Labour_History">
+        <div id="employee_payment_history_div"> </div>
+    </div>
+    <div id="ui-tabs-Labour_Payment"> </div>
+</div>
+ 
+</body>
+</html>
+
+
+
+
+
+

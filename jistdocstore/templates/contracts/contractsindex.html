@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+</head>
+
+<body>
+   <h2 class='effect6'>${page}</h2>
+    <!--div py:if="'contracts_group' in tg.identity.groups">
+    ${sidebar_menu_contracts_main()}
+    </div-->
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul py:if="tg.identity" class="nav nav-pills">
+            <!--li py:if="request.identity" class="active"><a href="${tg.url('/contractscont/showcontracts')}">Contracts</a> </li-->
+            <li py:if="request.identity" class="active"><a href="${tg.url('/contractscont/contractsconsole')}">Contracts Console</a> </li>
+            <!--li py:if="request.identity" class="active"><a href="${tg.url('/contractscont/budgetconsole')}">Budgets -  Scopes etc</a></li-->
+            <li py:if="'contracts_group' in tg.identity.groups" class="active"><a href="${tg.url('/mngntcont/contractoverview')}">Contract Overview</a> </li>
+            <li py:if="'contracts_group' in tg.identity.groups" class="active"><a href="${tg.url('/contractscont/contractsmaps')}">Contracts Maps</a> </li>
+            <!--li py:if="'contracts_group' in tg.identity.groups" class="active" > <a href="${tg.url('/cctvcont/menu')}">CCTV</a></li-->
+            <li py:if="'contracts_group' in tg.identity.groups" class="active" > <a href="${tg.url('/contractscont/logopage')}">About Our Logo</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  <div class="clearingdiv" />
+</body>
+</html>
+
+

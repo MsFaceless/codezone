@@ -1,0 +1,125 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      py:strip="">
+<head py:match="head" py:attrs="select('@*')">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=yes"/>
+  <meta charset="${response.charset}" />
+  <title py:if="False">JIST Management Software</title>
+  <meta py:replace="select('*')"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/bootstrap.min.css')}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/bootstrap-responsive.min.css')}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/style.css')}" />
+  <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/cctvstyles.css')}" />
+
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/admin.css')}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/jquery-ui.css')}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/jquery.timepicker.css')}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/fineuploader.css')}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/fineuploader-3.5.0.css')}" />
+        <link rel="stylesheet" type="text/css" media="screen" href="${tg.url('/css/gantt_style.css')}" />
+</head>
+
+<body py:match="body" py:attrs="select('@*')">
+  <div id = "app_container" class="container">
+            <div py:if="not tg.identity">Welcome, guest!</div>
+            <div py:if="tg.identity" class="loggedname">
+                ${tg.identity.groups}
+                <img src="${tg.url(['/images/staffpics/'+str(tg.identity.user.user_id)+'.png'])}" align="center"/>
+                Is logged in!
+            </div>
+
+
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <ul py:if="tg.identity" class="nav nav-pills">
+                <li py:if="request.identity" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/myjistconsole')}">My JIST</a></li>
+                <li py:if="'reception' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/receptioncont/reception_console')}">Reception</a></li>
+                <li py:if="'contracts_group' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/contractscont/menu')}">Contracts</a></li>
+                <li py:if="'production' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/productioncont/menu')}">Production</a></li>
+                <li py:if="'marketing' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/marketingcont/menu')}">Marketing</a></li>
+                <li py:if="'logistics' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/logisticscont/menu')}">Logistics</a></li>
+                <li py:if="'labour_payment' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/labourcont/menu')}">Time and Attendance</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/labourcont/menu')}">Labour</a></li>
+                <li py:if="'estimates' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/estimatingcont/menu')}">Estimating</a></li>
+                <li py:if="'palisade_ess' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/est3yresspalisadecont/menu')}">SPF</a></li>
+                <li py:if="'manufacture' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/manufacturecont/menu')}">JJMC</a></li>
+                <li py:if="'transport' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/transportcont/transport_console')}">Transport</a></li>
+                <li py:if="'fleet' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/fleetcont/menu')}">Fleet</a></li>
+                <li py:if="'managers' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/mngntcont')}">Management</a></li>
+                <li py:if="'accounts' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/accountscont/menu')}">Accounts</a></li>
+                <li py:if="'administration_manager' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/invoicingcont/production_invoicing_console')}">Invoicing</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/cctvcont/menu')}">CCTV</a></li>
+                <li py:if="'managers' in tg.identity.groups" id="login" class="${('active', 'active')[defined('page') and page=='index']}"><a href="${tg.url('/secc/index')}">Secure</a></li>
+          </ul>
+          <ul class="nav pull-right" py:if="tg.auth_stack_enabled">
+            <li py:if="not request.identity"><a href="${tg.url('/login')}">Login</a></li>
+            <li py:if="request.identity"><a href="${tg.url('/logout_handler')}">Logout</a></li>
+            <!--li py:if="request.identity"><a href="${tg.url('/admin')}">Admin</a></li-->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Main included content -->
+    <div py:replace="select('*|text()')"/>
+
+    <!-- Footer included from an external template >
+    <footer class="footer hidden-tablet hidden-phone"-->
+    <footer class="footer">
+    <a class="pull-right" href="http://www.jist.co.za">
+        <canvas id='logo_canvas' width='50px' height='50px'></canvas>
+        <!--img style="vertical-align:middle;" src="${tg.url('/images/jistweblogomedium.png')}" alt="" /--></a>
+      <p>Copyright &copy; ${getattr(tmpl_context, 'JIST', 'JIST')}  2005 - ${h.current_year()}</p>
+    </footer>
+  </div>
+
+        <!--script src="${tg.url('/javascript/bootstrap.min.js')}"></script-->
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery-1.8.2.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery-1.4.2.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery-ui.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_myjistconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_contractconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_receptionconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery.timepicker.js'])}"></script>
+
+        <script type="text/javascript" src="${tg.url(['/javascript/jqueryjistcontracts.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/contractsjscript.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/sierpinski.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/estimatingjscript.js'])}"></script>
+
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_buying_grv.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_receptionconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_payreqconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_fleetconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_transportconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_invoicingconsole.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_est5yreskom_console.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_est3yr_ess_palisade_console.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_est3yr_ess_hsf_console.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_manufacture_console.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_labour_console.js'])}"></script>
+        <!--script type="text/javascript" src="${tg.url(['/javascript/jquery_subcon_console.js'])}"></script-->
+
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_jistcctv.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery.fineuploader-3.5.0.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/cloud-carousel.1.0.5.js'])}"></script>
+
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery.mousewheel.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery.carouFredSel-6.2.0-packed.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_fileupload_console.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_googlemaps.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_contractsmaps.js'])}"></script>
+
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_project_management.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_jist_gantt.js'])}"></script>
+
+        <script type="text/javascript" src="${tg.url(['/javascript/RGraph/libraries/RGraph.common.core.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/RGraph/libraries/RGraph.common.dynamic.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/RGraph/libraries/RGraph.line.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/RGraph/libraries/RGraph.bar.js'])}"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+    </head>
+    <body>
+        <div id="activepodisplay"></div>
+        <h2 class='effect6'>${page}</h2>
+        <div id="warningdiv" style="display:none"></div>
+        <div id="active_disable_inputs_buying" style="display: none">
+            <label for="activepoid_buying" class="" style="margin-left:50px">Active PO ID</label>
+            <input type="text" name="activepoid_buying" id="activepoid_buying" class="text ui-widget-content ui-corner-all" disabled="true"/>
+        </div>
+        <div id="rental_console_tabs">
+            <ul>
+                <li py:if="'logistics_manager' in tg.identity.groups"><a href="/logisticscont/get_rentals_resources_active_html"><span></span>All Rental Suppliers</a></li>
+                <li py:if="'logistics' in tg.identity.groups"><a href="#ui_tabs_Last100POs"><span></span>Orders To Supplier - Last 5 Weeks</a></li>
+                <li py:if="'logistics' in tg.identity.groups"><a href="#ui_tabs_TrackedItem"><span></span>Tracked Item</a></li>
+            </ul>
+            <div id="tabs_rental_index"> </div>
+            <div id="ui_tabs_Last100POs">
+
+            </div>
+            <div id="ui_tabs_TrackedItem"> 
+                <div id="tracked_items_div"></div> 
+            </div>
+
+
+        </div>
+
+
+                <div class="clearingdiv" />
+                </body>
+            </html>
+
+
+

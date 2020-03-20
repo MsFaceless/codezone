@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+        <div id="div_cctv_left_smallpics">
+            <div py:for="i,x in enumerate(camimg_srclist)">
+                <img class='cctv_img_small' src='${x.src}' value='${x.value}'></img>
+
+            </div>
+        </div>
+        <div id='div_cctv_main_image' class='loading'>
+            <img id='img_main_cctv' src='${camimg_srclist[0].value}' width='640px' height='480px'></img>
+        </div>
+
+      <div class="clearingdiv" />
+</body>
+</html>

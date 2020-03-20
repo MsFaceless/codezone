@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #payreq_tabs  {min-height: 800px; overflow:auto}
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activereqid">Active Req ID</label>
+    <input type="text" name="activereqid" id="activereqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activepayeeid">Active Payee ID</label>
+    <input type="text" name="activepayeeid" id="activepayeeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activesplitreqid">Active Split Req ID</label>
+    <input type="text" name="activesplitreqid" id="activesplitreqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="payreq_tabs">
+    <ul>
+        <li><a href="#ui-tabs-PayReq"><span></span>Payment Reqs</a></li>
+        <li><a href="#ui-tabs-Payees"><span></span>Payees</a></li>
+        <li><a href="#ui-tabs-Payee-History"><span></span>Payee - History</a></li>
+        <li><a href="#ui-tabs-NewReq"><span></span>New Payment Req</a></li>
+        <li><a href="/accountscont/do_search_paymentreqs_notapproved"><span></span>Not Approved Reqs</a></li>
+        <li><a href="/accountscont/do_search_paymentreqs_unpaid_approved"><span></span>Approved UnPaid Reqs</a></li>
+        <li><a href="/accountscont/do_search_paymentreqs_paymentlist"><span></span>Payment List</a></li>
+        <li><a href="/accountscont/do_search_paymentreqs_paid"><span></span>Payments Paid By Date</a></li>
+        <li><a href="/accountscont/do_search_paymentreqs_all"><span></span>All Payment Reqs</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-PayReq"></div>
+    <div id="ui-tabs-Payees">
+        <fieldset>
+        <button class="ui-widget ui-widget-content ui-state-default" id="button_view_all_payees">View All Payees</button>
+        <label for="search_payeename">Search Payee Name</label>
+        <input type="text" name="search_payeename" id="search_payeename" class="text ui-widget-content ui-corner-all"/>
+        <button class="ui-widget ui-widget-content ui-state-default" id="button_search_payee">Search Payee</button>
+        <button class="ui-widget ui-widget-content ui-state-default" id="button_add_new_payee">Add New Payee</button>
+            <div id="add_new_payee" title="Add New Payee" style="display:none">
+                <form id ='frm_new_payee'>
+                <fieldset>
+                    <label for="payeename">Name</label>
+                    <input type="text" name="payeename" id="payeename" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="address1">Address1</label> 
+                    <input type="text" name="address1" id="address1" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="address2">Address2</label> 
+                    <input type="text" name="address2" id="address2" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="address3">Address3</label> 
+                    <input type="text" name="address3" id="address3" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="address4">Address4</label> 
+                    <input type="text" name="address4" id="address4" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="vat_no">Vat No</label> 
+                    <input type="text" name="vat_no" id="vat_no" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="bank">Bank</label> 
+                    <input type="text" name="bank" id="bank" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="branch">Branch Code</label> 
+                    <input type="text" name="branch" id="branch" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="accno">Acc No</label> 
+                    <input type="text" name="accno" id="accno" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="contact">Contact</label> 
+                    <input type="text" name="contact" id="contact" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="email">Email</label> 
+                    <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="phone">Phone</label> 
+                    <input type="text" name="phone" id="phone" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="fax">Fax</label> 
+                    <input type="text" name="fax" id="fax" value="" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <button class="ui-widget ui-widget-content ui-state-default" id="button_do_add_payee">Add New Payee</button>
+                    <button class="ui-widget ui-widget-content ui-state-default" id="button_do_cancel_new_payee">Cancel</button>
+                </fieldset>
+                </form>
+            </div>
+            <div id="add_new_payee_edit" title="Edit Payee" style="display:none">
+            </div>
+            <div id="payee_list_edit" title="Edit Payee Details" style="display:none"> 
+            </div>
+        </fieldset>
+        <div id="div_payee_list"> </div>
+    </div>
+    <div id="ui-tabs-Payee-History">
+        <div id="payee_history"></div>
+    </div>
+    <div id="ui-tabs-NewReq">
+
+            <div id="get_new_paymentreq" title="New Payment Req" style="display:block">
+            </div>
+    </div>
+    <div id="ui-tabs-NotApprovedReqs">
+        <form id="dialog_pay_req_split_payment" style="display: none">
+        <fieldset>
+            <label for="split_req_total_incl">This Total Incl</label>
+            <input type="text" name="split_req_total_incl" id="split_req_total_incl" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="split_payment_percent">Split Percentage(This One)</label>
+                <select id="split_payment_percent">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(percentlist)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x}">${x}</option>
+                  </div>
+                </select>
+            <label for="split_req_total_incl_paynow">Pay Now Total Incl</label>
+            <input type="text" name="split_req_total_incl_paynow" id="split_req_total_incl_paynow" class="text ui-widget-content ui-corner-all"/><br/>
+                <p/>
+            <label for="split_req_total_incl_balance">Balance Total Incl</label>
+            <input type="text" name="split_req_total_incl_balance" id="split_req_total_incl_balance" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="split_req_must_pay_date">Must Pay Balance Date</label>
+            <input type="text" name="split_req_must_pay_date" id="split_req_must_pay_date" class="text ui-widget-content ui-corner-all"/><br/>
+        </fieldset>
+        </form>
+    </div>
+    <div id="ui-tabs-ApprovedReqs">
+        <form id="dialog_payreq_set_paymentdate" style="display: none">
+        <fieldset>
+            <label for="payreq_paymentdate">Choose A Date</label>
+            <input type="text" name="payreq_paymentdate" id="payreq_paymentdate" class="text ui-widget-content ui-corner-all"/><br/>
+        </fieldset>
+        </form>
+    
+    </div>
+    <div id="ui-tabs-UnpaidReqs"></div>
+    <div id="ui-tabs-PaymentsPaid"></div>
+    <div id="ui-tabs-AllReqs"></div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+ 
+ 
+  <div class="clearingdiv" />
+</body>
+</html>
+
+
+
+
+

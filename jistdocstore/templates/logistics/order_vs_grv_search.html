@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+    <style>
+        .ui-combobox_suppliers_grv {
+            position: relative;
+            display: inline-block;
+        }
+        .ui-combobox_suppliers_grv {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            margin-left: -1px;
+            padding: 0;
+            /* adjust styles for IE 6/7 */
+            *height: 1.7em;
+            *top: 0.1em;
+        }
+        .ui-combobox-input {
+            margin: 0;
+            padding: 0.3em;
+            width: 400px;
+        }
+        .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+        .contract_req_budget {width: 200px;}
+        #prefered_supplier {width: 400px;}
+        #req_item {width: 120px;}
+        #req_description {width: 400px;}
+        #req_unit {width: 80px;}
+        #req_qty {width: 90px;}
+        #grv_console_tabs  {min-height: 600px;}
+        #new_grv_form { text-indent: 10px; letter-spacing: .3em; width: 310px; height: 250px; padding: 10px; margin: 10px; float: left; }
+        #log { text-indent: 40px; overflow-x: hidden; overflow-y: auto; letter-spacing: .4em; width: 810px; background: black; color:white; height: 200px; padding: 30px; margin: 10px; }
+        #add-grv-to-list { padding: .5em 1em; text-decoration: none; float:right }
+        .row-highlight { background-color: #FECA40; height: 30px; }
+    </style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <div id="active_disable_inputs_grv" style="display: none">
+        <label for="activesiteid_grv" class="" style="margin-left: 50px">Active Site ID</label>
+        <input type="text" name="activepoid_grv" id="activepoid_grv" class="text ui-widget-content ui-corner-all" disabled="true"/>
+        <label for="activesupplierid">Active Supplier ID</label>
+        <input type="text" name="activesupplierid_grv" id="activesupplierid_grv" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+        <label for="activebqitemid_grv">Active BQ Item ID</label>
+        <input type="text" name="activepoitemid_grv" id="activepoitemid_grv" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+        <br/>
+            <div id="outputtempsitestorage_grv" class="sidebar_est_site_sow" style="display: none"></div>
+    </div>
+
+    <div id="grv_console_tabs">
+        <ul>
+            <li><a href="#tabs-SearchOpenOrder">Search Open Order To Create GRV</a></li>
+            <li><a href="#ui-tabs-GRVList">Order Items</a></li>
+            <li><a href="#ui-tabs-GRVItems">GRV Items</a></li>
+        </ul>
+
+        <div id="tabs-SearchOpenOrder">
+            <p/>
+            <div id="searchwidget_contract_overview" class="ui-widget">
+            <label for="combobox_suppliers_grv">Choose a Supplier to get a list of open orders</label>
+                <br/>
+                <select id="combobox_suppliers_grv" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(suppliers)">
+                      <option value="${x.id}">${x.id}-${x.suppliername}-${x.city}-${x.address}</option>
+                  </div>
+                </select>
+
+            <p/>
+        </div>
+            <!--
+            Choose a Contract in Progress!!! 
+            <div id="searchwidget_contract_overview_grv" class="ui-widget">
+                <select id="combobox_contracts_grv" style="display: none">
+                <option value="">Select one...</option>
+                  <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+                      <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+                  </div>
+                </select>
+            </div>
+            <p/>
+            -->
+            <div id="open_order_list">
+            </div>
+        </div>
+        <div id="ui-tabs-GRVList">
+
+            <div id="grv_details">
+            </div>
+
+        </div>
+        <div id="ui-tabs-GRVItems">
+            <div id="grv_items">
+            </div>
+        </div>
+    </div>
+
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.</div>
+</body>
+</html>
+

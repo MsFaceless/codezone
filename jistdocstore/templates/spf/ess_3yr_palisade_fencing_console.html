@@ -1,0 +1,261 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            .ui-tabs-panel {width: 98%; float:left;}
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="screensize_radio">
+            <input type="radio" id="screen1" value="1250" checked="checked" />
+            <label for="screen1">1250</label>
+            <input type="radio" id="screen2" value="1900" />
+            <label for="screen2">1900</label>
+        </div>
+
+        <div id="warningdiv" style="display:none"></div>
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activesiteidindex">Active Site ID Index</label>
+            <input type="text" name="activesiteidindex" id="activesiteidindex" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebqitemid">Active BQ Item ID</label>
+            <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activemyuser">Active User</label>
+            <input type="text" name="activemyuser" id="activemyuser" value="${myjistid}" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activereqitemid">Active Req Item ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <input type="text" name="activequoteidindex" id="activequoteidindex" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+        </div>
+        <div id="ess_3yr_palisade_fencing_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>Estimate Index</a></li>
+                <li><a href="#ui-tabs-Sites"><span></span>Sites</a></li>
+                <li><a href="#ui-tabs-Scope"><span></span>Scope</a></li>
+                <li><a href="#ui-tabs-Quotes"><span></span>Quotes</a></li>
+                <li><a href="#ui-tabs-BOQ"><span></span>BOQ</a></li>
+                <li><a href="#ui-tabs-PicsPalisade"><span></span>Pics</a></li>
+            </ul>
+            <div id="tabs-1"> </div>
+            <div id="ui-tabs-Sites">
+                <fieldset>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_view_all_sites_palisade">View All Sites</button>
+                <label for="search_sitename">Search Site Name</label>
+                <input type="text" name="search_sitename_palisade" id="search_sitename_palisade" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_site_name_palisade">Search Site Name</button>
+                <label for="search_sitedescription_palisade">Search Site Area</label>
+                <input type="text" name="search_sitedescription_palisade" id="search_sitedescription_palisade" class=""/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_site_description_palisade">Search Site Area</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_add_new_est_site_palisade">Add New Site</button>
+                </fieldset>
+                    <div id="estimate_newsite" title="Add New Site" style="display:none">
+                        <form id ='frm_est_new_site'>
+                        <fieldset>
+                            <label for="sitename">Name</label>
+                            <input type="text" name="sitename" id="sitename" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="description">Description</label>
+                            <input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="wonumber">WONumber</label>
+                            <input type="wonumber" name="wonumber" id="wonumber" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="supervisor">Supervisor</label>
+                            <input type="supervisor" name="supervisor" id="supervisor" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="coordinates">Coordinates</label>
+                            <input type="coordinates" name="coordinates" id="coordinates" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="area">Area</label>
+                            <input type="text" name="area" id="area" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="province">Province</label>
+                            <input type="province" name="province" id="province" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <label for="visit_by">Visit By</label>
+                            <input type="visit_by" name="visit_by" id="visit_by" value="" class="text ui-widget-content ui-corner-all" />
+                            <br/>
+                            <button class="ui-widget ui-widget-content ui-state-default" id="button_do_add_new_site_palisade">Add New Site</button>
+                            <button class="ui-widget ui-widget-content ui-state-default" id="button_do_cancel_new_site_palisade">Cancel</button>
+                        </fieldset>
+                        </form>
+                    </div>
+                    <div id="estimate_editsite" title="Edit Site" style="display:none">
+                    </div>
+                <div id="div_est_sites"> </div>
+            </div>
+            <div id="ui-tabs-Scope">
+                <div id="dialog_newsitescope" title="New Site Scope">
+                    <form id="new_sites_scope_form">
+                    <fieldset>
+                        <label for="newscopeid">ID</label><br/>
+                        <input type="text" name="newscopeid" id="newscopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+                        <label for="newscopedescription">Description</label><br/>
+                        <input type="text" name="newscopedescription" id="newscopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newscopeunit">Unit</label><br/>
+                        <input type="text" name="newscopeunit" id="newscopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="newscopeqty">Qty</label><br/>
+                        <input type="text" name="newscopeqty" id="newscopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+                <div id="dialog_editsitescope" title="Edit Site Scope">
+                    <form id="edit_sites_scope_form">
+                    <fieldset>
+                        <label for="editsitescopeid">ID</label><br/>
+                        <input type="text" name="editsitescopeid" id="editsitescopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+                        <label for="editsitescopedescription">Description</label><br/>
+                        <input type="text" name="editsitescopedescription" id="editsitescopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editsitescopeunit">Unit</label><br/>
+                        <input type="text" name="editsitescopeunit" id="editsitescopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+                        <label for="editsitescopeqty">Qty</label><br/>
+                        <input type="text" name="editsitescopeqty" id="editsitescopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+                    </fieldset>
+                    </form>
+                </div>
+
+                <div id='div_site_scope'></div>
+                <div id='div_site_picture'></div>
+            </div>
+            <div id="ui-tabs-Quotes">
+                <fieldset>
+                <label for="activesiteid" class="" style="margin-left: 0px">Active Site ID</label>
+                <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <label for="activesitename" class="" style="margin-left: 0px">Active Site Name</label>
+                <input type="text" name="activesitename" id="activesitename" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <label for="activequoteid" class="" style="margin-left: 0px">Active Quote ID</label>
+                <input type="text" name="activequoteid" id="activequoteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+                <br/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_do_add_new_quote_palisade">Add New Full Quote</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_do_add_new_quote_palisade_empty">Add New Empty Quote</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_show_all_quotes">Show All Quotes</button>
+                </fieldset>
+                <div id="div_selected_quote" title="" style="display:block"> </div>
+                <div id = "estimate_quote_list"></div>
+                <div id = "estimate_quote_items_edit"></div>
+                <div id = "estimate_quote_items"></div>
+                <div id = "estimate_quote_list_all"></div>
+            </div> 
+            <div id="ui-tabs-BOQ">
+                <div id = "estimate_boq_prices">
+                        <H4>Bill Items</H4>
+                            <table id='boqlist_palisade' class='table_estdata'>
+                            <th>ID</th>
+                            <th>Item ID</th>
+                            <th>Description</th>
+                            <th>Unit</th>
+                            <th>Price</th>
+                            <th>Add To Current Quote</th>
+                  <div py:for="i,x in enumerate(boq)">
+                        <tr>
+                        <td >
+                           ${x.id} 
+                        </td>
+                        <td >
+                           ${x.itemno} 
+                        </td>
+                        <td >
+                           ${x.description} 
+                        </td>
+                        <td >
+                           ${x.units} 
+                        </td>
+                        <td align='right' >
+                           ${x.price} 
+                        </td>
+                        <td width='25px'>
+                            <img src="/images/project-open.png">
+                            </img>
+                        </td>
+                        </tr>
+                  </div>
+                    </table>
+
+                </div>
+            </div>
+            <div id="ui-tabs-PicsPalisade">
+                <div id="div_upload_pic">
+                    <form id="upload_data_form">
+                        <fieldset>
+                            <label for="taken_by">Taken By:</label><br/>
+                            <select id="pic_taken_by_user" name="pic_taken_by_user">
+                                   <div py:for="i,x in enumerate(users)" class="${i%2 and 'even' or 'odd'}">
+                                       <option py:if="x.user_id==myjistid" value="${x.user_id}" selected="selected">${x.user_name}</option>
+                                       <option py:if="x.user_id!=myjistid" value="${x.user_id}" >${x.user_name}</option>
+                                    </div>
+                            </select>
+                                <br/>
+                            <label for="pic_subject">Subject: [Add a meaningful subject that is searchable in the future !!!!!]</label>
+                                <br/>
+                            <input type="text" name="pic_subject" id="pic_subject"/>
+                                <br/>
+                            <label for="pic_date_taken">Date Pictures Taken:</label>
+                                <br/>
+                            <input type="text" name="pic_date_taken" id="pic_date_taken"/>
+                                <br/>
+                            <label for="pic_description">Description / Note</label>
+                                <br/>
+                            <textarea cols="60" rows="5" name="pic_description" id="pic_description" class="text ui-widget-content ui-corner-all" /><br/>
+                                <br/>
+                            <div id="jquery-fine-uploader_palisade" style="display: none">
+                            </div>
+                            <br/>
+                            <button id="triggerUpload" style="display: none" class="ui-state-default ui-corner-all">
+                                 Upload now
+                            </button>
+                            <button id="triggerReset" style="display: none" class="ui-state-default ui-corner-all">
+                                Reset 
+                            </button>
+                        </fieldset>
+                    </form>
+                <div class ='default_pic' id='palisade_pics_default'></div>
+                </div>
+                <div id='palisade_pics'></div>
+            </div> 
+        </div>
+                <div class="clearingdiv" />
+                </body>
+            </html>
+
+
+
+

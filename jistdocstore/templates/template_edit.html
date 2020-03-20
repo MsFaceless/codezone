@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <div class="">
+          <form id="template_edit_form"><fieldset>
+            <fieldset>
+              <label for="template_id_edit">ID Number</label>
+              <input  value='${template.id}' type="text" name="template_id_edit" id="template_id_edit" class="text ui-widget-content ui-corner-all" />
+              <br/>
+              <label for="template_active_edit">Active</label>
+                  <select py:if="storelocation.active==0" id="storeactive" name="storeactive" >
+                    <option value="0" selected="selected">False</option>
+                    <option value="1">True</option>
+                  </select>
+                  <select py:if="storelocation.active==1" id="storeactive" name="storeactive" >
+                    <option value="0">False</option>
+                    <option value="1" selected="selected">True</option>
+                  </select><br/>
+              <br/>
+              <button   class="ui-state-default ui-corner-all"
+                  id="btn_template_edit">Save template_ Details</button>
+              <br/>
+           </fieldset>
+          </form>
+  </div>
+      <div class="clearingdiv" />
+</body>
+</html>

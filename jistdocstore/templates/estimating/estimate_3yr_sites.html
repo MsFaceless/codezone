@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+  <!--script src="http://maps.google.com/maps/api/js?sensor=false"></script-->
+ <style>
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #feedback { font-size: 1.4em; }
+    #selectableli .ui-selecting { background: #FECA40; }
+    #selectableli .ui-selected { background: #F39814; color: white; }
+    #selectableli { list-style-type: none; margin: 0; padding: 0; width: 90%; }
+    #selectableli li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 10px; }
+    #screensize_radio { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 10px; float:right; }
+    </style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+    <input type="radio" value="0" name="radio2" id="displayText_sites" onclick="javascript:toggle_sites();">Toggle Sites</input>
+    <input type="radio" value="0" name="radio1" id="displayText_boq" onclick="javascript:toggle_boq();">Toggle Bill of Quantities</input>
+    <input type="radio" value="0" name="radio3" id="idnew_quote_box" onclick="javascript:toggle_newquote_box();">Toggle Quotes</input>
+<div id="acitve_radio_buttons" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebqitemid">Active BQ Item ID</label>
+    <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+    <label for="activequoteno">Active BQ Item ID</label>
+    <input type="text" name="activequoteno" id="activequoteno" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+</div>
+<div id="sites_main_window" style="display: none">
+    <p id="feedback">
+        <span>Sites:</span> <span id="select-result-quantity"></span>.
+    </p>
+
+  <div id="radio_status_box" class="sidebar_est_radiobox_status">
+     <div py:for="i,x in enumerate(statuscodes)" class="${i%2 and 'even' or 'odd'}">
+                     <input type="radio" value="${i+1}" name="radiostatuscode" id="displayText_sites" onclick="loadXMLRadioStatuscode()">${x.status}</input>
+         </div>
+
+        <button id="create-user">Add New Site</button>
+
+    <div id="outputscopebuttons" class="sidebar_est_scope_buttons" style="display: none">
+        <button id="create-newscope">Add New Scope Item</button>
+    </div>
+  </div>
+        <div id="outputsites" class="sidebar_est_site_40"></div>
+       
+    <div id="outputsiteviewbutton" class ="sidebar_est_radiobox_status" style="display: none">
+        <input type="radio" value="0" name="radio3" id="radio_view_all_site_info" onclick="javascript:toggle_view_on_site_show();">View All Site Info</input>
+    </div>
+    <div id="toggleText_status_changer" style="display: none">
+
+          <div id="radio_status_changer" class="sidebar_est_radiobox_status_change">
+                
+                <table class="table_eststatuschanger" border="0" cellspacing="0" cellpadding="2">
+                    <th colspan="5">Site ID:<input type="text" id="radio_status_changer_jcno"></input></th>
+                  <tr class="table_eststatuschanger" >
+             <div py:for="i,x in enumerate(statuscodes[:5])" class="${i%2 and 'even' or 'odd'}">
+                  <td    colspan="1" align='left'>
+                 <input type="radio" value="${i+1}" name="radiostatuscodechange" id="displayText_status_changed" onclick="loadXMLRadioStatuscodeChange()">${x.status}</input>
+                 </td>
+                </div>
+            </tr>
+                  <tr class="table_eststatuschanger" >
+             <div py:for="i,x in enumerate(statuscodes[5:10])" class="${i%2 and 'even' or 'odd'}">
+                  <td    colspan="1" align='left'>
+                 <input type="radio" value="${i+6}" name="radiostatuscodechange" id="displayText_status_changed" onclick="loadXMLRadioStatuscodeChange()">${x.status}</input>
+                 </td>
+                </div>
+            </tr>
+                  <tr class="table_eststatuschanger" >
+             <div py:for="i,x in enumerate(statuscodes[10:])" class="${i%2 and 'even' or 'odd'}">
+                  <td    colspan="1" align='left'>
+                 <input type="radio" value="${i+11}" name="radiostatuscodechange" id="displayText_status_changed" onclick="loadXMLRadioStatuscodeChange()">${x.status}</input>
+                 </td>
+                </div>
+            </tr>
+               </table>
+
+          </div>
+
+    </div>
+    <div id="outputsitesow" class="sidebar_est_site_sow">
+    </div>
+    <div id="outputsitestatuschanger" class="sidebar_est_site_sow">
+    </div>
+    <div id="outputsitescopeitems" class="sidebar_est_site_sow">
+    </div>
+</div>
+
+<div id="dialog-newsite" title="Add New Site">
+    <p class="validateScopeTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+        <label for="sitename">Name</label>
+        <input type="text" name="sitename" id="sitename" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="area">Area</label>
+        <input type="text" name="area" id="area" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="wonumber">WONumber</label>
+        <input type="wonumber" name="wonumber" id="wonumber" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="supervisor">Supervisor</label>
+        <input type="supervisor" name="supervisor" id="supervisor" value="" class="text ui-widget-content ui-corner-all" />
+    </fieldset>
+    </form>
+</div>
+
+<div id="dialog-newbqqty" title="Add Quantity">
+    <p class="validateBQItemTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+        <label for="bqitemqty">Quantity</label>
+        <input type="text" name="bqitemqty" id="bqitemqty" class="text ui-widget-content ui-corner-all" />
+        <label for="bqitemprice">Price Change Only For Specialists Items</label>
+        <input type="text" name="bqitemprice" id="bqitemprice" class="text ui-widget-content ui-corner-all" />
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-newscope" title="Add New Scope">
+    <p class="validateSiteTips">All form fields are required.</p>
+    <form>
+    <fieldset>
+        <label for="scopename">Scope Description</label>
+        <input type="text" name="scopename" id="scopename" class="text ui-widget-content ui-corner-all" />
+        <label for="scopeunit">Unit</label>
+        <input type="text" name="scopeunit" id="scopeunit" value="" class="text ui-widget-content ui-corner-all" />
+        <label for="scopeqty">Quantity</label>
+        <input type="scopeqty" name="scopeqty" id="scopeqty" value="" class="text ui-widget-content ui-corner-all" />
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-editscope" title="Edit Scope">
+    <form>
+    <fieldset>
+        <input type="text" name="editscopeid" id="editscopeid" style="display: none"/>
+        <label for="editscopename">Scope Description</label>
+        <input type="text" name="editscopename" id="editscopename" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editscopeunit">Unit</label>
+        <input type="text" name="editscopeunit" id="editscopeunit" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editscopeqty">Qty</label>
+        <input type="text" name="editscopeqty" id="editscopeqty" value="" class="text ui-widget-content ui-corner-all" />
+    </fieldset>
+    </form>
+</div>
+<div id="dialog-editsite" title="Edit Site">
+    <form>
+    <fieldset>
+        <input type="text" name="editsiteid" id="editsiteid" style="display: none"/>
+        <label for="editsitedate">Site Date</label>
+        <input type="text" name="editsitedate" id="editsitedate" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editsitename">Site Name</label>
+        <input type="text" name="editsitename" id="editsitename" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editsitedescription">Description</label>
+        <input type="text" name="editsitedescription" id="editsitedescription" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editsitewonumber">WO Number</label>
+        <input type="text" name="editsitewonumber" id="editsitewonumber" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editsitesupervisor">Supervisor</label>
+        <input type="text" name="editsitesupervisor" id="editsitesupervisor" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+        <label for="editsitearea">Area</label>
+        <input type="text" name="editsitearea" id="editsitearea" value="" class="text ui-widget-content ui-corner-all" />
+        <p/>
+    </fieldset>
+    </form>
+</div>
+ 
+<div id="toggleText_boq" style="display: none">
+      <div class="clearingdiv" />
+    <p id="feedback">
+        <span>Bill Of Quantities:</span> <span id="select-result-quantity"></span>.
+    </p>
+      <div class="clearingdiv" />
+
+          <div id="yr3buildingestimate_boq" class="sidebar_est_schedule">
+               <div style="float:left">
+                </div>
+                <table class="table_estschedule" border="5" cellspacing="0" cellpadding="2">
+                             <th>Show Headers</th>
+                            <th colspan="1">Schedule Name </th>
+             <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+                  <tr class="table_estdata" >
+                            <td  class="table_estdata"  colspan="1" align='left'>
+                                    <img src="${tg.url(['/images/project-open.png'])}"
+                                    onclick="loadXMLHeaders(${x.id})">
+                                    </img>
+                            </td>
+                            <td  class="table_estdata"  colspan="1" align='left'>
+                                ${x.description} 
+                            </td>
+                            </tr>
+                 </div>
+               </table>
+          </div>
+        <!--${sidebar_estimate_3yr_building_sites_tree()}-->
+    <div id="outputheadings" class="sidebar_est_schedule"></div>
+    <div id="outputsubheadings" class="sidebar_est_schedule"></div>
+    <div id="outputitems" class="sidebar_est_schedule"></div>
+    <div id="toggleText_boq" style="display: none"></div>
+    
+        <!--${tmpl_context.tree()}
+        ${tmpl_context.tree()}
+        ${tmpl_context.widget}-->
+</div>
+      <div class="clearingdiv" />
+<div id="newquotebox" width="100%" style="display: none">
+    <p id="feedback">
+        <span>Quotations:</span> <span id="select-result-quotations"></span>.
+    </p>
+        <div id = "output_newquotebox" width="100%"  class="sidebar_est_site_sow"></div>
+        <div id = "output_allquotebox" width="100%"  class="sidebar_est_site_sow"></div>
+      <div class="clearingdiv" />
+        <div id = "output_thisquotescope" width="100%"  class="sidebar_est_site_sow"></div>
+        <div id = "output_thisquotescopeitems" width="100%"  class="sidebar_est_site_sow"></div>
+        <div id="dialog-QuoteContract" title="Add To Contract Scope">
+            <form>
+            <fieldset>
+                <select id="quote_contract_add" name="quote_contract_add">
+                  <div py:for="i,x in enumerate(contracts)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+                </div>
+            </select>
+            </fieldset>
+            </form>
+        </div>
+</div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.
+  </div>
+</body>
+</html>
+

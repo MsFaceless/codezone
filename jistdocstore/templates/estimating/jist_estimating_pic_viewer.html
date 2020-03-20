@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id='jist_estimating_pic_viewer'>
+                    <div id ="staff_faces_available_div" class = "staff_photo_carousel responsive">
+                    </div>
+                    <div id='pic_data_div'>
+                        <table id='table_pic_data' class='tablepicdata'>
+                            <th> Subject</th>
+                            <th> Site ID</th>
+                            <th> Description</th>
+                            <th> Owner</th>
+                            <th> Date Taken</th>
+                            <th> Rotate</th>
+                            <th> Toggle Default</th>
+                            <th> Close Window</th>
+                            <tr>
+                                <td>
+                                ${thisupload.filesubject}
+                                </td><td>
+                                ${thisupload.jcno} 
+                                </td><td>
+                                ${thisupload.description}
+                                </td><td>
+                                ${owner}
+                                </td><td>
+                                ${thisupload.datetaken}
+                                </td><td width='50px'>
+                                <img class="rotate_pic_fencing_ests" value="${srcid}" appname="${appname}" src="/images/object-rotate-left-3.png"></img>
+                                </td><td width='50px'>
+                                <img class="set_default_pic" picid="${srcid}" value="${thisupload.defaultpic}" appname="${appname}" src="/images/${blndefaultpic}.png"></img>
+                                </td><td width='100px'>
+                                <button id="triggerClose" style="display: block" class="ui-state-default ui-corner-all">
+                                    Close Window 
+                                </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan='8'>
+                                    <img id="jist_viewer_current_pic" value="${srcid}" src="${srcpic}"></img>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="staff_faces_shared_div" class = "staff_photo_carousel responsive">
+                    </div>
+        </div>
+
+        <div style="height:20px;"> &nbsp; </div>
+        <div class="clearingdiv" />
+            <div class="notice"> The JIST Way.
+            </div>
+        </body>
+    </html>
+
+
+

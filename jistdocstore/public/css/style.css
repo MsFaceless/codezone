@@ -1,0 +1,2502 @@
+@import url("pagination.css");
+@import url("cctvstyles.css");
+html {
+    background: #555555 url('../images/pagebg.png') top left repeat-x;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: left;
+    width: 1250px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0;
+    font-size: 12px;
+    font-family:"Lucida Grande","Lucida Sans Unicode",geneva,verdana,sans-serif;
+}
+
+a {
+    color: #286571;
+}
+
+#header {
+    height: 82px;
+    margin: 10px 10px 0 10px;
+    background: url('../images/headerbg.png') top left no-repeat;
+}
+
+#header h1 {
+    padding: 0;
+    margin: 0;
+    padding-top: 10px;
+    padding-left: 400px;
+    color: #fff;
+    position: relative;
+    font-size: 26px;
+    }
+
+    #header h1 .subtitle {
+    font-size: 60%;
+    position: absolute;
+    left: 480px;
+    top: 40px;
+    }
+
+    ul#mainmenu {
+    margin: 0;
+    margin-left: -2px;
+    background: url('../images/menubg.png') top left;
+    height: 38px;
+    }
+
+    ul#mainmenu li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: inline;
+    float: left;
+    }
+
+    ul#mainmenu li a {
+    color: #fff;
+    float: left;
+    height: 31px;
+    display: block;
+    line-height: 30px;
+    vertical-align: middle;
+    padding: 0 15px;
+    font-size: 12px;
+    text-decoration: none;
+    background: url('../images/menu-item-border.png') left top no-repeat;
+}
+
+ul#mainmenu li a:hover, ul#mainmenu li a.active {
+    background: url('../images/menu-item-actibg.png') left top no-repeat;
+}
+
+ul#mainmenu li.first a {
+    background: none;
+}
+
+ul#mainmenu li.first a:hover, ul#mainmenu li.first a.active {
+    background: url('../images/menu-item-actibg-first.png') left top no-repeat;
+}
+
+ul#mainmenu li.loginlogout
+{
+    float: right;
+    right: 10px;
+}
+
+ul#mainmenu li.loginlogout a:hover
+{
+    background: url('../images/menu-item-border.png') left top no-repeat;
+}
+
+#content {
+    background: #fff url('../images/contentbg.png') left bottom no-repeat;
+    margin : 0 10px 10px 10px;
+    padding: 0 10px;
+    overflow: hidden;
+}
+
+#content .currentpage {
+    margin-top: 0;
+}
+
+.navigation .pager {
+    text-align: center;
+    background: #fff url('../images/contentbg.png') left bottom no-repeat;
+    color: darkgrey;
+}
+/* Login form*/
+
+#loginform
+{
+    text-align: center;
+}
+
+form.loginfields
+{
+    text-align: left;
+    width: 270px;
+    background: url('../images/loginbg.png') top left no-repeat;
+    padding: 0;
+    margin: 0 auto;
+    border: 0;
+}
+
+form.loginfields h2
+{
+    font-size: 16px;
+    float: left;
+    padding: 0;
+    margin: 5px;
+    margin-top: 0;
+    background: url('../images/loginheader-left.png') top left no-repeat;
+}
+
+* html form.loginfields h2
+{
+    margin-left: 3px;
+    width: 80px;
+    text-align: center;
+}
+
+form.loginfields h2 span
+{
+    background: url('../images/loginheader-right.png') right top no-repeat;
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    font-size: 100%;
+    font-weight: normal;
+    color: #fff;
+    padding: 0 10px;
+}
+
+*+html form.loginfields h2 span
+{
+    padding: 0 20px;
+}
+
+form.loginfields label
+{
+    clear: left;
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 65px;
+    line-height: 31px;
+    vertical-align: middle;
+}
+
+form.loginfields input.text
+{
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+    width: 165px;
+    height: 21px;
+    padding: 5px;
+    border: 0;
+    background: url('../images/inputbg.png') top left no-repeat;
+    color: #fff;
+}
+
+form.loginfields #loginremember
+{
+    float:right;
+    vertical-align: middle;
+    height: 26px;
+}
+
+form.loginfields #labelremember 
+{
+    float: right;
+    width: auto;
+    margin:0;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+form.loginfields input#submit
+{
+    background: url('../images/loginbottombg.png') bottom left no-repeat;
+    width: 270px;
+    height: 61px;
+    border: 0;
+    margin-top: 10px;
+    color: #fff;
+    padding: 10px 140px 20px 10px;
+}
+
+* html form.loginfields input#submit
+{
+    clear: both;
+    margin-left: -10px;
+}
+
+/* Sidebar */
+.sidebar {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 1.5em;
+    padding: 1em;
+    float: right;
+    width: 200px;
+    font-size: 88%;
+    margin-top: -60px
+}
+
+.sidebar h2 {
+    margin-top: 0;
+    color: black;
+}
+
+.sidebar ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 120%;
+}
+/* Sidebar_mytasks */
+.sidebar_mytasks {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 300px;
+    margin-top: 0px
+}
+
+.sidebar_mysingletasks {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 655px;
+    margin-top: 0px
+}
+.sidebar_myownertasks {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 675px;
+    margin-top: 0px
+}
+.sidebar_mypurchasereq {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 675px;
+    margin-top: 0px
+}
+.sidebar_mybearertasks {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 675px;
+    margin-top: 0px
+}
+.sidebar_mysharertasks {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: right;
+    width: 675px;
+    margin-top: 0px
+}
+.sidebar_single_points_all {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 675px;
+    margin-top: 0px
+}
+
+.sidebar_mytasks h2 {
+    margin-top: 0;
+    color: black;
+}
+
+.sidebar_mytasks ul {
+    margin-left: 0.5em;
+    padding-left: 0;
+    font-size: 100%;
+}
+
+.sidebar_labour_payment_data {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 955px;
+    margin-top: 0px
+}
+.sidebar_labour_payment_data_totals {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 5em;
+    padding: 0.5em;
+    float: left;
+    width: 455px;
+    margin-top: 0px
+}
+.sidebar_labour_one_payment_data_totals {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 455px;
+    margin-top: 0px
+}
+.sidebar_labour_payment_div_choice {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: right;
+    width: 220px;
+    margin-top: 0px
+    margin-left: 40px
+}
+
+.sidebar_est_schedule {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 255px;
+    margin-top: 0px
+}
+.sidebar_est_radiobox_status {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 135px;
+    margin-top: 0px
+}
+.sidebar_est_scope_buttons {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    float: left;
+    width: 130px;
+    margin-left: 0px
+}
+.sidebar_est_radiobox_status_change {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 40%;
+    margin-top: 0px
+}
+.sidebar_est_sites {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 50%;
+    margin-top: 0px
+}
+.sidebar_est_site_40 {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 40%;
+    margin-top: 0px
+}
+.sidebar_est_site_sow {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 40%;
+    margin-top: 0px
+}
+.sidebar_contract_searchbox {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 3.5em;
+    padding: 0.5em;
+    padding-left: 40px;
+    float: left;
+    width: 575px;
+    margin-top: 0px
+}
+.sidebar_purchase_req {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 3.5em;
+    padding: 0.5em;
+    padding-left: 40px;
+    float: left;
+    width: 750px; 
+    margin-top: 0px
+}
+.sidebar_purchase_req_new {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 0.5em;
+    padding: 0.5em;
+    padding-left: 40px;
+    padding-right: 40px;
+    float: left;
+    width: 90%;
+    margin-top: 0px
+}
+.sidebar_purchase_req_items {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 3.5em;
+    padding: 0.5em;
+    padding-left: 40px;
+    float: left;
+    width: 80%;
+    margin-top: 0px
+}
+.sidebar_purchase_trolley {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-top: 2em;
+    margin-left: 3em;
+    margin-right: 3em;
+    padding: 1em;
+    padding-right:1.5em;
+    float:right;
+}
+.owner_request_single  {
+    margin-left: 0.1em;
+    padding-left: 1em;
+    float: left;
+}
+.manage_single_point  {
+    margin-left: 0.1em;
+    padding-left: 1em;
+    float: left;
+}
+.owner_request_single_respond ul  {
+    margin-left: 0.1em;
+    padding-left: 1em;
+    font-size: 340%%
+    float: left;
+}
+.manage_single_point ul {
+    margin-left: 0.1em;
+    padding-left: 0;
+    font-size: 120%;
+    float: right;
+}
+
+.owner_request_single ul {
+    margin-left: 0.1em;
+    padding-left: 0;
+    font-size: 120%;
+    float: right;
+}
+.simple_menu_right  {
+    margin-left: 0.1em;
+    padding-left: 1em;
+    float: right;
+}
+.simple_menu_right ul {
+    margin-left: 0.1em;
+    padding-left: 0;
+    font-size: 120%;
+    float: right;
+}
+/* Sidebar_myjist */
+.sidebar_myjist {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: left;
+    width: 400px;
+    margin-top: 0px
+}
+
+.sidebar_myjist h2 {
+    margin-top: 0;
+    color: black;
+}
+
+.sidebar_myjist ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 100%;
+}
+.sidebar_mypoints ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 100%;
+}
+.sidebar_mypoints {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.5em;
+    float: right;
+    width: 400px;
+    margin-top: -40px
+}
+
+/* Sidebar_management */
+.sidebar_backbutton {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: right;
+    width: 64px;
+    margin-top: -90px
+}
+.sidebar_menu_production {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 200px;
+    margin-top: 0px
+}
+.sidebar_menu_marketing {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 200px;
+    margin-top: 0px
+}
+.sidebar_menu_accounts {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 200px;
+    margin-top: 0px
+}
+.sidebar_menu_purchasing {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 200px;
+    margin-top: 0px
+}
+
+.sidebar_menu_executive {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: center;
+    width: 500px;
+    margin-top: 0px
+}
+.sidebar_menu_secure_main {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 200px;
+    margin-top: 0px
+}
+.sidebar_menu_labour_subs {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_labour_perms {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_labour_paymentruns {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_labour_casuals {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+
+.sidebar_inv_completion {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    margin-top: 0px
+}
+.sidebar_menu_logistics_purchasing {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 320px;
+    margin-top: 0px
+}
+.sidebar_menu_marketing_clients {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_production_main {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_estimating {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_menu_transport_main {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 350px;
+    margin-top: 0px
+}
+.sidebar_menu_transport_submenu {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: right;
+    width: 250px;
+    margin-top: 0px
+}
+.sidebar_total_excl {
+    border: 2px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 1.5em;
+    float: right;
+    width: 200px;
+    clear: right;
+}
+.sidebar_labour_pdf_link {
+    border: 2px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-top: -20px;
+    padding: 1.5em;
+    float: right;
+    width: 200px;
+    clear: right;
+}
+.sidebar_balance_outstanding {
+    border: 2px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 1.5em;
+    float: right;
+    width: 200px;
+}
+.sidebar_management h2 {
+    margin-top: 0;
+    color: black;
+}
+
+.sidebar_management ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 100%;
+}
+
+.div_tableinvlist {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 75%;
+    margin-top:0px
+}
+.div_tableinvvspay {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 75%;
+    margin-top:-40px
+}
+.sidebarcontractpoint {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 1.5em;
+    padding: 1em;
+    float: right;
+    width: 150px;
+    font-size: 88%;
+    margin-top: 20px
+}
+.sidebarestimates {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 1.5em;
+    padding: 1em;
+    float: right;
+    width: 200px;
+    font-size: 98%;
+    margin-top: -120px
+}
+.sidebarestimatespointchoose {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    margin-left: 1.5em;
+    padding: 1em;
+    float: right;
+    width: 200px;
+    font-size: 98%;
+    margin-top: -100px
+}
+.div_invorderitems {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 45%;
+    margin-top:0px
+}
+.div_invoicescontract {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 45%;
+    margin-top:0px
+}
+.div_invoicesitems {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 95%;
+    margin-top:0px
+}
+#contractheader {
+    border: 1px solid #cce;
+    background-color: #cce;
+    margin: 0.5em;
+    padding: 0.1em;
+    float: left;
+    width: 95%;
+    margin-top:0px
+    font-size: 180%;
+}
+
+.sidebarcontractpoint h2 {
+    margin-top: 0;
+    color: black;
+}
+
+.sidebar ul {
+    margin-left: 1.5em;
+    padding-left: 0;
+    font-size: 120%;
+}
+#sb_top {
+    clear: right;
+    width:23%;
+}
+
+#sb_bottom {
+    clear: right;
+}
+
+#getting_started {
+    margin-left: 20px;
+}
+
+#getting_started_steps a {
+    text-decoration: none;
+}
+
+#getting_started_steps a:hover {
+    text-decoration: underline;
+}
+
+#getting_started_steps li {
+    margin-bottom: 0.5em;
+}
+
+/* Other and footer */
+#footer {
+    background: #fff;
+    padding: 10px;
+    color:#888888;
+    font-size:90%;
+}
+.flogo {
+    float:left;
+    margin-bottom:0px;
+    padding-left:20px;
+    padding-right:20px;
+    padding-top:0px;
+}
+.foottext p {
+    float:right; margin: 10; padding: 10;
+
+}
+.code {
+    font-family:monospace;
+    font-size:10%;
+}
+span.code {
+    background:#EEEEEE none repeat scroll 0% 0%;
+    font-weight:bold;
+}
+#flash, .notice {
+    font-size:120%;
+    font-weight:bolder;
+    margin:0pt auto 0.5em;
+    width:680px;
+}
+#flash div, .notice {
+    padding:20px 15px 20px 65px;
+}
+#flash .ok {
+    background:#d8ecd8 url(../images/ok.png) no-repeat scroll 10px center;
+}
+#flash .warning {
+    background:#fff483 url(../images/warning.png) no-repeat scroll 10px center;
+}
+#flash .error {
+    background:#f9c5c1 url(../images/error.png) no-repeat scroll 10px center;
+}
+#flash .alert,
+#flash .info {
+    background:#EEEEFF url(../images/info.png) no-repeat scroll 10px center;
+}
+.notice {
+    background:#EEEEFF url(../images/info.png) no-repeat scroll 10px center;
+}
+.fielderror {
+    color:red;
+    font-weight:bold;
+}
+div.clearingdiv {
+    clear:both;
+}
+
+table.tablepurchaseorders {
+    width: 60%;
+    background-color: #cce;
+    border: 1px solid #cce;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:5px;
+    padding-right:5px;
+    padding-top:0px;
+}
+tr.tablepurchaseorders  {
+    background-color: #cee;
+}
+td.tablepurchaseorders  {
+    background-color: gray;
+}
+table.tablecontractdata {
+    width: 70%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+table.tablestandard {
+    width: 80%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablestandard  {
+    background-color: lightgray;
+}
+table.tabletabs {
+    width: 95%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tabletabs  {
+    background-color: lightgray;
+}
+table.tablecontractfiles {
+    width: 90%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablecontractfiles  {
+    background-color: lightgray;
+}
+
+table.tablemytasks {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablemytasks  {
+    background-color: lightgray;
+}
+td.tablemytasks  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+
+table.tablelabourdata {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablelabourdata  {
+    border: 1px solid #eee;
+}
+td.tablelabourdata  {
+    border: 1px solid #eee;
+}
+table.tablecontracttasks {
+    width: 90%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+
+table.tablesinglepoint {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablesinglepoint  {
+    background-color: lightgray;
+}
+td.tablesinglepoint  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tablesupplier_quote {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablesupplier_quote  {
+    background-color: lightgray;
+}
+table.tablesupplier_quote2 {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablesupplier_quote2  {
+    background-color: lightgray;
+}
+
+
+table.tableinvbalances {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tableinvbalances  {
+    background-color: lightgray;
+}
+td.tableinvbalances  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tableinvorderitems {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+table.tableinvoicesitems {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+table.tablereqslist {
+    width: 60%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 40px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablereqslist  {
+    background-color: lightgray;
+}
+td.tablereqslist  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tablebuyingitems {
+    width: 60%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 20px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablebuyingitems  {
+    background-color: lightgray;
+}
+table.tablefuelslip {
+    width: 75%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablefuelslip  {
+    background-color: lightgray;
+}
+td.tablefuelslip  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.table_estdata {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_estdata  {
+    border: 1px solid #eee;
+}
+table.table_productionbudget {
+    width: 50%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_productionbudget  {
+    border: 1px solid #eee;
+}
+table.table_budgetoverview {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_budgetoverview  {
+    border: 1px solid #eee;
+}
+table.table_productionbudget_detail {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_productionbudget_detail  {
+    border: 1px solid #eee;
+}
+table.table_eststatuschanger {
+    width: 100%;
+    background-color: #eee;
+    border: 3px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_eststatuschanger  {
+    border: 3px solid #eee;
+}
+table.table_estheaders {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_estheaders  {
+    border: 1px solid #eee;
+}
+table.table_estschedule {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.table_estschedule  {
+    border: 1px solid #eee;
+}
+table.tableinvoicelist {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-bottom:0px;
+    margin-left: 0px;
+    margin-top: -10px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tableinvoicelist  {
+    background-color: lightgray;
+}
+td.tableinvoicelist  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tblpaymentlist {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-bottom:0px;
+    margin-left: 0px;
+    margin-top: -10px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tblpaymentlist  {
+    background-color: lightgray;
+}
+td.tblpaymentlist {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tablebuyingitemsgrv {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-bottom:0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.buyingitemsgrv  {
+    background-color: lightgray;
+}
+td.buyingitemsgrv  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+table.tablepicdata {
+    width: 1000px;
+    background-color: #eee;
+    border: 1px solid #eee;
+    margin-bottom:0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+tr.tablepicdata  {
+    background-color: lightgray;
+}
+td.tablepicdata  {
+    border: 1px solid #eee;
+    background-color: lightgray;
+}
+tr:nth-of-type(even) {
+    background-color: #eee;
+}
+
+tr:nth-of-type(odd) {
+    background-color: white;
+}
+
+tr:first-child {
+    background-color: lightgray;
+}
+*[href] {
+    text-decoration: none;
+}
+ul#links:li a:hover {
+    text-decoration: none;
+    background-color: black;
+}
+
+.links li  {
+    border: 3px solid #cce;
+    background-color: #cce;
+    margin: 0.5em;
+    float: left;
+    width: 95%;
+    margin-top:0px
+    font-size: 180%;
+    line-height: 20px;
+}
+
+div.loggedname {
+    border: 1px solid #cce;
+    clear: both;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-left: 1.0em;
+    padding: 0em;
+    padding-right:1em;
+    float: right;
+}
+
+h2 {
+    font-size:140%;
+    margin-top: -10px;
+}
+h2.header {
+    font-size:140%;
+    margin-top: -10px;
+}
+h3.header {
+    font-size:120%;
+   margin-top: -10px;
+}
+h4.header {
+    font-size:120%;
+    margin-top: 0px;
+}
+#app_container {
+    width:100%
+}
+div.simplecontainerdiv {
+    border: 1px solid #cce;
+    clear: both;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-left: 5em;
+    padding: 1em;
+    padding-right:1.5em;
+    float: left;
+}
+div.simple_no_clear_estimates {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-left: 5em;
+    padding: 1em;
+    width: 220px;
+    padding-right:1.5em;
+    float:right;
+
+
+}
+div.simple_no_clear_containerdiv {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-left: 5em;
+    margin-top: -50px;
+    padding: 1em;
+    padding-right:1.5em;
+    float:right;
+
+
+}
+div.simple_no_clear_left_containerdiv {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin: 0.1em;
+    margin-left: 5em;
+    padding: 1em;
+    padding-right:1.5em;
+    float:left;
+}
+
+
+.TotalRight {
+    border: 1px solid #cce;
+    background-color: #eee;
+    margin-right: 10px;
+    float:right;
+
+
+}
+table.tablegrvmain {
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #eee;
+    float:center;
+    margin-bottom:0px;
+    margin-left: 0px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+
+table.tablejistconsolecontract {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #fff;
+    float:left;
+    margin-bottom:0px;
+    margin-left: 40px;
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+}
+.tablejistconsolecontract tr  {
+    background-color: #fff;
+}
+.hover { 
+    background-color: #FECA40; 
+    background: url("/images/lillac_background.png") repeat scroll transparent;
+}
+.hoverclicked { 
+    background-color: #FECA40; 
+    background: url("/images/lillac_background.png") repeat scroll transparent;
+}
+.tdspacer{
+    background-color: #FECA40; 
+    background: url("/images/lillac_background.png") repeat scroll transparent;
+}
+.tdrightalign{
+    text-align:right;
+}
+
+#contract_contractual {width: 70%; padding:10px; float: left;  }
+#contract_status_form { text-indent: 10px; letter-spacing: .3em; width: 310px; height: 250px; padding: 10px; margin: 10px; float: right; }
+#dropdown_points_status_update {width: 175px;}
+#dropdown_siteagent_status_update {width: 175px;}
+#dropdown_status_update {width: 175px;}
+#button_status_update_pressed { padding: .5em 1em; float: right; }
+#cont_main_budget_seperated { text-indent: 10px; letter-spacing: .3em; width: 100%; height: 250px; padding: 10px; margin: 10px; float: right; }
+#cont_main_budget_seperated input { width: 100px; text-align: right;}
+#production_budget_totals {float:left; width: 48%; margin-left:20px;}
+#screensize_radio {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+.staff_photo_carousel {
+    background-color: #ccc;
+    margin: 0 0 10px 10px;
+    width: 80px;
+}
+.staff_photo_carousel ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: block;
+}
+.staff_photo_carousel li {
+    font-size: 40px;
+    color: #999;
+    text-align: center;
+    background-color: #eee;
+    border: 5px solid #999;
+    width: 50px;
+    height: 50px;
+    padding: 0;
+    margin: 6px;
+    display: block;
+    float: left;
+}
+.staff_photo_carousel.responsive {
+    margin-left: 0px;
+    float:left;
+    width: 90px;
+}
+.staff_photo_carousel_shared.responsive {
+    margin-right: 15px;
+    float:right;
+    width: 80px;
+}
+
+#h3available{
+    position:relative;
+    margin-bottom: 5px;
+}
+
+#h3shared{
+    float:right;
+    position:relative;
+    margin-top: 0px;
+}
+
+#staff_faces_available_div {
+    margin-left: 0px;
+    float:left;
+    width: 90px;
+    position: relative; 
+}
+#staff_faces_shared_div {
+    width: 90px;
+    float:right;
+    margin-right: -120px
+}
+#pic_data_div {
+    float:left;
+    position: relative; 
+    width: 80%;
+}
+.my_bio_info {
+    font-size: 15px;
+    color: #999;
+    text-align: left;
+    background-color: #eee;
+    border: 1px solid #999;
+    width: 95%;
+    height: 25px;
+    padding: 0;
+
+    margin: 3px;
+    display: block;
+    float: left;
+    cursor: pointer;
+}
+#jisttabfooter {
+    width: 100%;
+    margin-left: 0;
+    float:right;
+}
+.clearfix {
+    float: none;
+    clear: both;
+}
+.prev {
+    float: left;
+    margin-left: 10px;
+}
+.next {
+    float: right;
+    margin-right: 10px;
+}
+.pager {
+    float: left;
+    width: 300px;
+    text-align: center;
+}
+.pager a {
+    margin: 0 5px;
+    text-decoration: none;
+}
+.pager a.selected {
+    text-decoration: underline;
+}
+.timer {
+    background-color: #999;
+    height: 6px;
+    width: 0px;
+}
+
+#warningdiv { background-color: #FECA40; height: 30px; font-size: 1.4em; }
+#active_shopping_trolley {
+    position: relative;
+    margin-top: 10px;
+    width: 49%;
+    float: left;
+}
+#purchase_req_trolley_active_div{
+    width: 50%;
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position:absolute;
+    top: 0;
+    left: 0;
+    margin-top: 120px;
+    float: left;
+}
+#active_shopping_req_prices_list{
+    width: 45%;
+    position:absolute;
+    top: 0;
+    right: 0;
+    margin-top: 120px;
+    margin-right: 30px;
+    float: right;
+
+}
+#active_shopping_trolley_approval {
+    position: relative;
+    margin-top: 10px;
+    width: 51%;
+}
+#purchase_req_trolley_approval_div{
+    width: 100%;
+    height: 600px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    position:absolute;
+    top: 0;
+    left: 0;
+    margin-top: 30px;
+    float: left;
+}
+#active_shopping_req_prices_budget{
+    width: 45%;
+    position:absolute;
+    right: 0;
+    top:0;
+    margin-right: 30px;
+    margin-top: 120px;
+    float: right;
+
+}
+#active_shopping_req_prices_list_approval{
+    width: 45%;
+    position:absolute;
+    margin-top: 180px;
+    margin-right: 30px;
+    right: 0;
+    float: right;
+}
+#reqs_by_user_buying{
+    width: 100%;
+    float: left;
+}
+#outputsites{
+    width: 100%;
+    height: 600px;
+    overflow-y: scroll;
+}
+#yr3buildingestimate_boq{
+    height: 600px;
+    overflow-y: scroll;
+}
+#outputsitescopeitems{
+    height: 300px;
+    overflow-y: scroll;
+}
+#outputsitesow{
+    height: 300px;
+    overflow-y: scroll;
+}
+#output_newquotebox{
+    height: 600px;
+    overflow-y: scroll;
+}
+#outputheadings{
+    height: 600px;
+    overflow-y: scroll;
+}
+#outputcontractorderitems{
+    height: 600px;
+    overflow-y: scroll;
+}
+#jist_pic_viewer{
+    float: left;
+}
+#estimate_boq_prices{
+    height: 600px;
+    overflow-y: scroll;
+}
+#estimate_quote_list{
+    float:left;
+    width: 15%;
+}
+#estimate_quote_items{
+    float:right;
+    height: 600px;
+    width:100%;
+    overflow-y: scroll;
+}
+#quote_list{
+    width: 100%;
+}
+#quote_list_all{
+    width: 100%;
+    overflow-y: scroll;
+    height: 600px;
+}
+#quote_items{
+    width: 100%;
+    margin:0 auto;
+}
+#quote_scope_items{
+    width: 50%;
+    margin:0 auto;
+}
+#export_excel_est{
+    float: right;
+    margin-right: 40px;
+}
+#choose_material_each{
+    float: left;
+    margin-left: 40px;
+}
+#div_pics_site{
+    height: 400px;
+    overflow-y: scroll;
+}
+
+h2.paymentheader {
+    font-size:140%;
+    margin-top: 0px;
+    height: 33px;
+}
+
+.spinner {
+  background: url(/images/ui-anim_basic_16x16.gif) no-repeat 5px 3px;
+  padding-left: 20px;
+}
+#div_upload_pic {
+    width:100%;
+}
+#upload_data_form {
+    width:50%;
+}
+
+.default_pic{
+    width:50%;
+    float: right;
+}
+#palisade_pics_jcno{
+    width:50%;
+    float: left;
+}
+#div_site_scope{
+    width: 50%;
+    overflow-y: scroll;
+    float: left;
+    height: 200px;
+}
+#div_site_picture{
+    width: 50%;
+    overflow-y: scroll;
+    float: left;
+    height: 400px;
+}
+#divstandardmatlist{
+    width: 39%;
+    overflow-y: scroll;
+    float: left;
+    height: 600px;
+}
+#divstandardmatlistitems{
+    width: 60%;
+    overflow-y: scroll;
+    float: right;
+    height: 600px;
+}
+#tbl_despatch_by_jcno{
+    width: 100%;
+}
+#div_jcno_despatch{
+    width: 48%;
+    overflow-y: scroll;
+    float: right;
+    height: 400px;
+}
+#site_scope_items{
+    width: 100%;
+    overflow-y: scroll;
+}
+#div_jcno_scope{
+    width: 48%;
+    overflow-y: scroll;
+    height: 200px;
+}
+.stores_view{
+    overflow-y: scroll;
+    height: 600px;
+}
+#div_est_contracts{
+    width: 100%;
+    overflow-y: scroll;
+    height: 600px;
+}
+#div_est_sites{
+    width: 100%;
+    overflow-y: scroll;
+    height: 600px;
+}
+.menuboxbig {
+    width:80%;
+    height:400px;
+    background:#FFF;
+    margin:5px auto;
+    margin-left:10px;
+    float:left;
+}
+.menuboxbig li{
+    text-align:left;
+    position:relative;
+    top:10px;
+    list-style-image:url('/images/book-open.png')
+}
+.menuboxbig div{
+    text-align:center;
+    position:relative;
+    top:50px;
+}
+.menulinks li  {
+    border: 1px solid #fff;
+    background-color: #cce;
+    margin: 0.5em;
+    float: left;
+    width: 95%;
+    margin-top:0px
+    font-size: 180%;
+    line-height: 20px;
+}
+
+
+/*==================================================
+* Effect 6
+* ===============================================*/
+.effect6
+{
+    position:relative;       
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.effect6:before, .effect6:after
+{
+    content:"";
+    position:absolute; 
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:50%;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+#div_contract_data{
+    width: 48%;
+    float:left;
+}
+#div_contract_scope_data{
+    width: 48%;
+    float:left;
+    height: 500px;
+}
+#div_quote_data{
+    width: 48%;
+    float:right;
+    height: 500px;
+}
+#logo_canvas{
+    margin-left:0px;
+    margin-top: 0px;
+
+}
+#grv_items_done_div{
+    float:left;
+    margin-top: 30px;
+}
+fieldset {
+    font-family: sans-serif;
+    border: 3px solid #1F497D;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+fieldset legend {
+    background: #1F497D;
+    color: #fff;
+    padding: 5px 0px ;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 0px;
+}
+fieldset label {
+    display: inline;
+}
+.fieldsetright {
+    font-family: sans-serif;
+    border: 3px solid #1F497D;
+    background: #ddd;
+    border-radius: 5px;
+    padding: 10px;
+}
+.fieldsetright legend {
+    background: #1F497D;
+    color: #fff;
+    padding: 5px 0px ;
+    font-size: 16px;
+    border-radius: 3px;
+    box-shadow: 0 0 0 5px #ddd;
+    margin-left: 0px;
+}
+.fieldsetright label {
+    display: inline;
+}
+#link_all_fleet_div {
+    width: 48%;
+    float: left;
+
+}
+#link_all_transport_div {
+    width: 48%;
+    float: left;
+    margin-left: 30px;
+}
+#link_all_suppliers_rentals_div {
+    width: 48%;
+    float: left;
+
+}
+#link_all_rentals_div {
+    width: 48%;
+    float: left;
+    margin-left: 30px;
+}
+#link_all_suppliers_maintenance_div {
+    width: 48%;
+    float: left;
+
+}
+#link_all_maintenance_div {
+    width: 48%;
+    float: left;
+    margin-left: 30px;
+}
+.spanleft{
+    float: left;
+}
+.spanleft30{
+    float: left;
+    margin-left: 30px;
+}
+.spanleft60{
+    float: left;
+    margin-left: 100px;
+}
+.spanright{
+    float: right;
+}
+#map_canvas{
+    float: left;
+    margin: 5px;
+    padding: 0;
+    height: 500px;
+    width: 70% ;
+}
+#map_location_canvas{
+    float: right;
+    margin-bottom: 10px;
+    padding: 0;
+    height: 300px;
+    width: 29% ;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    
+}
+#map_directions_canvas{
+    float: right;
+    margin: 0px;
+    padding: 0;
+    height: 200px;
+    width: 29% ;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+}
+#map_streetview_canvas{
+    float: left;
+    margin: 10px;
+    padding: 0;
+    height: 480px;
+    width: 49%;
+    overflow-y: scroll;
+}
+#map_maps_canvas{
+    float: left;
+    margin: 10px;
+    padding: 0;
+    height: 480px;
+    width: 48%;
+    overflow-y: scroll;
+}
+.static_map_small{
+    margin: 5px;
+    padding: 0;
+}
+.span_steplen{
+    float: right;
+    padding: 0;
+}
+#map_contract_canvas{
+    float: left;
+    margin: 3px;
+    padding: 0;
+    height: 800px;
+    width: 80% ;
+        padding: 1px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #ccc #999 #ccc;
+        -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+}
+#map_contract_contractlis_canvas{
+    float: right;
+    margin-bottom: 10px;
+    padding: 0;
+    height: 300px;
+    width: 29% ;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    
+}
+#map_contract_directions_canvas{
+    float: right;
+    margin: 0px;
+    padding: 0;
+    height: 200px;
+    width: 29% ;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+}
+#map_contract_streetview_canvas{
+    float: left;
+    margin: 10px;
+    padding: 0;
+    height: 480px;
+    width: 49%;
+    overflow-y: scroll;
+}
+#map_contract_maps_canvas{
+    float: left;
+    margin: 10px;
+    padding: 0;
+    height: 480px;
+    width: 48%;
+    overflow-y: scroll;
+}
+#map_contract_search_div{
+    float: right;
+    padding: 0;
+    width: 19%;
+
+}
+#map-container {
+        padding: 6px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: #ccc #ccc #999 #ccc;
+        -webkit-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        -moz-box-shadow: rgba(64, 64, 64, 0.5) 0 2px 5px;
+        box-shadow: rgba(64, 64, 64, 0.1) 0 2px 5px;
+      }
+#jcno_upload_list_shared {
+    float:left;
+    width: 48%;
+    margin-left: 10px;
+
+}
+.accord_header {
+    zoom: 1;
+}
+.accord_qty {
+    float:right;
+    text-align:right;
+}
+#process_flow_accordion {
+    float:right;
+    width: 48%;
+    margin-left: 10px;
+}
+#gallery { float: left; width: 100%; min-height: 6em; background-color: #eee; } * html #gallery { height: 8em; } /* IE6 */
+.gallery.custom-state-active { background: #eee; }
+.gallery li { float: left; width: 86px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+.gallery li h6 { margin: 0 0 0.4em; cursor: move; }
+.gallery li a { float: left; }
+.gallery li a.ui-icon-zoomin { float: left; }
+.gallery li img {  align:left; cursor: move; }
+
+#gallery_labour { float: left; width: 110px; height: 200px; min-height: 6em; background-color: #eee; } 
+.gallery_labour.custom-state-active { background: #eee; }
+.gallery_labour li { float: left; width: 98px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+.gallery_labour li h6 { margin: 0 0.4em 0.4em 0; cursor: move; }
+.gallery_labour li a { float: left; }
+.gallery_labour li a.ui-icon-zoomin { float: left; }
+.gallery_labour li img {  align:left; cursor: move; }
+
+#gallery_team_labour { float: left; width: 110px; height: 120px; min-height: 6em; background-color: #eee; } 
+.gallery_team_labour.custom-state-active { background: #eee; }
+.gallery_team_labour li { float: left; width: 98px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+.gallery_team_labour li h6 { margin: 0 0.4em 0.4em 0; cursor: move; }
+.gallery_team_labour li a { float: left; }
+.gallery_team_labour li a.ui-icon-zoomin { float: left; }
+.gallery_team_labour li img {  align:left; cursor: move; }
+
+#gallery_team_labour_small { float: left; width: 50px; height: 50px; min-height: 2em; background-color: #eee; } 
+.gallery_team_labour_small.custom-state-active { background: #eee; }
+.gallery_team_labour_small li { float: left; width: 58px; padding: 0; margin: 0 0 0 0; text-align: center; }
+.gallery_team_labour_small li h7 { margin: 0 0 0 0; cursor: move; }
+.gallery_team_labour_small li a { float: left; }
+.gallery_team_labour_small li a.ui-icon-zoomin { float: left; }
+.gallery_team_labour_small li img {  align:left; cursor: move; }
+
+#gallery_team_labour_scheduled { float: left; width: 100px; height: 100px; min-height: 2em; background-color: #eee; } 
+.gallery_team_labour_scheduled.custom-state-active { background: #eee; }
+.gallery_team_labour_scheduled li { float: left; width: 80px; padding: 0; margin: 0 0 0 0; text-align: center; }
+.gallery_team_labour_scheduled li h7 { margin: 0 0 0 0; cursor: move; }
+.gallery_team_labour_scheduled li a { float: left; }
+.gallery_team_labour_scheduled li a.ui-icon-zoomin { float: left; }
+.gallery_team_labour_scheduled li img {  align:left; cursor: move; }
+
+#div_point_list{
+    float:left;
+    width: 20%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_staff_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_labour_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_subcons_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_point_list{
+    float:left;
+    width: 20%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_staff_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_labour_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_subcons_list{
+    float:left;
+    width: 24%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_labour_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 0px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_labour_divisions_all{
+    float:left;
+    width: 18%;
+    margin-left: 0px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_point_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_staff_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_subcons_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_labour_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_point_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_staff_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_team_subcons_divisions{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_labour_categories_all{
+    float:left;
+    width: 20%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_labour_categories{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_point_categories{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_staff_categories{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_subcon_categories{
+    float:left;
+    width: 18%;
+    margin-left: 10px;
+    height: 480px;
+    overflow-y: scroll;
+}
+#div_divisions_accordion{
+    float:left;
+    width: 48%;
+    margin-left: 10px;
+    height: 780px;
+    overflow-y: scroll;
+}
+#div_categories_accordion{
+    float:left;
+    width: 48%;
+    margin-left: 10px;
+    height: 780px;
+    overflow-y: scroll;
+}
+#div_categories_people_accordion{
+    float:left;
+    width: 48%;
+    margin-left: 10px;
+    height: 780px;
+    overflow-y: scroll;
+}
+#div_current_team{
+    float:right;
+    width: 48%;
+    margin-right: 10px;
+    height: 680px;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+#div_teams_choice_box{
+    float:right;
+    width: 48%;
+    margin-right: 10px;
+}
+.span_lab_name{
+    float:left;
+    width: 80px;
+}
+.div_leader_accord_team_pic{
+    width: 25px;
+    height: 25px;
+}
+.div_day_team_name_schedule{
+    float:left;
+    width: 40%;
+    margin-right: 10px;
+    height: 49%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_team_days_schedule{
+    float:left;
+    width: 76%;
+    margin-right: 10px;
+    height: 49%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_day_form_schedule{
+    float:left;
+    width: 22%;
+    margin-right: 10px;
+    height: 49%;
+    background-color: #eee;
+    overflow-y: scroll;
+}
+.div_day_gantt_schedule{
+    float:left;
+    width: 99.5%;
+    margin-top: 10px;
+    margin-right: 10px;
+    height: 48%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_day_schedule{
+    float:left;
+    width: 25.5%;
+    margin-right: 10px;
+    height: 48%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_day_top_schedule{
+    float:left;
+    width: 98%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 89%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_day_date_schedule{
+    float:left;
+    width: 68%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 89%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+.div_day_date_nonschedule{
+    float:left;
+    width: 29%;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    height: 89%;
+    overflow-y: scroll;
+    background-color: #eee;
+}
+
+.div_lab_pic{
+    width: 80px;
+    height: 80px;
+}
+.div_staff_pic{
+    width: 80px;
+    height: 80px;
+}
+.div_subcon_pic{
+    width: 80px;
+    height: 80px;
+}
+.div_contact_details{
+    width: 48%;
+    height: 90%;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+#map_street_view_sites{
+    height: 90%;
+    float: left;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+
+
+
+

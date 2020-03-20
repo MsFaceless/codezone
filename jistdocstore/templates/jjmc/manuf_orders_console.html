@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            .ui-tabs-panel {width: 98%; float:left;}
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="screensize_radio">
+            <input type="radio" id="screen1" value="1250" checked="checked" />
+            <label for="screen1">1250</label>
+            <input type="radio" id="screen2" value="1900" />
+            <label for="screen2">1900</label>
+        </div>
+
+        <div id="warningdiv" style="display:none"></div>
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activesiteidindex">Active Site ID Index</label>
+            <input type="text" name="activesiteidindex" id="activesiteidindex" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebqitemid">Active BQ Item ID</label>
+            <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activemyuser">Active User</label>
+            <input type="text" name="activemyuser" id="activemyuser" value="${myjistid}" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activereqitemid">Active Req Item ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <input type="text" name="activequoteidindex" id="activequoteidindex" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+        </div>
+        <div id="manufacture_orders_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>JJMC Orders Index</a></li>
+                <li><a href="/manufacturecont/get_jjmc_order_list"><span></span>JJMC - Orders</a></li>
+                <li><a href="/manufacturecont/get_jjmc_progress_list"><span></span>In Progress</a></li>
+            </ul>
+
+            <div id="tabs-1"> </div>
+            <div id="ui-tabs-Orders"> </div> 
+            <div id="ui_tabs_ManInProgress"> </div> 
+          </div>
+                <div class="clearingdiv" />
+                    <div class="notice"> The JIST Way.
+                    </div>
+                </body>
+    </html>
+
+

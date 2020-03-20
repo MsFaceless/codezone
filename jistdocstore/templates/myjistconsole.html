@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #myjistconsole_tabs  {min-height: 800px;}
+            #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+            #grv_back_button { padding: 1.9em 1em; text-decoration: none; }
+            #button_edit_budget { padding: 1.9em 1em; text-decoration: none; }
+            #myjistconsole_tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+            #add_tab { cursor: pointer; }
+            #contract_contractual {width: 50%; padding:10px; float: left;  }
+            #contract_overview_scope {width: 70%; padding:10px; float: left;  }
+            #countdown {width: 95%; padding:10px; float: left;  }
+            #myjistconsole_myactivity_count {width: 45%; padding:10px; float: right;  }
+            #myjistconsole_paperwork_menu {width: 45%; padding:10px; float: left;  }
+            .span.ui-icon { float:right;}
+            .ui-tabs-panel {width: 98%; float:left;}
+        </style>
+    </head>
+    <body>
+    <h2 class='effect6'>${page}</h2>
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activemysiteid" class="" style="margin-left: 50px">Active Site ID</label>
+            <input type="text" name="activemysiteid" id="activemysiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activescopeid">Active Scope ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebqitemid">Active BQ Item ID</label>
+            <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activemyuser">Active User</label>
+            <input type="text" name="activemyuser" id="activemyuser" value="${myjistid}" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activereqitemid">Active Req Item ID</label>
+            <input type="text" name="activereqitemid" id="activereqitemid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+        </div>
+        <div id="myjistconsole_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>My JIST BIO</a></li>
+
+                <li py:if="'production_manager' in tg.identity.groups" ><a href="/mngntcont/ajaxgetmanagepoints/${myjistid}"><span></span>My Point Contracts</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" ><a href="#ui-tabs-JCContract"><span></span>JCNo: None</a></li>
+                <!--li><a href="/productioncont/ajaxgetmanagesiteagents/${myjistid}"><span></span>My Site Agent Contracts</a></li-->
+                <li><a href="/logisticscont/purchase_reqs_items_per_user/${myjistid}"><span></span>My Pur Req Items</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" ><a href="/mngntcont/ajax_invoices_per_point/${myjistid}"><span></span>My Invoices</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" ><a href="/mngntcont/ajax_contracts_wip_balances_per_point/${myjistid}"><span></span>My WIP Financial Overview</a></li>
+                <li><a href="/productioncont/do_search_telephone_messages?dateadded="><span></span>My Tel Calls</a></li>
+                <li><a href="#ui-tabs-MyOutOfOfficeMovements"><span></span>My Out of Office</a></li>
+                <li><a href="/transportcont/get_transport_list_by_me_html"><span></span>My Transport Reqs</a></li>
+                <li><a href="#ui-tabs-MyWayBills"><span></span>My Loading Way Bills</a></li>
+                <li><a href="#ui-tabs-MyCellFuelBills"><span></span>My Budgets</a></li>
+                <li><a href="#ui-tabs-PicsPerJCNo"><span></span>Pics Per JCNo</a></li>
+                <!--li py:if="'production_manager' in tg.identity.groups" ><a href="#ui_tabs_GanttView"><span></span>Gantt View</a></li>
+                <li py:if="'production_manager' in tg.identity.groups" ><a href="#ui_tabs_GraphView"><span></span>Graph View</a></li-->
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="tabs-1">
+                <div></div>
+                <h1 id="countdown" class="ui-widget-header"></h1>
+                <div id="myjistconsole_paperwork_menu">
+                    <button class="ui-widget ui-widget-content ui-state-default"
+                        id="button_go_jisterp">Go To JIST ERP</button>
+                    <p/>
+                    <button class="ui-widget ui-widget-content ui-state-default"
+                        id="button_create_new_purchase_req">Create New Purchase Req</button>
+                    <p/>
+                    <button class="ui-widget ui-widget-content ui-state-default"
+                        id="button_create_new_transport_req">Create New Transport Req</button>
+                    <p/>
+                    <button class="ui-widget ui-widget-content ui-state-default"
+                        id="button_create_sitemeeting_req">Create Site Meeting Request</button>
+                    <p/>
+                    <button class="ui-widget ui-widget-content ui-state-default"
+                        id="button_upload_docs">Upload / View Pictures /
+                        Share Pictures</button>
+                    <p/>
+                </div>
+                <div id="myjistconsole_myactivity_count"></div>
+                <div style="height:20px;"> &nbsp; </div>
+                <div style="height:20px;"> &nbsp; </div>
+
+                <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+            </div>
+            <div id="ui-tabs-MyPoint"> </div>
+            <div id="ui-tabs-JCContract"><div id="contract_status_update"></div><div id="contract_overview_scope"></div></div>
+            <!--div id="ui-tabs-MySiteAgent"></div-->
+            <div id="ui-tabs-MyPOReqs"></div>
+            <div id="ui-tabs-MyInvoices"> </div>
+            <div id="ui-tabs-MyFinancialOverview"> </div>
+            <div id="ui-tabs-MyTelephoneCalls"> </div>
+            <div id="ui-tabs-MyOutOfOfficeMovements">
+                <form id="myoutofoffice_startend_form"><fieldset>
+                        <label for="myoutofoffice_telstartdate">My Out Of Office Movements For Date:</label>
+                        <input type="text" name="myoutofoffice_telstartdate"
+                        id="myoutofoffice_telstartdate" class="text ui-widget-content ui-corner-all" />
+                        <br/>
+                        <button class="ui-state-default ui-corner-all"
+                            id="button_get_myoutoffice_dates">Get Out Of Office Movements For Date</button>
+                    </fieldset>
+                </form>
+                <div style="height:20px;"> &nbsp; </div>
+                <div style="height:20px;"> &nbsp; </div>
+                <div id="output_myoutofoffice_view"> </div>
+                <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+            </div>
+            <div id="ui-tabs-MyTransportRequests">
+            
+            </div>
+            <div id="ui-tabs-MyCellFuelBills">Not Implemented Yet</div>
+            <div id="ui-tabs-MyWayBills">
+                <div id="transport_req_waybill_new"></div> 
+            </div>
+            <div id="ui-tabs-MyBudgets"> </div>
+
+            <div id="ui-tabs-PicsPerJCNo">
+
+                <fieldset>
+                <label for="">Search JCNo</label>
+                <input type="text" name="search_pic_jcno" id="search_pic_jcno" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_jcno">Search JCNo</button>
+                <label for="">Search Client</label>
+                <input type="text" name="search_pic_client" id="search_pic_client" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_client">Search Client</button>
+                <label for="">Search Site Name</label>
+                <input type="text" name="search_pic_sitename" id="search_pic_sitename" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_sitename">Search Site Name</button>
+                <label for="search_site_description">Search Site Description</label>
+                <input type="text" name="search_pic_description" id="search_pic_description" class=""/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_description">Search Site Description</button>
+                </fieldset>
+
+                <div id='div_pics_site'> </div> 
+                <div id='jcno_upload_list_shared'> </div> 
+            </div> 
+            <!--div id="ui_tabs_GanttView">
+                <div id='jist_contract_gantt_div' width='1200px' height='800px'> 
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_view_daily_gantt">View Gantt Daily</button>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_view_monthly_gantt">View Gantt Monthly</button>
+                <div class="ui-widget ui-helper-clearfix">
+                    <ul id="gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+                         <div py:for="i,x in enumerate(points)">
+                            <li class="ui-widget-content ui-corner-tr">
+                            <h6 class="ui-widget-header">${x.display_name}</h6>
+                            <img class='point_gantt' value="${x.user_id}" src="/images/staffpics/${x.user_id}.png" alt="${x.user_name}" width="80px" height="80px" />
+                              <div class="idnos" style="display:none">${x.user_id}</div>
+                            </li>
+
+                        </div>
+                    </ul>
+                </div>
+                <p/>
+                    <canvas id='jist_contract_gantt_canvas'></canvas> 
+                </div>
+            </div>
+            <div id="ui_tabs_GraphView">
+                <div id='contract_gantt_div' width='1200px' height='600px'></div> 
+                <canvas id='contract_bars_canvas' width='1200px' height='600px'></canvas> 
+            </div-->
+            <div id="ui-tabs-MyWIP"> </div>
+        </div>
+
+        <div id="dialog_purchasereq_notes" title="Purchase Requisition Notes">
+            <form id="dialog_purchasereq_notes_form">
+                <fieldset>
+                    <label for="purchasereq_notes_new">Add New Note</label>
+                    <textarea cols="60" rows="5" name="purchasereq_notes_new" id="purchasereq_notes_new" class="text ui-widget-content ui-corner-all" /><br/>
+                        <textarea cols="60" rows="28" name="purchasereq_notes_all" id="purchasereq_notes_all" class="text ui-widget-content ui-corner-all" disabled="true" /><br/>
+                        </fieldset>
+                    </form>
+                </div>
+
+                <div class="clearingdiv" />
+                </body>
+            </html>
+

@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #fileupload_tabs  {min-height: 600px;}
+            .ui-tabs-panel {width: 98%; float:left;}
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="screensize_radio">
+            <input type="radio" id="screen1" value="1250" checked="checked" />
+            <label for="screen1">1250</label>
+            <input type="radio" id="screen2" value="1900" />
+            <label for="screen2">1900</label>
+        </div>
+
+        <div id="acitve_radio_buttons" style="display: none">
+            <label for="activemysiteid" class="" style="margin-left: 50px">Active Site ID</label>
+            <input type="text" name="activemysiteid" id="activemysiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activescopeid">Active Scope ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebqitemid">Active BQ Item ID</label>
+            <input type="text" name="activebqitemid" id="activebqitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activemyuser">Active User</label>
+            <input type="text" name="activemyuser" id="activemyuser" value="${myjistid}" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activereqitemid">Active Req Item ID</label>
+            <input type="text" name="activereqitemid" id="activereqitemid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <br/>
+        </div>
+        <div id="fileupload_tabs">
+            <ul>
+                <li><a href="#tabs-1"><span></span>Upload Index</a></li>
+                <li><a href="#ui-tabs-UploadPics"><span></span>Upload Pictures</a></li>
+                <li><a href="#ui-tabs-MyUploads"><span></span>My Uploads</a></li>
+                <li><a href="#ui-tabs-MySharedUploads"><span></span> Shared Pics</a></li>
+                <li><a href="#ui-tabs-PicsPerJCNo"><span></span>Pics Per JCNo</a></li>
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="tabs-1">
+                
+            </div>
+            <div id="ui-tabs-UploadPics">
+                <div style="height:20px;"> &nbsp; </div>
+                <form id="upload_data_form">
+                    <fieldset>
+                        <label for="tie_to_jcno">Tie To JCNo:</label>
+                        <br/>
+                        <select id="pic_tie_to_jcno" name="pic_tie_to_jcno">
+                               <option value="None">Do Not Tie To Contract</option>
+                               <div py:for="i,x in enumerate(contracts)" class="${i%2 and 'even' or 'odd'}">
+                               <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+                                </div>
+                        </select> 
+                        <br/>
+                        <label for="taken_by">Taken By:</label><br/>
+                        <select id="pic_taken_by_user" name="pic_taken_by_user">
+                               <div py:for="i,x in enumerate(users)" class="${i%2 and 'even' or 'odd'}">
+                                   <option py:if="x.user_id==myjistid" value="${x.user_id}" selected="selected">${x.user_name}</option>
+                                   <option py:if="x.user_id!=myjistid" value="${x.user_id}" >${x.user_name}</option>
+                                </div>
+                        </select>
+                            <br/>
+                        <label for="pic_subject">Subject: [Add a meaningful subject that is searchable in the future !!!!!]</label>
+                            <br/>
+                        <input type="text" name="pic_subject" id="pic_subject"/>
+                            <br/>
+                        <label for="pic_date_taken">Date Pictures Taken:</label>
+                            <br/>
+                        <input type="text" name="pic_date_taken" id="pic_date_taken"/>
+                            <br/>
+                        <label for="pic_description">Description / Note</label>
+                            <br/>
+                        <textarea cols="60" rows="5" name="pic_description" id="pic_description" class="text ui-widget-content ui-corner-all" /><br/>
+                            <br/>
+                        <div id="jquery-fine-uploader" style="display: none">
+                        </div>
+                        <br/>
+                        <button id="triggerUpload" style="display: none" class="ui-state-default ui-corner-all">
+                             Upload now
+                        </button>
+                        <button id="triggerReset" style="display: none" class="ui-state-default ui-corner-all">
+                            Reset 
+                        </button>
+                    </fieldset>
+                </form>
+            </div>
+            <div id="ui-tabs-MyUploads">
+                        <h5 class="ui-widget-header"> 
+                        <fieldset>
+                        <label for="pic_date_start">View My Uploads Between Dates:</label>
+                        <input type="text" name="pic_date_start" id="pic_date_start"/>
+                        <label for="pic_date_end">To :</label>
+                        <input type="text" name="pic_date_end" id="pic_date_end"/>
+                        <button id="btn_get_my_thumbs" style="display: inline-block" class="ui-state-default ui-corner-all">
+                            Get The Picture Thumbs
+                        </button>
+                        <label for="pic_date_time">Default View: Last Seven Days</label>
+                        </fieldset>
+                        </h5> 
+                <div id='my_upload_list'>
+                </div> 
+            </div>
+            <div id="ui-tabs-MySharedUploads">
+                <div id='my_upload_list_shared'>
+                </div> 
+            </div> 
+            <div id="ui-tabs-PicsPerJCNo">
+
+                <fieldset>
+                <label for="">Search JCNo</label>
+                <input type="text" name="search_pic_jcno" id="search_pic_jcno" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_jcno">Search JCNo</button>
+                <label for="">Search Client</label>
+                <input type="text" name="search_pic_client" id="search_pic_client" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_client">Search Client</button>
+                <label for="">Search Site Name</label>
+                <input type="text" name="search_pic_sitename" id="search_pic_sitename" class="text ui-widget-content ui-corner-all"/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_sitename">Search Site Name</button>
+                <label for="search_site_description">Search Site Description</label>
+                <input type="text" name="search_pic_description" id="search_pic_description" class=""/>
+                <button class="ui-widget ui-widget-content ui-state-default" id="button_search_pic_description">Search Site Description</button>
+                </fieldset>
+
+                <div id='div_pics_site'> </div> 
+                <div id='jcno_upload_list_shared'> </div> 
+            </div> 
+            <div id="ui-tabs-MyWIP"> </div>
+        </div>
+                <div style="height:20px;"> &nbsp; </div>
+                <div class="clearingdiv" />
+                    <div class="notice"> The JIST Way.
+                    </div>
+                </body>
+            </html>
+
+

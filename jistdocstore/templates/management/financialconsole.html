@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery-1.8.2.js'])}"></script>
+        <script type="text/javascript" src="${tg.url(['/javascript/jquery_financialconsole.js'])}"></script>
+        <title>${page}</title>
+        <style>
+        </style>
+        <style>
+            .ui-combobox {
+                position: relative;
+                display: inline-block;
+            }
+            .ui-combobox-toggle {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                margin-left: -1px;
+                padding: 0;
+                /* adjust styles for IE 6/7 */
+                *height: 1.7em;
+                *top: 0.1em;
+            }
+            .ui-combobox-input {
+                margin: 0;
+                padding: 0.3em;
+                width: 800px;
+            }
+            .ui-autocomplete {
+                max-height: 200px;
+                overflow-y: auto;
+                /* prevent horizontal scrollbar */
+                overflow-x: hidden;
+            }
+            #financial_tabs  {min-height: 800px; overflow:auto}
+            #cont_budgets_seperated { width: 45%;  margin: 0px; float: right; }
+            #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+            #feedback { font-size: 1.4em; }
+            #cont_main_budget .ui-selecting { background: #FECA40; }
+            #cont_main_budget .ui-selected { background: #F39814; color: white; }
+            #cont_main_budget { list-style-type: none; margin: 0; padding: 0; width: 50%; float: left; }
+            #cont_main_budget li { margin: 3px; padding: 0.4em; font-size: 0.9em; height: 12px; }
+            #point_gallery { float: left; width: 100%; min-height: 8em; background-color: #eee; } * html #gallery { height: 12em; } /* IE6 */
+            .gallery.custom-state-active { background: #eee; }
+            .gallery li { float: left; width: 96px; padding: 0.4em; margin: 0 0.4em 0.4em 0; text-align: center; }
+            .gallery li h5 { margin: 0 0 0.4em; cursor: move; }
+            .gallery li a { float: left; }
+            .gallery li a.ui-icon-zoomin { float: left; }
+            .gallery li img { width: 100%; align:left; cursor: move; }
+        </style>
+    </head>
+
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="active_disable_inputs" style="display: none">
+            <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+            <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+            <label for="activescopeid">Active Scope ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activebudgetitemid">Active Budget Item ID</label>
+            <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <label for="activescopeid">Active Scope Item ID</label>
+            <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+            <br/>
+            <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+        </div>
+        <div id="financial_tabs">
+            <ul>
+                <li><a href="#ui-tabs-Financial"><span></span>Financial Views</a></li>
+                <li><a href="/accountscont/ajax_contracts_wip_balances"><span></span>WIP Contracts Financial Overview</a></li>
+                <li><a href="#ui-tabs-WIPPoint"><span></span>WIP Per Point</a></li>
+                <li><a href="#ui_tabs_GraphView"><span></span>Point Graph View</a></li>
+                <li><a href="/accountscont/ajax_contracts_completed_balances"><span></span>Completed Contracts Financial Overview</a></li>
+                <li><a href="/mngntcont/ajaxgetbudget_contracts_progress/"><span></span>Budgets Overview In Progress</a></li>
+                <li><a href="/mngntcont/ajaxget_contracts_progress_no_budget/"><span></span>Contracts Progress No Budgets</a></li>
+                <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+            </ul>
+            <div id="ui-tabs-Financial"></div>
+            <div id="ui-tabs-FinancialOverview"></div>
+            <div id="ui-tabs-WIPPoint">
+                <div class="ui-widget ui-helper-clearfix">
+                    <ul id="point_gallery" class="gallery ui-helper-reset ui-helper-clearfix">
+                        <div py:for="i,x in enumerate(points)">
+                            <li class="ui-widget-content ui-corner-tr">
+                            <h5 class="ui-widget-header">${x.display_name}</h5>
+                            <img value="${x.user_id}" src="/images/staffpics/${x.user_id}.png" alt="${x.user_name}" width="80px" height="80px" />
+                            <div class="idnos" style="display:none">${x.user_id}</div>
+                            </li>
+
+                        </div>
+                    </ul>
+                </div>
+
+                <div id="financial_wip_per_point"></div>
+            </div>
+            <div id="ui_tabs_GraphView">
+                <canvas id='contract_bars_canvas' width='1200px' height='600px'></canvas> 
+            </div>
+            <div id="ui-tabs-WIPCompleted"></div>
+            <div id="ui-tabs-BudgetOverview"></div>
+            <div id="ui-tabs-ProgressNoBudgets"></div>
+            <div id="ui-tabs-WIP"></div>
+        </div>
+
+        <div class="clearingdiv" />
+        </body>
+    </html>
+
+
+
+
+

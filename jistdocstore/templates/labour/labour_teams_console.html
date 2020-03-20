@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    #labour_teams_tabs  {min-height: 800px; overflow:auto}
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activereqid">Active Req ID</label>
+    <input type="text" name="activereqid" id="activereqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activepayeeid">Active Payee ID</label>
+    <input type="text" name="activepayeeid" id="activepayeeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activesplitreqid">Active Split Req ID</label>
+    <input type="text" name="activesplitreqid" id="activesplitreqid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="labour_teams_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Labour_Index"><span></span>Labour Index</a></li>
+        <li><a href="#ui-tabs-Labour_Force"><span></span>Labour Force</a></li>
+        <li><a href="#ui-tabs-Labour_Divisions"><span></span>Divisions &amp; Categories Edit</a></li>
+        <li><a href="#ui-tabs-Labour_DivViews"><span></span>Divisions &amp; Categories View</a></li>
+        <li><a href="#ui-tabs-Labour_TeamsCreate"><span></span>Teams Create</a></li>
+        <li><a href="#ui-tabs-Labour_TeamsView"><span></span>Teams View</a></li>
+    </ul>
+    <div id="ui-tabs-Labour_Index"></div>
+    <div id="ui-tabs-Labour_Force">
+        <div id="div_point_list"> </div>
+        <div id="div_staff_list"> </div>
+        <div id="div_labour_list"> </div>
+        <div id="div_subcons_list"> </div>
+    </div>
+    <div id="ui-tabs-Labour_Divisions">
+
+        <div id="division_accordion" >
+            <div class='accord_header'>
+                <h3>Divisions</h3>
+                <div>
+                    <div id="dialog_divisions" style="display:none"></div>
+                    <div id="dialog_category" style="display:none"></div>
+                    <div id="div_labour_divisions_all"></div>
+                    <div id="div_point_divisions"></div>
+                    <div id="div_staff_divisions"></div>
+                    <div id="div_labour_divisions"></div>
+                    <div id="div_subcons_divisions"></div>
+                </div>
+            </div>
+            <div class='accord_header'>
+                <h3>Categories</h3>
+                <div>
+                    <div id="div_labour_categories_all"></div>
+                    <div id="div_point_categories"></div>
+                    <div id="div_staff_categories"></div>
+                    <div id="div_labour_categories"></div>
+                    <div id="div_subcon_categories"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="ui-tabs-Labour_DivViews">
+        <div id="div_divisions_accordion" > </div>
+        <div id="div_categories_accordion" > </div>
+    </div>
+    <div id="ui-tabs-Labour_TeamsCreate">
+        <div id="warningdiv" style="display:none"> </div>
+        <div id="div_teams_choice_box">
+        </div>
+        <div id="div_categories_people_accordion"> </div>
+            <div id="div_current_team" style="display:none">
+            
+            </div>
+        <div id="div_all_teams" style="display:none"> </div>
+    </div>
+    <div id="ui-tabs-Labour_TeamsView">
+        <div id="div_labour_teams_accordion" > </div>
+        <div id="div_all_teams" style="display:none"> </div>
+    </div>
+</div>
+ 
+ 
+</body>
+</html>
+
+
+
+
+
+

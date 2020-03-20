@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #gallery_allfleet {float:left; width:200px;}
+    #activefleet {float:right; width:200px; min-height:300px}
+    #transport_req_tabs  {min-height: 600px; overflow:auto}
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="transport_req_tabs">
+    <ul>
+        <li><a href="#ui-tabs-NewReq"><span></span>New Transport Request</a></li>
+        <li><a href="#ui-tabs-WayBill"><span></span>Loading Bill</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-NewReq">
+    
+        <form id="transport_req_new_form">
+        <fieldset>
+            <label for="del_jcno">For Site</label>
+                <select name="del_jcno" id="del_jcno"  class="text ui-widget-content ui-corner-all">
+                <option  value="">Select one...</option>
+                  <div py:for="i,x in enumerate(wip)">
+                      <option value="${x.jno}">${x.jno}-${x.site}-${x.description}</option>
+                  </div>
+                </select>
+            <label for="request_person">Person Requesting</label>
+                <select name="request_person" id="request_person"  class="text ui-widget-content ui-corner-all">
+                               <div py:for="i,x in enumerate(activeusers)" class="${i%2 and 'even' or 'odd'}">
+                                   <option py:if="x.user_id==myjistid" value="${x.user_id}" selected="selected">${x.user_name}</option>
+                                   <option py:if="x.user_id!=myjistid" value="${x.user_id}" >${x.user_name}</option>
+                                </div>
+                </select>
+
+            <label for="">Date Required</label>
+            <input type="text" name="del_date_required" id="del_date_required" class="text ui-widget-content ui-corner-all"/><br/>
+            <fieldset>
+            <legend>From - Source </legend>
+            <label for="">Place - Source</label>
+            <input type="text" name="from_start" id="from_start" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Area</label>
+            <input type="text" name="from_area" id="from_area" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Address</label>
+            <input type="text" name="from_address" id="from_address" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Contact Person</label>
+            <input type="text" name="from_contact" id="from_contact" class="text ui-widget-content ui-corner-all"/><br/>
+            </fieldset>
+            <br/>
+            <fieldset>
+            <legend>To  - Destination</legend>
+            <label for="">Place - Destination</label>
+            <input type="text" name="to_end" id="to_end" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Area</label>
+            <input type="text" name="to_area" id="to_area" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Address</label>
+            <input type="text" name="to_address" id="to_address" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="">Contact Person</label>
+            <input type="text" name="to_contact" id="to_contact" class="text ui-widget-content ui-corner-all"/><br/>
+            </fieldset>
+            <br/>
+            <label for="">Special Instructions</label>
+            <textarea cols="60" rows="5" name="transport_instructions" id="transport_instructions" class="text ui-widget-content ui-corner-all" /><br/>
+            <button class="ui-state-default ui-corner-all"
+                id="btn_add_new_transport_req" style="display:block">Add New Transport Requisition</button>
+            <div id="warningdiv" style="display:none"></div>
+        </fieldset>
+        </form>
+
+    </div>
+    <div id="ui-tabs-WayBill">
+        <div id="transport_req_waybill_new"></div> 
+        <div id="transport_req_waybill_all"></div> 
+    </div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+ 
+ 
+  <div class="clearingdiv" />
+</body>
+</html>
+
+

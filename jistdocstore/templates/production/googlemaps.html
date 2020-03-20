@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:py="http://genshi.edgewall.org/"
+    xmlns:xi="http://www.w3.org/2001/XInclude">
+
+    <xi:include href="master.html" />
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+        <title>${page}</title>
+        <script type="text/javascript" src="${tg.url(['/javascript/googlemaps.js'])}"></script>
+        <style>
+            .gallery.custom-state-active { background: #eee; }
+            .ui-widget-header { margin: 0 0 0em; 
+                padding: 0px; 
+                cursor: move; 
+                margin-top: 10px; 
+                margin-bottom: 10px; 
+            }
+
+        </style>
+    </head>
+    <body>
+        <h2 class='effect6'>${page}</h2>
+        <div id="map_search">
+        </div>
+        <div id="directions_div">
+            <form id="search_directions">
+                <fieldset>
+                        <label for="">Latitude :</label>
+                        <input type="text" name="mapsearch_lat" id="mapsearch_lat" class="text ui-widget-content ui-corner-all" />
+                        <label for="">Longitude :</label>
+                        <input type="text" name="mapsearch_lng" id="mapsearch_lng" class="text ui-widget-content ui-corner-all" />
+                        <button class="ui-state-default ui-corner-all" id="btn_search_streetviewpic">Get Street View Pic</button>                
+                        <button class="ui-state-default ui-corner-all" id="btn_search_currentposition">Get Current Position</button>                
+                        <button class="ui-state-default ui-icon-home" id="btn_search_gohome"> Go Home</button>                
+                        <button class="ui-state-default ui-icon-home" id="btn_export_location"> Save Location</button>                
+                        <label for="">Search Address</label>
+                        <input type="text" name="mapsearch_address" id="mapsearch_address" class="text ui-widget-content ui-corner-all" />
+                        <button class="ui-state-default ui-icon-home" id="btn_search_address">Search Address</button>                
+                        <button class="ui-state-default ui-icon-home" id="btn_change_directions_saved_locations">Get Directions Between Saved Locations</button>                
+
+
+                        <div id="pdf_div"></div>
+                </fieldset>
+            </form>
+        </div>
+        <div id='google_address'></div>
+        <div id="map_canvas"></div>
+        <div id="map_location_canvas"></div>
+        <div id="map_directions_canvas"></div>
+        <div class="clearingdiv" />
+        <div id="map_streetview_canvas"></div>
+        <div id="map_maps_canvas"></div>
+        <div id="warnings_panel"></div>
+        <div id="dialog_choose_locations_div"></div>
+
+        <div id="dialog_location_div" title="Save Description to Coordinates">
+            <form id="dialog_location_frm">
+                <fieldset>
+                    <label for="">Description Of Location</label>
+                    <input id="description_location" name="description_location" class="text ui-widget-content ui-corner-all" /><br/>
+                    <label for="">Latitude :</label>
+                    <input type="text" name="dialog_lat" id="dialog_lat" class="text ui-widget-content ui-corner-all" />
+                    <br/>
+                    <label for="">Longitude :</label>
+                    <input type="text" name="dialog_lng" id="dialog_lng" class="text ui-widget-content ui-corner-all" />
+                </fieldset>
+            </form>
+        </div>
+
+
+        <div class="clearingdiv" />
+        </body>
+    </html>
+
+
+
+

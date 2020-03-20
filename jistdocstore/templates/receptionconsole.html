@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #reception_tabs  {min-height: 600px; overflow:auto}
+    #cont_budgets_seperated { width: 45%;  margin: 0px; float: right; }
+    #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+    #feedback { font-size: 1.4em; }
+    #cont_main_budget .ui-selecting { background: #FECA40; }
+    #cont_main_budget .ui-selected { background: #F39814; color: white; }
+    #cont_main_budget { list-style-type: none; margin: 0; padding: 0; width: 50%; float: left; }
+    #cont_main_budget li { margin: 3px; padding: 0.4em; font-size: 0.9em; height: 12px; }
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebudgetitemid">Active Budget Item ID</label>
+    <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activescopeid">Active Scope Item ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="reception_tabs">
+    <ul>
+        <li><a href="#ui-tabs-Reception"><span></span>Reception</a></li>
+        <li><a href="#ui-tabs-TelephoneCallNew"><span></span>Telephone Call - New</a></li>
+        <li><a href="#ui-tabs-TelephoneCallView"><span></span>Telephone Call - View</a></li>
+        <li><a href="#ui-tabs-OutOfOfficeNew"><span></span>Out Of Office - New</a></li>
+        <li><a href="#ui-tabs-OutOfOfficeView"><span></span>Out Of Office - View</a></li>
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="ui-tabs-Reception">
+       <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+    </div>
+    <div id="ui-tabs-TelephoneCallNew">
+        <form id="telephonecall_new_form">
+        <fieldset>
+            <label for="telephonecall_toperson">Call To Person</label>
+                <select id="userlist"  class="text ui-widget-content ui-corner-all">
+                <option id="user_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(userlist)">
+                      <option value="${x.user_id}">${x.user_name}</option>
+                  </div>
+                </select>
+            <br/>
+            <label for="telephonecall_person_calling">Person Who Called</label>
+            <input type="text" name="telephonecall_person_calling" id="telephonecall_person_calling" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="telephonecall_returnno">Return Telephone Number</label>
+            <input type="text" name="telephonecall_returnno" id="telephonecall_returnno" class="text ui-widget-content ui-corner-all"/><br/>
+            <div id="message_radio">
+                <input type="radio" name="call_back" id="call_back" class="text ui-widget-content ui-corner-all"/>
+                <label for="call_back">Please Call Back</label>
+                <input type="radio" name="will_call_again" id="will_call_again" class="text ui-widget-content ui-corner-all"/>
+                <label for="will_call_again">Person Will Call Again</label>
+                <input type="radio" name="no_message" id="no_message" class="text ui-widget-content ui-corner-all"/>
+                <label for="no_message">No Message</label><br/>
+            </div>
+            <label for="telephonecall_message">Telephone Message</label><br/>
+            <textarea name="telephonecall_message" id="telephonecall_message" class="text ui-widget-content ui-corner-all"/><br/>
+            <button class="ui-state-default ui-corner-all" id="btn_telephonecall_new" style="display:block">Add New Telephone Call</button>
+        </fieldset>
+        </form>
+
+       <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+    </div>
+    <div id="ui-tabs-TelephoneCallView">
+              <form id="clientstartend_form"><fieldset>
+                  <label for="telstartdate">Messages For Date:</label>
+                  <input type="text" name="telstartdate" id="telstartdate" class="text ui-widget-content ui-corner-all" />
+                  <br/>
+                  <button class="ui-state-default ui-corner-all"
+                      id="button_get_messages_dates">Get Telephone Messages For Date</button>
+               </fieldset>
+              </form>
+       <div style="height:20px;"> &nbsp; </div>
+       <div style="height:20px;"> &nbsp; </div>
+       <div id="output_telephonecall_view"> </div>
+       <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+    </div>
+    <div id="ui-tabs-OutOfOfficeNew">
+    
+        <form id="outofoffice_new_form">
+        <fieldset>
+            <label for="outofoffice_toperson">For Person</label>
+                <select id="outofoffice_user_name"  class="text ui-widget-content ui-corner-all">
+                <option id="outofoffice_user_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(userlist)">
+                      <option value="${x.user_id}">${x.user_name}</option>
+                  </div>
+                </select>
+            <br/>
+            <label for="outofoffice_site">Site</label>
+                <select id="outofoffice_site_name"  class="text ui-widget-content ui-corner-all">
+                <option id="outofoffice_site_name" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(wip)">
+                      <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+                  </div>
+                </select>
+            <br/>
+            <label for="outofoffice_otherdestination">Other Destination</label>
+            <input type="text" name="outofoffice_otherdestination" id="outofoffice_otherdestination" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="outofoffice_purpose">Purpose</label>
+            <input type="text" name="outofoffice_purpose" id="outofoffice_purpose" class="text ui-widget-content ui-corner-all"/><br/>
+            <label for="outofoffice_est_hours_there">Anticipated Duration (Hrs)</label>
+                <select id="outofoffice_duration"  class="text ui-widget-content ui-corner-all">
+                <option id="outofoffice_duration" value="">Select one...</option>
+                  <div py:for="i,x in enumerate(timeperiod)">
+                      <option value="${x}">${x}</option>
+                  </div>
+                </select>
+            <br/>
+            <label for="outofoffice_timestart">Time Start</label>
+            <input type="text" name="outofoffice_timestart" id="outofoffice_timestart" class="ui-widget-content ui-corner-all"/><br/>
+            <button class="ui-state-default ui-corner-all"
+                id="btn_outofoffice_new" style="display:block">Add New Out Of Office</button>
+        </fieldset>
+        </form>
+
+       <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+    </div>
+    <div id="ui-tabs-OutOfOfficeView">
+              <form id="outofoffice_startend_form"><fieldset>
+                  <label for="outofoffice_telstartdate">Out Of Office Movements For Date:</label>
+                  <input type="text" name="outofoffice_telstartdate" id="outofoffice_telstartdate" class="text ui-widget-content ui-corner-all" />
+                  <br/>
+                  <button class="ui-state-default ui-corner-all"
+                      id="button_get_outoffice_dates">Get Out Of Office Movements For Date</button>
+               </fieldset>
+              </form>
+       <div style="height:20px;"> &nbsp; </div>
+       <div style="height:20px;"> &nbsp; </div>
+       <div id="output_outofoffice_view"> </div>
+       <img id="jisttabfooter" src="${tg.url(['/images/jistfooter.png'])}"/>
+    
+    </div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+ 
+ 
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.</div>
+</body>
+</html>
+
+
+
+
+

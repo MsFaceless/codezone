@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:py="http://genshi.edgewall.org/"
+      xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <xi:include href="master.html" />
+
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type" py:replace="''"/>
+  <title>${page}</title>
+ <style>
+  </style>
+<style>
+    .ui-combobox {
+        position: relative;
+        display: inline-block;
+    }
+    .ui-combobox-toggle {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin-left: -1px;
+        padding: 0;
+        /* adjust styles for IE 6/7 */
+        *height: 1.7em;
+        *top: 0.1em;
+    }
+    .ui-combobox-input {
+        margin: 0;
+        padding: 0.3em;
+        width: 800px;
+    }
+    .ui-autocomplete {
+            max-height: 200px;
+            overflow-y: auto;
+            /* prevent horizontal scrollbar */
+            overflow-x: hidden;
+        }
+    #contract_overview_tabs  {min-height: 600px; overflow:auto}
+    #cont_budgets_seperated { width: 45%;  margin: 0px; float: right; }
+    #tabs-1-old { text-indent: 40px; letter-spacing: .4em; width: 810px; height: 200px; padding: 30px; margin: 10px; }
+    #feedback { font-size: 1.4em; }
+    #cont_main_budget .ui-selecting { background: #FECA40; }
+    #cont_main_budget .ui-selected { background: #F39814; color: white; }
+    #cont_main_budget { list-style-type: none; margin: 0; padding: 0; width: 50%; float: left; }
+    #cont_main_budget li { margin: 3px; padding: 0.4em; font-size: 0.9em; height: 12px; }
+</style>
+</head>
+
+<body>
+    <h2 class='effect6'>${page}</h2>
+<div id="active_disable_inputs" style="display: none">
+    <label for="activesiteid" class="" style="margin-left: 50px">Active Site ID</label>
+    <input type="text" name="activesiteid" id="activesiteid" class="text ui-widget-content ui-corner-all" disabled="true"/>
+    <label for="activescopeid">Active Scope ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activebudgetitemid">Active Budget Item ID</label>
+    <input type="text" name="activebudgetitemid" id="activebudgetitemid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <label for="activescopeid">Active Scope Item ID</label>
+    <input type="text" name="activescopeid" id="activescopeid" class="text ui-widget-content ui-corner-all"  disabled="true"/>
+    <br/>
+        <div id="outputtempsitestorage" class="sidebar_est_site_sow" style="display: none"></div>
+</div>
+<div id="contract_overview_tabs">
+    <ul>
+        <li><a href="#tabs-1"><span></span>Contracts</a></li>
+        <li><a href="#ui-tabs-Contractual"><span></span>Contractual</a></li>
+        <li><a href="#ui-tabs-POItems"><span></span>Order Items</a></li>
+        <li><a href="#ui-tabs-SOW"><span></span>Scope</a></li>
+        <li><a href="#ui-tabs-Budgets"><span></span>Budgets</a></li>
+        <!--li><a href="#ui-tabs-POReqs"><span></span>Purchase Reqs</a></li>
+        <li><a href="#ui-tabs-PaymentReqs"><span></span>Payment Reqs</a></li>
+        <li><a href="#ui-tabs-Labour"><span></span>Labour</a></li>
+        <li><a href="#ui-tabs-Buying"><span></span>Buying</a></li>
+        <li><a href="#ui-tabs-GRV"><span></span>GRV's </a></li-->
+        <li><a href="#ui-tabs-Invoices"><span></span>Invoicing</a></li>
+        <!--li><a href="/logisticscont/getPurchase_orders_for_jcno/1801"><span></span>Buying Records</a></li-->
+        <li><a href="/contractscont/ajaxsiteswip/"><span></span>WIP</a></li>
+    </ul>
+    <div id="tabs-1">
+        Choose a Contract in Progress!!! 
+        <div id="searchwidget_contract_overview" class="ui-widget">
+            <select id="combobox_overview" style="display: none">
+            <option value="">Select one...</option>
+              <div py:for="i,x in enumerate(wip)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+              </div>
+            </select>
+        </div>
+        <p/>
+        Choose a Completed Contract !!! (Contracts List only contain
+        contracts booked within the last 2 years) 
+        <div id="searchwidget_contract_completed" class="ui-widget">
+            <select id="combobox_completed" style="display: none">
+            <option value="">Select one...</option>
+              <div py:for="i,x in enumerate(completed)" class="${i%2 and 'even' or 'odd'}">
+                  <option value="${x.jno}">${x.jno}-${x.orderno}-${x.client}-${x.site}</option>
+              </div>
+            </select>
+        </div>
+
+    </div>
+    <div class="thisClass" id="ui-tabs-Contractual"></div>
+    <div id="ui-tabs-POItems"></div>
+    <div id="ui-tabs-SOW"></div>
+    <div id="ui-tabs-Budgets"></div>
+    <!--div id="ui-tabs-POReqs"></div>
+    <div id="ui-tabs-PaymentReqs"></div>
+    <div id="ui-tabs-Buying"></div>
+    <div id="ui-tabs-Labour"></div-->
+    <div id="ui-tabs-Invoices"></div>
+    <div id="ui-tabs-WIP"></div>
+</div>
+
+<div id="dialog_editbudgets" title="Edit Budgets">
+    <p class="validateSiteTips">All form fields are required.</p>
+    <form id="edit_budgets_form">
+    <fieldset>
+        <label for="budgetid">ID</label><br/>
+        <input type="text" name="budgetid" id="budgetid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+        <label for="budgetitem">Item</label><br/>
+        <input type="text" name="budgetitem" id="budgetitem" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="budgetdescription">Description</label><br/>
+        <input type="text" name="budgetdescription" id="budgetdescription" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="budgetunit">Unit</label><br/>
+        <input type="text" name="budgetunit" id="budgetunit" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="budgetqty">New Quantity</label><br/>
+        <input type="budgetqty" name="budgetqty" id="budgetqty" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="budgetprice">New Price</label><br/>
+        <input type="budgetprice" name="budgetprice" id="budgetprice" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="budgettotal">New Total Budget</label><br/>
+        <input type="budgettotal" name="budgettotal" id="budgettotal" value="" class="text ui-widget-content ui-corner-all" /><br/>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog_newbudget" title="New Budget">
+    <form id="new_budgets_form">
+    <fieldset>
+        <label for="newbudgetid">ID</label><br/>
+        <input type="text" name="newbudgetid" id="newbudgetid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+        <label for="newbudgetitem">Item</label><br/>
+        <input type="text" name="newbudgetitem" id="newbudgetitem" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newbudgetdescription">Description</label><br/>
+        <input type="text" name="newbudgetdescription" id="newbudgetdescription" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newbudgetunit">Unit</label><br/>
+        <input type="text" name="newbudgetunit" id="newbudgetunit" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newbudgetqty">New Quantity</label><br/>
+        <input type="newbudgetqty" name="newbudgetqty" id="newbudgetqty" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newbudgetprice">New Price</label><br/>
+        <input type="newbudgetprice" name="newbudgetprice" id="newbudgetprice" value="" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newbudgettotal">New Total Budget</label><br/>
+        <input type="newbudgettotal" name="newbudgettotal" id="newbudgettotal" value="" class="text ui-widget-content ui-corner-all" /><br/>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog_newcontractscope" title="New Contract Scope">
+    <form id="new_contracts_scope_form">
+    <fieldset>
+        <label for="newscopeid">ID</label><br/>
+        <input type="text" name="newscopeid" id="newscopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+        <label for="newscopeitem">Item</label><br/>
+        <input type="text" name="newscopeitem" id="newscopeitem" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newscopedescription">Description</label><br/>
+        <input type="text" name="newscopedescription" id="newscopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newscopeunit">Unit</label><br/>
+        <input type="text" name="newscopeunit" id="newscopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newscopeqty">Qty</label><br/>
+        <input type="text" name="newscopeqty" id="newscopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newscopeprice">Price</label><br/>
+        <input type="text" name="newscopeprice" id="newscopeprice" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="newscopetotal">Total</label><br/>
+        <input type="text" name="newscopetotal" id="newscopetotal" class="text ui-widget-content ui-corner-all" /><br/>
+    </fieldset>
+    </form>
+</div>
+<div id="dialog_editcontractscope" title="Edit Contract Scope">
+    <form id="edit_contracts_scope_form">
+    <fieldset>
+        <label for="editcontractscopeid">ID</label><br/>
+        <input type="text" name="editcontractscopeid" id="editcontractscopeid" class="text ui-widget-content ui-corner-all" disabled="true"/><br/>
+        <label for="editcontractscopeitem">Item</label><br/>
+        <input type="text" name="editcontractscopeitem" id="editcontractscopeitem" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="editcontractscopedescription">Description</label><br/>
+        <input type="text" name="editcontractscopedescription" id="editcontractscopedescription" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="editcontractscopeunit">Unit</label><br/>
+        <input type="text" name="editcontractscopeunit" id="editcontractscopeunit" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="editcontractscopeqty">Qty</label><br/>
+        <input type="text" name="editcontractscopeqty" id="editcontractscopeqty" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="editcontractscopeprice">Price</label><br/>
+        <input type="text" name="editcontractscopeprice" id="editcontractscopeprice" class="text ui-widget-content ui-corner-all" /><br/>
+        <label for="editcontractscopetotal">Total</label><br/>
+        <input type="text" name="editcontractscopetotal" id="editcontractscopetotal" class="text ui-widget-content ui-corner-all" /><br/>
+    </fieldset>
+    </form>
+</div>
+ 
+ 
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="clearingdiv" />
+  <div style="height:20px;"> &nbsp; </div>
+  <div class="notice"> The JIST Way.</div>
+</body>
+</html>
+
+
+
